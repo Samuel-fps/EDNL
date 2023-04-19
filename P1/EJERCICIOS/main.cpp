@@ -1,14 +1,15 @@
 #include <iostream>
 
-#include <ejerciciosP1.h>
+#include "ejeciciosP1.h"
+#include "AbinV.h"
 
 int main(){
-	Abin<char> A = Abin();
-	A.insertarRaiz('A');
-	A.insertarHijoDrcho(A.raiz(), 'B');
-	A.eliminarHijoIzqdo(A.raiz(), 'C');
+	size_t maxNodos = 20;
+	Abin<int> A(maxNodos);
+	A.insertarRaiz(1);
+	A.insertarHijoDrcho(A.raiz(), 2);
+	A.insertarHijoIzqdo(A.raiz(), 3);
 	
-	A.
 	
 	return 0;
 }

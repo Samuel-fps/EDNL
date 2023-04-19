@@ -39,7 +39,7 @@ template <typename T> class Abin {
 /* Definición del nodo nulo */
 template <typename T>
 const typename Abin<T>::nodo Abin<T>::NODO_NULO(SIZE_MAX);
-
+/*
 // Calcular altura
 template<typename T>
 inline int Abin<T>::getHeight(){
@@ -66,7 +66,7 @@ inline Abin<T>::Abin(size_t maxNodos) :
 	maxNodos(maxNodos),
 	numNodos(0)
 {}
-
+*/
 template <typename T>
 inline void Abin<T>::insertarRaiz(const T& e)
 {
