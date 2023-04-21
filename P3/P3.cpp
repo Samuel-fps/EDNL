@@ -67,11 +67,21 @@ void poda(Agen<T> A, Agen<T>::nodo poda){
 }
 
 void podaRec(Agen<T> A, Agen<T>::nodo n, Agen<T>::nodo poda){
-    if(n == poda){ // encuenta el nodo
-        
+    if(n == poda){ // encuentra el nodo -> podar
+        if(A.hizq(n) == Agen<T>::NODO_NULO)
+            A.eliminarHizq(n);
+            else{
+                Agen<T>::nodo aux = A.hizq(n);
+                while(aux != Agen<T>::NODO_NULO){
+                    podaRec(A, aux, poda);
+                    aux = A.hermanoDrch(aux);
+                }
+            }
     }
+
     else if(Agen<T>::NODO_NULO == A.hizq(n)){  // esto else reorren el arbol
         podaRec(A, A.hizq(n), poda);
+    }
     else{  
         Agen<T>::nodo aux = A.hizq(n);
         while(aux != Agen<T>::NODO_NULO){
