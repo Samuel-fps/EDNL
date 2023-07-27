@@ -6,8 +6,33 @@ construyendo recursivamente los subárboles izquierdo y derecho de cada nodo.
 Implementa este algoritmo para equilibrar un ABB. 
 */
 template <typename T>
-void equilibrarAbb(Abb<T>& A){
+Abb<T> equilibrarAbb(const Abb<T>& A) {
+    std::vector<T> elementos;
+    insertar_inorden(A, elementos);
+    return construir_arbol_equilibrado(elementos, 0, elementos.size() - 1);
+}
 
+template <typename T>
+void insertar_inorden(const Abb<T>& A, std::vector<T>& elementos) {
+    if (!A.vacio()) {
+        insertar_inorden(A.izqdo(), elementos);
+        elementos.push_back(A.elemento());
+        insertar_inorden(A.drcho(), elementos);
+    }
+}
+
+template <typename T>
+Abb<T> construir_arbol_equilibrado(const std::vector<T>& elementos, int inicio, int fin) {
+    if (inicio > fin) {
+        return Abb<T>();
+    }
+
+    int mediana = (inicio + fin) / 2;
+    Abb<T> arbol;
+    arbol.insertar(elementos[mediana]);
+    arbol.asignar_izqdo(construir_arbol_equilibrado(elementos, inicio, mediana - 1));
+    arbol.asignar_drcho(construir_arbol_equilibrado(elementos, mediana + 1, fin));
+    return arbol;
 }
 
 /*EJERCICIO 2

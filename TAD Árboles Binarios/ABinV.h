@@ -39,26 +39,6 @@ template <typename T> class Abin {
 /* Definición del nodo nulo */
 template <typename T>
 const typename Abin<T>::nodo Abin<T>::NODO_NULO(SIZE_MAX);
-/*
-// Calcular altura
-template<typename T>
-inline int Abin<T>::getHeight(){
-	if(nodos[0] == Abin<T>::NODO_NULO)
-		return -1;
-	else if(getHeight() > getHeight()
-		return 1 + hizq.getHeight();
-	else
-		return 1 + hder.getHeight();
-}
-
-// Calcular profundidad
-template<typename T>
-inline Abin<T>::getDeep(Abin<T>::nodo n, Abin<T>A){
-	if(n == (A.raiz())
-		return 0;
-	else
-		return 1 + getDeep(n.padre, *this);
-}
 
 template <typename T>
 inline Abin<T>::Abin(size_t maxNodos) :
@@ -66,7 +46,7 @@ inline Abin<T>::Abin(size_t maxNodos) :
 	maxNodos(maxNodos),
 	numNodos(0)
 {}
-*/
+
 template <typename T>
 inline void Abin<T>::insertarRaiz(const T& e)
 {

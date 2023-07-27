@@ -1,4 +1,4 @@
-#include "AbinV.h"
+#include "AbinC.h"
 #include <algorithm>
 
 // EJERCICIO 1
@@ -14,12 +14,12 @@ int numNodes_rec(Abin<T> A, const typename Abin<T>::nodo &n){
 	if(n == Abin<T>::NODO_NULO)
 		return 0;
 	else
-		return 1 + numNodes_rec(A, A.hijoIzqdo(n)) + numNodes_rec(A, A.hijoDrcho());
+		return 1 + numNodes_rec(A, A.hijoIzqdo(n)) + numNodes_rec(A, A.hijoDrcho(n));
 }
 
 // EJERCICIO 2
 /*Implementa un subprograma que calcule la altura de un árbol binario. */
-
+/*
 template <typename T>
 int height(Abin<T> A){
 	return height_rec(A, A.raiz());
@@ -37,7 +37,7 @@ int height_rec(Abin<T> A, const typename Abin<T>::nodo n){
 
 Implementa un subprograma que, dados un árbol binario y un nodo del mismo, determine 
 la profundidad de este nodo en dicho árbol. */
-
+/*
 template <typename T>
 int deep_rec(Abin<T> A, Abin<T>::nodo n){
 	if(n == A.raiz())
