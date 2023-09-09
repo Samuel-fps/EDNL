@@ -13,7 +13,7 @@ const tElto fin = '#';
 ////////////////////////////////////
 
 /*
-    EJERCICIO 6
+    EJERCICIO 5
     Implementa un subprograma que determine el nivel de desequilibrio de un árbol binario,
     definido como el máximo desequilibrio de todos sus nodos. El desequilibrio de un nodo se
     define como la diferencia entre las alturas de los subárboles del mismo.
@@ -21,6 +21,7 @@ const tElto fin = '#';
 
 /*
     FUNCIONES DECLARADAS EN AbinC (No olvide agragar la declaracion en la parte publica de la clase)
+    
         template <typename T>
         int Abin<T>::alturaArbol(const nodo n){
             if(n == NODO_NULO)
@@ -47,7 +48,7 @@ int main(){
     fe.close();
 
     // Llamada a la funcion creada en el arbol por celdas enlazadas
-    cout << "El arbol tiene una altura de " << A.alturaArbol(A.raiz()) << endl;
+    cout << "El arbol tiene una altura de " << A.altura(A.raiz()) << endl;
     cout << "El arbol tiene una profundidad de " << A.profundidadNodo(A.raiz()) << endl;
 
     //cout << "\n*** Mostrar árbol binario A ***\n";

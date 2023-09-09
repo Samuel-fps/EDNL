@@ -13,7 +13,7 @@ int main ()
     Abin<tElto> A, B;
     cout << "*** Lectura del árbol binario A ***\n";
     rellenarAbin(A, fin); // Desde std::cin
-    ofstream fs("abin.dat"); // Abrir fichero de salida.
+    ofstream fs("abinCompleto.dat"); // Abrir fichero de salida.
     imprimirAbin(fs, A, fin); // En fichero.
     fs.close();
     cout << "\n*** Árbol A guardado en fichero abin.dat ***\n";

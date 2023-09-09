@@ -1,5 +1,5 @@
 
-#include "../../TAD_ABIN/ABinC.h" // Importamos el arbol binario
+#include "../../TAD_ABIN/ABinV.h" // Importamos el arbol binario
 using namespace std;
 #include <cstddef>
 
@@ -13,10 +13,30 @@ const tElto fin = '#';
 ////////////////////////////////////
 
 /*
-    EJERCICIO 6
-    Implementa un subprograma que determine el nivel de desequilibrio de un árbol binario,
-    definido como el máximo desequilibrio de todos sus nodos. El desequilibrio de un nodo se
-    define como la diferencia entre las alturas de los subárboles del mismo.
+    EJERCICIO 4
+    Añade dos nuevas operaciones al TAD árbol binario, una que calcule la profundidad de un
+    nodo y otra que calcule la altura de un nodo en un árbol dado. Implementa esta operación para
+    la representación vectorial (índices del padre, hijo izquierdo e hijo derecho)
+*/
+
+/*
+    FUNCIONES DE AbinV (Implementación vectorial)
+
+        template <typename T>
+        int Abin<T>::alturaArbol(const nodo n){
+            if(n == NODO_NULO)
+                return -1;
+            else
+                return 1 + std::max(alturaArbol(nodos[n].hizq), alturaArbol(nodos[n].hder));
+        }
+
+        template <typename T>
+        int Abin<T>::profundidadNodo(nodo n){
+            if(n == raiz())
+                return 0;
+            else
+                return 1 + profundidadNodo(nodos[n].padre);
+        }
 */
 
 int main(){
