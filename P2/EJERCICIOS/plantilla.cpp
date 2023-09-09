@@ -19,7 +19,7 @@ const tElto fin = '#';
 int main(){
     // Leer Arbol del fichero
     Abin<tElto> A;
-    cout << "\n*** Lectura de árbol binario B de abin.dat ***\n";
+    
     ifstream fe("abin.dat"); // Abrir fichero de entrada.
     rellenarAbin(fe, A); // Desde fichero.
     fe.close();

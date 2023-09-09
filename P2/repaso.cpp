@@ -2,9 +2,6 @@
 
 /*REPASO
 Dado un árbol comprobar si es simetrico
-
-Comprobar que dado un arbol todos los valores del subarbol izquierdos son menores,
-mientras que todos los valores del arbol derecho deben ser mayores que el propio nodo
 */
 
 template <typename T>
