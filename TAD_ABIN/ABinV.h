@@ -3,9 +3,11 @@
 #ifndef ABIN_VEC0_H
 #define ABIN_VEC0_H
 #include <cassert>
+#include <algorithm>
+
 template <typename T> class Abin {
 	public:
-		typedef size_t nodo; // índice de la matriz
+		typedef size_t nodo; // ï¿½ndice de la matriz
 		// entre 0 y maxNodos-1
 		static const nodo NODO_NULO;
 		explicit Abin(size_t maxNodos); // constructor
@@ -18,13 +20,16 @@ template <typename T> class Abin {
 		bool arbolVacio() const;
 		const T& elemento(nodo n) const; // acceso a elto, lectura
 		T& elemento(nodo n); // acceso a elto, lectura/escritura
+
+		int alturaArbol(const nodo n);
+		int profundidadNodo(nodo n);
 		
 		nodo raiz() const;
 		nodo padre(nodo n) const;
 		nodo hijoIzqdo(nodo n) const;
 		nodo hijoDrcho(nodo n) const;
 		Abin(const Abin<T>& A); // ctor. de copia
-		Abin<T>& operator =(const Abin<T>& A); // asig. de árboles
+		Abin<T>& operator =(const Abin<T>& A); // asig. de ï¿½rboles
 		~Abin(); // destructor
 	private:
 		struct celda {
@@ -32,13 +37,29 @@ template <typename T> class Abin {
 		nodo padre, hizq, hder;
 		};
 		celda *nodos; // vector de nodos
-		size_t maxNodos; // tamaño del vector
-		size_t numNodos; // número de nodos del árbol
+		size_t maxNodos; // tamaï¿½o del vector
+		size_t numNodos; // nï¿½mero de nodos del ï¿½rbol
 };
 
-/* Definición del nodo nulo */
+/* Definicion del nodo nulo */
 template <typename T>
 const typename Abin<T>::nodo Abin<T>::NODO_NULO(SIZE_MAX);
+
+template <typename T>
+int Abin<T>::alturaArbol(const nodo n){
+    if(n == NODO_NULO)
+        return -1;
+    else
+        return 1 + std::max(alturaArbol(nodos[n].hizq), alturaArbol(nodos[n].hder));
+}
+
+template <typename T>
+int Abin<T>::profundidadNodo(nodo n){
+    if(n == raiz())
+        return 0;
+    else
+        return 1 + profundidadNodo(nodos[n].padre);
+}
 
 template <typename T>
 inline Abin<T>::Abin(size_t maxNodos) :
@@ -50,7 +71,7 @@ inline Abin<T>::Abin(size_t maxNodos) :
 template <typename T>
 inline void Abin<T>::insertarRaiz(const T& e)
 {
-assert(numNodos == 0); // Árbol vacío
+assert(numNodos == 0); // ï¿½rbol vacï¿½o
 numNodos = 1;
 nodos[0].elto = e;
 nodos[0].padre = NODO_NULO;
@@ -61,10 +82,10 @@ nodos[0].hder = NODO_NULO;
 template <typename T>
 inline void Abin<T>::insertarHijoIzqdo(nodo n, const T& e)
 {
-	assert(n >= 0 && n < numNodos); // Nodo válido
+	assert(n >= 0 && n < numNodos); // Nodo vï¿½lido
 	assert(nodos[n].hizq == NODO_NULO); // n no tiene hijo izqdo.
-	assert(numNodos < maxNodos); // Árbol no lleno
-	// Añadir el nuevo nodo al final de la secuencia.
+	assert(numNodos < maxNodos); // ï¿½rbol no lleno
+	// Aï¿½adir el nuevo nodo al final de la secuencia.
 	nodos[n].hizq = numNodos;
 	nodos[numNodos].elto = e;
 	nodos[numNodos].padre = n;
@@ -76,10 +97,10 @@ inline void Abin<T>::insertarHijoIzqdo(nodo n, const T& e)
 template <typename T>
 inline void Abin<T>::insertarHijoDrcho(nodo n, const T& e)
 {
-	assert(n >= 0 && n < numNodos); // Nodo válido
+	assert(n >= 0 && n < numNodos); // Nodo vï¿½lido
 	assert(nodos[n].hder == NODO_NULO); // n no tiene hijo drcho.
-	assert(numNodos < maxNodos); // Árbol no lleno
-	// Añadir el nuevo nodo al final de la secuencia.
+	assert(numNodos < maxNodos); // ï¿½rbol no lleno
+	// Aï¿½adir el nuevo nodo al final de la secuencia.
 	nodos[n].hder = numNodos;
 	nodos[numNodos].elto = e;
 	nodos[numNodos].padre = n;
@@ -92,22 +113,22 @@ template <typename T>
 void Abin<T>::eliminarHijoIzqdo(nodo n)
 {
 	nodo hizqdo ;
-	assert(n >= 0 && n < numNodos); // Nodo válido
+	assert(n >= 0 && n < numNodos); // Nodo vï¿½lido
 	hizqdo = nodos[n].hizq;
 	assert(hizqdo != NODO_NULO); // Existe hijo izqdo. de n.
 	assert(nodos[hizqdo].hizq == NODO_NULO && // Hijo izqdo. de
 	nodos[hizqdo].hder == NODO_NULO); // n es hoja.
 	if (hizqdo != numNodos-1){
-		// Mover el último nodo a la posición del hijo izqdo.
+		// Mover el ï¿½ltimo nodo a la posiciï¿½n del hijo izqdo.
 		nodos[hizqdo] = nodos[numNodos-1];
-		// Actualizar la posición del hijo (izquierdo o derecho)
+		// Actualizar la posiciï¿½n del hijo (izquierdo o derecho)
 		// en el padre del nodo movido.
 		if (nodos[nodos[hizqdo].padre].hizq == numNodos-1)
 			nodos[nodos[hizqdo].padre].hizq = hizqdo;
 		else
 			nodos[nodos[hizqdo].padre].hder = hizqdo;
 		// Si el nodo movido tiene hijos,
-		// actualizar la posición del padre.
+		// actualizar la posiciï¿½n del padre.
 		if (nodos[hizqdo].hizq != NODO_NULO)
 			nodos[nodos[hizqdo].hizq].padre = hizqdo;
 		if (nodos[hizqdo].hder != NODO_NULO)
@@ -121,22 +142,22 @@ template <typename T>
 void Abin<T>::eliminarHijoDrcho(nodo n)
 {
 	nodo hdrcho;
-	assert(n >= 0 && n < numNodos); // Nodo válido
+	assert(n >= 0 && n < numNodos); // Nodo vï¿½lido
 	hdrcho = nodos[n].hder;
 	assert(hdrcho != NODO_NULO); // Existe hijo drcho. de n.
 	assert(nodos[hdrcho].hizq == NODO_NULO && // Hijo drcho. de
 	nodos[hdrcho].hder == NODO_NULO); // n es hoja.
 	if (hdrcho != numNodos-1){
-		// Mover el último nodo a la posición del hijo drcho.
+		// Mover el ï¿½ltimo nodo a la posiciï¿½n del hijo drcho.
 		nodos[hdrcho] = nodos[numNodos-1];
-		// Actualizar la posición del hijo (izquierdo o derecho)
+		// Actualizar la posiciï¿½n del hijo (izquierdo o derecho)
 		// en el padre del nodo movido.
 		if (nodos[nodos[hdrcho].padre].hizq == numNodos-1)
 			nodos[nodos[hdrcho].padre].hizq = hdrcho;
 		else
 			nodos[nodos[hdrcho].padre].hder = hdrcho;
 		// Si el nodo movido tiene hijos,
-		// actualizar la posición del padre.
+		// actualizar la posiciï¿½n del padre.
 		if (nodos[hdrcho].hizq != NODO_NULO)
 			nodos[nodos[hdrcho].hizq].padre = hdrcho;
 		if (nodos[hdrcho].hder != NODO_NULO)
@@ -208,7 +229,7 @@ inline Abin<T>::~Abin() {
 
 template <typename T>
 Abin<T>& Abin<T>::operator =(const Abin<T>& A){
-	if (this != &A) // Evitar autoasignación.
+	if (this != &A) // Evitar autoasignaciï¿½n.
 	{
 	// Destruir el vector y crear uno nuevo si es necesario.
 	if (maxNodos != A.maxNodos)

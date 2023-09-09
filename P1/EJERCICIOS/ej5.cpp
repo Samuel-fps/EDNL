@@ -19,16 +19,36 @@ const tElto fin = '#';
     define como la diferencia entre las alturas de los subárboles del mismo.
 */
 
+/*
+    FUNCIONES DECLARADAS EN AbinC (No olvide agragar la declaracion en la parte publica de la clase)
+        template <typename T>
+        int Abin<T>::alturaArbol(const nodo n){
+            if(n == NODO_NULO)
+                return -1;
+            else
+                return 1 + std::max(alturaArbol(n->hizq), alturaArbol(n->hder));
+        }
+
+        template <typename T>
+        int Abin<T>::profundidadNodo(const nodo n){
+            if(n == r)
+                return 0;
+            else
+                return 1 + profundidadNodo(n->padre);
+        }
+*/
+
 int main(){
     // Leer Arbol del fichero
-    Abin<tElto> A(50);
+    Abin<tElto> A;
     cout << "\n*** Lectura de árbol binario B de abin.dat ***\n";
     ifstream fe("abin.dat"); // Abrir fichero de entrada.
     rellenarAbin(fe, A); // Desde fichero.
     fe.close();
 
-    // Llamada a la funcion del ejercicio
+    // Llamada a la funcion creada en el arbol por celdas enlazadas
     cout << "El arbol tiene una altura de " << A.alturaArbol(A.raiz()) << endl;
+    cout << "El arbol tiene una profundidad de " << A.profundidadNodo(A.raiz()) << endl;
 
     //cout << "\n*** Mostrar árbol binario A ***\n";
     //imprimirAbin(A); // En std::cout
