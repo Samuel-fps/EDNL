@@ -19,7 +19,7 @@ template <typename T> class Abin {
 			void eliminarRaiz();
 			bool arbolVacio() const;
 
-			int alturaArbol(const nodo n);
+			int altura(const nodo n);
 			int profundidadNodo(const nodo n);
 
 			const T& elemento(nodo n) const; // acceso a elto, lectura
@@ -53,11 +53,11 @@ const typename Abin<T>::nodo Abin<T>::NODO_NULO(nullptr);
 /*--------------------------------------------------------*/
 
 template <typename T>
-int Abin<T>::alturaArbol(const nodo n){
+int Abin<T>::altura(const nodo n){
     if(n == NODO_NULO)
         return -1;
     else
-        return 1 + std::max(alturaArbol(n->hizq), alturaArbol(n->hder));
+        return 1 + std::max(altura(n->hizq), altura(n->hder));
 }
 
 template <typename T>
