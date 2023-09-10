@@ -5,8 +5,8 @@
 #include "../abin_E-S.h" 
 
 using namespace std;
-typedef char tElto;
-const tElto fin = '#'; // Fin de lectura. 
+typedef string tElto;
+const tElto fin = "#"; // Fin de lectura. 
 
 int main ()
 {

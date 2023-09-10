@@ -17,12 +17,11 @@ const tElto fin = '#';
 */
 
 int main(){
-    // Leer Arbol del fichero
     Abin<tElto> A;
     
-    ifstream fe("abin.dat"); // Abrir fichero de entrada.
-    rellenarAbin(fe, A); // Desde fichero.
-    fe.close();
+    ifstream fa("abin.dat"); // Abrir fichero de entrada.
+    rellenarAbin(fa, A); // Desde fichero.
+    fa.close();
 
     // Llamada a la funcion del ejercicio
     cout << "El arbol tiene una altura de " << alturaArbol(A) << endl;
