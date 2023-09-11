@@ -23,12 +23,12 @@ int grado_rec(const Agen<T>& A, typename Agen<T>::nodo n, int gradoMax){
     if(n == Agen<T>::NODO_NULO)
         return 0;
     else{
-        typename Agen<T>::nodo hermano = A.hijoIzqdo(n); // Primero hijo izquierdo, si es nulo no tiene hijos
+        typename Agen<T>::nodo hijo = A.hijoIzqdo(n); // Primero hijo izquierdo, si es nulo no tiene hijos
         int nHijos = 0;
-        while(hermano != Agen<T>::NODO_NULO){ 
-            gradoMax = std::max(gradoMax, grado_rec(A, A.hermDrcho(hermano), gradoMax)); // LLamada al hermano y cojo el mayor
+        while(hijo != Agen<T>::NODO_NULO){ 
+            gradoMax = std::max(gradoMax, grado_rec(A, A.hermDrcho(hijo), gradoMax)); // LLamada al hermano y cojo el mayor
             nHijos++; // Sumar el grado del nodo actual
-            hermano = A.hermDrcho(hermano); // Avanzar bucle (Pasar hermano)
+            hijo = A.hermDrcho(hijo); // Avanzar bucle (Pasar hermano)
         }
         return ++nHijos; // Se suma porque el ultimo hermano no se suma
     }
