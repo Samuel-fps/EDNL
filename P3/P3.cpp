@@ -2,6 +2,7 @@
 Implementa un subprograma que dado un árbol general nos calcule su grado.
 */
 
+
 template <typename T>
 int gradoMax(Agen<T> A){
     return gradoMaxRec(A, A.raiz());
@@ -66,6 +67,7 @@ void poda(Agen<T> A, Agen<T>::nodo poda){
     podaRec(A,  A.raiz(), n);
 }
 
+template <typename T>
 void podaRec(Agen<T> A, Agen<T>::nodo n, Agen<T>::nodo poda){
     if(n == poda){ // encuentra el nodo -> podar
         if(A.hizq(n) == Agen<T>::NODO_NULO)
@@ -89,5 +91,4 @@ void podaRec(Agen<T> A, Agen<T>::nodo n, Agen<T>::nodo poda){
             aux = A.hermanoDrch(aux);
         }
     }
-}
-
+};
