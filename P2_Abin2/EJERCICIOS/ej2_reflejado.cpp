@@ -34,8 +34,8 @@ void abinReflejado_rec(const Abin<T>& A, Abin<T>& C, typename Abin<T>::nodo nA, 
 
 template <typename T>
 Abin<T> abinReflejado(const Abin<T>& A){
-    Abin<T> copia{A};
-    abinReflejado_rec(A, copia, A.raiz());
+    Abin<T> reflejado;
+    abinReflejado_rec(A, copia, A.raiz(), reflejado);
     return copia;
 }
 

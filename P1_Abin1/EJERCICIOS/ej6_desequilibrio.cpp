@@ -25,7 +25,8 @@ int desequilibrioAbin_rec(Abin<T> A, typename Abin<T>::nodo n){
     if(n == Abin<T>::NODO_NULO)
         return 0;
     else // Devolve el maximo desequilibrio (entre el actual, hizq, hder)
-        return  std::max(std::abs(A.altura(A.hijoIzqdo(n)) - A.altura(A.hijoDrcho(n)), std::max(desequilibrioAbin_rec(A, A.hijoIzqdo(n)), desequilibrioAbin_rec(A, A.hijoDrcho(n))));
+        return  std::max(std::abs(A.altura(A.hijoIzqdo(n)) - A.altura(A.hijoDrcho(n)),
+                         std::max(desequilibrioAbin_rec(A, A.hijoIzqdo(n)), desequilibrioAbin_rec(A, A.hijoDrcho(n)))));
 }
 
 template <typename T>
