@@ -35,7 +35,7 @@ int main(){
     
 
     // Llamada a la funcion del ejercicio
-    cout << "El arbol tiene una profundidad de " << profundidadNodo(A, h) << endl;
+    cout << "El arbol tiene una profundidad de " << profundidadNodo(A, A.raiz()) << endl;
 
     //cout << "\n*** Mostrar árbol binario A ***\n";
     //imprimirAgen(A); // En std::cout
