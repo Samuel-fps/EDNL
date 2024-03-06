@@ -4,6 +4,8 @@
 #define ABIN_VEC0_H
 #include <cassert>
 #include <algorithm>
+#include <cstddef>
+
 
 template <typename T> class Abin {
 	public:

@@ -26,7 +26,7 @@ int profundidadNodo(const Abin<T>& A, typename Abin<T>::nodo n){
 }
 
 int main(){
-    // Leer Arbol del fichero
+    // Leer árbol del fichero
     Abin<tElto> A;
     cout << "\n*** Lectura de arbol binario B de abin.dat ***\n";
     ifstream fe("abin.dat"); // Abrir fichero de entrada.

@@ -12,6 +12,7 @@ const tElto fin = '#'; // Fin de lectura.
     EJERCICIO 1
     Implementa un subprograma que calcule el número de nodos de un árbol binario. 
 */
+
 template <typename T>
 int numNodos_rec(const Abin<T>& A, const typename Abin<T>::nodo& n){
     if(n == Abin<T>::NODO_NULO)

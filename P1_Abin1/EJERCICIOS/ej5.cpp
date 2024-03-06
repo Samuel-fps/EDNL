@@ -1,5 +1,5 @@
 
-#include "../../TAD_ABIN/ABinC.h" // Importamos el arbol binario
+#include "../../TAD_ABIN/ABinV.h" // Importamos el arbol binario
 using namespace std;
 #include <cstddef>
 
@@ -14,11 +14,12 @@ const tElto fin = '#';
 
 /*
     EJERCICIO 5
-    
+    Repite el ejercicio anterior para la representación enlazada de árboles binarios (punteros al
+    padre, hijo izquierdo e hijo derecho). 
 */
 
 /*
-    FUNCIONES DECLARADAS EN AbinC (No olvide agragar la declaracion en la parte publica de la clase)
+    FUNCIONES DECLARADAS EN AbinC (No olvides agragar la declaracion en la parte publica de la clase)
     
         template <typename T>
         int Abin<T>::alturaArbol(const nodo n){
