@@ -23,7 +23,7 @@ template <typename T>
 bool abinSimilares_rec(Abin<T> A, Abin<T> B, typename Abin<T>::nodo nA, typename Abin<T>::nodo nB){
     if(nA == Abin<T>::NODO_NULO && nB == Abin<T>::NODO_NULO) // Los dos son nulos
         return true;
-    else if(nA == Abin<T>::NODO_NULO || nB == Abin<T>::NODO_NULO) // Uno es nulo y el otro no (por el if anteriro sabemos que no son los dos nulos)
+    else if(nA == Abin<T>::NODO_NULO || nB == Abin<T>::NODO_NULO) // Uno es nulo y el otro no (por el if anterior sabemos que no son los dos nulos)
         return false;
     else // Ninguno es nulo
         return abinSimilares_rec(A, B, A.hijoIzqdo(nA), B.hijoDrcho(nB)) 
