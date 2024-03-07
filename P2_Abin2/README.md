@@ -17,7 +17,21 @@ es decir, ambos son vacíos, o en caso contrario, tienen subárboles izquierdo y
 similares. Implementa un subprograma que determine si dos árboles binarios son similares.
 
 ```cpp
+template <typename T>
+bool abinSimilares_rec(Abin<T> A, Abin<T> B, typename Abin<T>::nodo nA, typename Abin<T>::nodo nB){
+    if(nA == Abin<T>::NODO_NULO && nB == Abin<T>::NODO_NULO) // Los dos son nulos
+        return true;
+    else if(nA == Abin<T>::NODO_NULO || nB == Abin<T>::NODO_NULO) // Uno es nulo y el otro no (por el if anterior sabemos que no son los dos nulos)
+        return false;
+    else // Ninguno es nulo
+        return abinSimilares_rec(A, B, A.hijoIzqdo(nA), B.hijoDrcho(nB)) 
+            && abinSimilares_rec(A, B, A.hijoDrcho(nA), B.hijoIzqdo(nB));
+}
 
+template <typename T>
+bool abinSimilares(Abin<T> A, Abin<T> B){
+    return  abinSimilares_rec(A, B, A.raiz(), B.raiz());
+}
 ```
 
 ### Ejercicio 2
@@ -27,7 +41,26 @@ subárboles izquierdo y derecho en cada nodo. Implementa un subprograma que devu
 el árbol binario reflejado de uno dado.
 
 ```cpp
+template <typename T>
+void abinReflejado_rec(const Abin<T>& A, Abin<T>& C, typename Abin<T>::nodo nA, typename Abin<T>::nodo nC){
+    if(n != Abin<T>::NODO_NULO){
+        if(A.hijoIzqdo(nA) != Abin<T>::NODO_NULO){
+            C.insertarHijoDrcho(nC, A.elemento(A.hijoIzqdo(nA)));
+            abinReflejado_rec(A, C, A.hijoIzqdo(nA), C.hijoDrcho(nC));
+        }
+        if(A.hijoDrcho(nA) != Abin<T>::NODO_NULO){
+            C.insertarHijoIzqdo(nC, A.elemento(A.hijoDrcho(nA)));
+            abinReflejado_rec(A, C, A.hijoDrcho(nA), C.hijoIzqdo(nC));
+        }
+    }
+}
 
+template <typename T>
+Abin<T> abinReflejado(const Abin<T>& A){
+    Abin<T> reflejado;
+    abinReflejado_rec(A, copia, A.raiz(), reflejado);
+    return copia;
+}
 ```
 
 ## Ejercicio 3
@@ -36,7 +69,25 @@ El TAD árbol binario puede albergar expresiones matemáticas mediante un árbol
 expresión. Dentro del árbol binario los nodos hojas contendrán los operandos, y el resto de los nodos los operadores.
 
 ```cpp
+// Los decimales deben estar con un '.' y no con una ','
+double resolver_rec(const Abin<string> e, typename Abin<string>::nodo n){
+    if(e.hijoIzqdo(n) == Abin<string>::NODO_NULO) // Si uno es nulo ambos hijos lo son, No puedes tenr esto : (5 + )
+        return std::stod(e.elemento(n));            // Devolvemos el numero
+    else
+        if(e.elemento(n) == "+")
+            return resolver_rec(e, e.hijoIzqdo(n)) + resolver_rec(e, e.hijoDrcho(n));
+        else if(e.elemento(n) == "-")
+            return resolver_rec(e, e.hijoIzqdo(n)) - resolver_rec(e, e.hijoDrcho(n));
+        else if(e.elemento(n) == "*")
+            return resolver_rec(e, e.hijoIzqdo(n)) * resolver_rec(e, e.hijoDrcho(n));
+        else if(e.elemento(n) == "/")
+            return resolver_rec(e, e.hijoIzqdo(n)) / resolver_rec(e, e.hijoDrcho(n));
 
+}
+
+double resolver(const Abin<string> e){
+    return resolver_rec(e, e.raiz());
+}
 ```
 
 ## Ejercicio 4
