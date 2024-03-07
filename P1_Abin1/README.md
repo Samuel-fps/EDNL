@@ -1,7 +1,17 @@
 
 # Práctca 1 Árboles Binarios 1
 
-## Ejercicio 1
+## ÁRBOLES PARA EJERCICIOS
+
+En los ficheros .dat están guardados los árboles que se leen con las funciones Abin_E-S.h y nos sirven para hacer pruebas de las funciones sin tener que introducir el árbol cada vez.
+
+### abin.dat
+
+### abinCompleto.dat
+
+## EJERCICIOS
+
+### Ejercicio 1
 
 Implementa un subprograma que calcule el número de nodos de un árbol binario.
 
@@ -20,7 +30,7 @@ int numNodos(const Abin<T>& A){
 }
 ```
 
-## Ejercicio 2
+### Ejercicio 2
 
 Implementa un subprograma que calcule la altura de un árbol binario.
 
@@ -39,7 +49,7 @@ int alturaArbol(Abin<T> A){
 }
 ```
 
-## Ejercicio 3
+### Ejercicio 3
 
 Implementa un subprograma que, dados un árbol binario y un nodo del mismo, determine
 la profundidad de este nodo en dicho árbol.
@@ -54,7 +64,7 @@ int profundidadNodo(const Abin<T>& A, typename Abin<T>::nodo n){
 }
 ```
 
-## Ejercicio 4
+### Ejercicio 4
 
 Añade dos nuevas operaciones al TAD árbol binario, una que calcule la profundidad de un nodo y otra que calcule la altura de un nodo en un árbol dado. Implementa esta operación para la representación vectorial (índices del padre, hijo izquierdo e hijo derecho)
 
@@ -62,7 +72,7 @@ Añade dos nuevas operaciones al TAD árbol binario, una que calcule la profundi
 
 ```
 
-## Ejercicio 5
+### Ejercicio 5
 
 Repite el ejercicio anterior para la representación enlazada de árboles binarios (punteros al padre, hijo izquierdo e hijo derecho).
 
@@ -70,7 +80,7 @@ Repite el ejercicio anterior para la representación enlazada de árboles binari
 
 ```
 
-## Ejercicio 6
+### Ejercicio 6
 
 Implementa un subprograma que determine el nivel de desequilibrio de un árbol binario,
 definido como el máximo desequilibrio de todos sus nodos. El desequilibrio de un nodo se define como la diferencia entre las alturas de los subárboles del mismo.
@@ -91,7 +101,7 @@ int desequilibrioAbin(Abin<T> A){
 }
 ```
 
-## Ejercicio 7
+### Ejercicio 7
 
 Implementa un subprograma que determine si un árbol binario es o no pseudocompleto.
 En este problema entenderemos que un árbol es pseudocompleto, si en el penúltimo nivel
@@ -114,8 +124,4 @@ template <typename T>
 bool esPseudocompleto(Abin<T> A){
     return esPseudocompleto_rec(A, A.raiz());
 }
-```
-
-```{css, echo=FALSE}
-   h1, h2, h3 { text-align: center; }
 ```
