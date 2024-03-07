@@ -1,5 +1,5 @@
 
-#include "../../TAD_ABIN/ABinC.h" // Importamos el arbol binario
+#include "../TAD_ABIN/ABinC.h" // Importamos el arbol binario
 #include <algorithm>
 #include <cstdlib>
 using namespace std;
@@ -8,7 +8,7 @@ using namespace std;
 #include <iostream>
 #include <fstream>
 
-#include "../abin_E-S.h"
+#include "abin_E-S.h"
 typedef char tElto;
 const tElto fin = '#';
 ////////////////////////////////////

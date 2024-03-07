@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
 
-#include "../../TAD_ABIN/ABinC.h"
-#include "../abin_E-S.h"
+#include "../TAD_ABIN/ABinC.h"
+#include "abin_E-S.h"
 
 using namespace std;
 typedef char tElto;
