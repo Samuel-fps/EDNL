@@ -1,12 +1,12 @@
 
-#include "../../TAD_ABIN/ABinC.h" // Importamos el arbol binario
+#include "../TAD_ABIN/ABinC.h" // Importamos el arbol binario
 using namespace std;
 
 //////////// Esta parte es solo para poder leer los arboles de los ficheros
 #include <iostream>
 #include <fstream>
 
-#include "../abin_E-S.h"
+#include "abin_E-S.h"
 typedef std::string tElto;
 const tElto fin = "#";
 ////////////////////////////////////
