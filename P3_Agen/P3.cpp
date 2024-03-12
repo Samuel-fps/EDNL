@@ -57,6 +57,13 @@ return desequilibrioRec(Agen<T> A, Agen<T>::nodo n){
 }
 
 
+/// DLH
+
+
+
+
+///
+
 /*EJERCICIO 4
 Dado un árbol general de enteros A y un entero x, implementa un subprograma que realice
 la poda de A a partir de x. Se asume que no hay elementos repetidos en A. 
@@ -81,7 +88,7 @@ void podaRec(Agen<T> A, Agen<T>::nodo n, Agen<T>::nodo poda){
             }
     }
 
-    else if(Agen<T>::NODO_NULO == A.hizq(n)){  // esto else reorren el arbol
+    else if(Agen<T>::NODO_NULO == A.hizq(n)){  // este else reorre el arbol
         podaRec(A, A.hizq(n), poda);
     }
     else{  
