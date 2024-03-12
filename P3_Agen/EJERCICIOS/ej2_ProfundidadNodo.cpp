@@ -21,9 +21,8 @@ template <typename T>
 int profundidadNodo(Agen<T> A, typename Agen<T>::nodo n){
     if(n == A.raiz())
         return 0;
-    else{
+    else
         return 1 + profundidadNodo(A, A.padre(n));
-    }
 }
 
 int main(){
