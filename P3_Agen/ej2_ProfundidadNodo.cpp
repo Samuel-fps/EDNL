@@ -1,12 +1,12 @@
 
-#include "../../TAD_AGEN/agenlis.h" // Importamos el arbol binario
+#include "../TAD_AGEN/agenlis.h" // Importamos el arbol binario
 using namespace std;
 
 //////////// Esta parte es solo para poder leer los arboles de los ficheros
 #include <iostream>
 #include <fstream>
 
-#include "../../agen_E-S.h"
+#include "agen_E-S.h"
 typedef char tElto;
 const tElto fin = '#';
 ////////////////////////////////////
