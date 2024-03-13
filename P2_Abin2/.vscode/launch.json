@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/PRACTICAS/EDNL/P3_Agen/EJERCICIOS",
-      "program": "d:/PRACTICAS/EDNL/P3_Agen/EJERCICIOS/build/Debug/outDebug",
+      "cwd": "d:/PRACTICAS/EDNL/P2_Abin2",
+      "program": "d:/PRACTICAS/EDNL/P2_Abin2/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
