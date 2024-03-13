@@ -3,6 +3,7 @@
 
 #include <cassert>
 #include <cstddef>
+#include <cstdint>
 #include "listaEnla.h"
 
 template <typename T> class Agen {
