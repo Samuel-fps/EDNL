@@ -2,13 +2,18 @@
 
 ## ÁRBOLES PARA EJERCICIOS
 
-En los ficheros .dat están guardados los árboles que se leen con las funciones Abin_E-S.h y nos sirven para hacer pruebas de las funciones sin tener que introducir el árbol cada vez.
+Los ficheros .dat contienen unos árboles de ejemplo para probar los ejercicios sin necesidad de introducir un árbol manualmente, se leen gracias al fichero agen_E-S.h.
+A continuación se muestra una imagen que representa los árboles guardados en cada fichero.
 
 ### AgenA.dat
 
 ![AgenA.dat](AgenA.png)
 
 ### AgenB.dat
+
+Se usa para podar el árbol desde el nodo con el elemento 6 marcado en naranja.
+
+![AgenB.dat](AgenB.png)
 
 ## EJERCICIOS
 
@@ -63,7 +68,7 @@ Implementa un subprograma que dados un árbol y un nodo dentro de dicho árbol d
 
 ### Ejercicio 4
 
-Implementa un subprograma que dados un árbol y un nodo dentro de dicho árbol determine la profundidad de éste nodo en el árbol.
+Dado un árbol general de enteros A y un entero x, implementa un subprograma que realice la poda de A a partir de x. Se asume que no hay elementos repetidos en A.
 
 ```cpp
 

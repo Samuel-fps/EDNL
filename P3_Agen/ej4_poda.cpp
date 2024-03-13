@@ -11,7 +11,8 @@ const tElto fin = '#';
 ////////////////////////////////////
 
 /*  EJERCICIO 4
-    Implementa un subprograma que dados un árbol y un nodo dentro de dicho árbol determine la profundidad de éste nodo en el árbol.
+    Dado un árbol general de enteros A y un entero x, implementa un subprograma que realice 
+    la poda de A a partir de x. Se asume que no hay elementos repetidos en A.
 */
 
 void encuentraEntero(Agen<int> A, int x){
