@@ -27,7 +27,7 @@ int grado_rec(const Agen<T>& A, typename Agen<T>::nodo n){
             nHijos++; // Sumar el grado del nodo actual
             hijo = A.hermDrcho(hijo); // Avanzar bucle (Pasar hermano)
         }
-        return std::max(grado, nHijos); // Se suma porque el ultimo hermano no se suma
+        return std::max(grado, nHijos);
     }
 }
 
