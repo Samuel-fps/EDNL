@@ -4,9 +4,11 @@
 
 En los ficheros .dat están guardados los árboles que se leen con las funciones Abin_E-S.h y nos sirven para hacer pruebas de las funciones sin tener que introducir el árbol cada vez.
 
-### arbolA.dat
+### AgenA.dat
 
-### arbolB.dat
+![AgenA.dat](AgenA.png)
+
+### AgenB.dat
 
 ## EJERCICIOS
 

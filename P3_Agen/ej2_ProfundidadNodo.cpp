@@ -28,7 +28,7 @@ int profundidadNodo(Agen<T> A, typename Agen<T>::nodo n){
 int main(){
     Agen<tElto> A(16);
 
-    ifstream fa("A.dat"); // Abrir fichero de entrada.
+    ifstream fa("AgenA.dat"); // Abrir fichero de entrada.
     rellenarAgen(fa, A); // Desde fichero.
     fa.close();
     
