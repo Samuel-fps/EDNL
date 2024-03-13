@@ -50,9 +50,9 @@ Implementa un subprograma que dados un árbol y un nodo dentro de dicho árbol d
 
 ```cpp
 template <typename T>
-int profundidadNodo(Agen<T> A, typename Agen<T>::nodo n){
-    if(n == A.raiz())
-        return 0;
+int profundidadNodo(const Agen<T>& A, typename Agen<T>::nodo n){
+    if(Agen<T>::NODO_NULO == n) 
+        return -1;
     else
         return 1 + profundidadNodo(A, A.padre(n));
 }

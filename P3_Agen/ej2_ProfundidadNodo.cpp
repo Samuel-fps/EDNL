@@ -18,23 +18,24 @@ const tElto fin = '#';
 */
 
 template <typename T>
-int profundidadNodo(Agen<T> A, typename Agen<T>::nodo n){
-    if(n == A.raiz())
-        return 0;
+int profundidadNodo(const Agen<T>& A, typename Agen<T>::nodo n){
+    if(Agen<T>::NODO_NULO == n) 
+        return -1;
     else
         return 1 + profundidadNodo(A, A.padre(n));
 }
 
 int main(){
-    Agen<tElto> A(16);
+    Agen<tElto> A(32);
 
     ifstream fa("AgenA.dat"); // Abrir fichero de entrada.
     rellenarAgen(fa, A); // Desde fichero.
     fa.close();
     
 
-    // Llamada a la funcion del ejercicio
-    cout << "El arbol tiene una profundidad de " << profundidadNodo(A, A.raiz()) << endl;
+    // Llamada a la funcion del ejercicio podemos cambiar el nodo para ver que sea correcta
+    cout << "El arbol tiene una profundidad de "
+         << profundidadNodo(A, A.hijoIzqdo(A.hijoIzqdo(A.raiz()))) << endl;
 
     //cout << "\n*** Mostrar árbol binario A ***\n";
     //imprimirAgen(A); // En std::cout
