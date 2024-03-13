@@ -26,7 +26,7 @@ int grado_rec(const Agen<T>& A, typename Agen<T>::nodo n){
         typename Agen<T>::nodo hijo = A.hijoIzqdo(n); // Primero hijo izquierdo, si es nulo no tiene hijos
         int nHijos = 0, grado = 0;
         while(hijo != Agen<T>::NODO_NULO){ 
-            grado = std::max(grado, grado_rec(A, A.hermDrcho(hijo), grado)); // LLamada al hermano y cojo el mayor
+            grado = std::max(grado, grado_rec(A, A.hermDrcho(hijo))); // LLamada recursiva hermano
             nHijos++; // Sumar el grado del nodo actual
             hijo = A.hermDrcho(hijo); // Avanzar bucle (Pasar hermano)
         }
@@ -40,14 +40,14 @@ int gradoAgen(const Agen<T>& A){
 }
 
 int main(){
-    Agen<tElto> A(16);
+    Agen<tElto> A(32);
 
     ifstream fa("AgenA.dat"); // Abrir fichero de entrada.
     rellenarAgen(fa, A); // Desde fichero.
     fa.close();
     
     // Llamada a la funcion del ejercicio
-    cout << "El arbol grado del arbol A es " << gradoAgen(A) << endl;
+    cout << "El árbol grado del árbol es " << gradoAgen(A) << endl;
 
     //cout << "\n*** Mostrar árbol binario A ***\n";
     //imprimirAgen(A); // En std::cout
