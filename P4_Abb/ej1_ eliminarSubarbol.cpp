@@ -15,6 +15,22 @@ const tElto fin = '#';
     elimine al completo el subárbol que cuelga de él.
 */
 
+template <typename T>
+void eliminarSubarbol(Abb<T>& A){
+    if(!A.izqdo().vacio())
+        eliminarSubArbol(A.izqdo());
+    if(!A.drcho().vacio())
+        eliminarSubArbol(A.drcho());
+    else
+        A.eliminar(A.elemento());
+}
+
+template <typename T>
+void eliminarSubarbolElto(Abb<T>& A, const T& elto){
+    Abb<T> subarbol = A.buscar(elto);
+    eliminarSubarbol(subarbol);
+}
+
 
 int main(){
     Abb<tElto> A();
