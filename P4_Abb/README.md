@@ -38,8 +38,7 @@ Implementa este algoritmo para equilibrar un ABB.
 
 ### Ejercicio 3
 
-Dados dos conjuntos representados mediante árboles binarios de búsqueda,
-implementa la operación unión de dos conjuntos que devuelva como resultado otro
+Dados dos conjuntos representados mediante árboles binarios de búsqueda, implementa la operación unión de dos conjuntos que devuelva como resultado otro
 conjunto que sea la unión de ambos, representado por un ABB equilibrado.
 
 ```cpp
@@ -48,10 +47,7 @@ conjunto que sea la unión de ambos, representado por un ABB equilibrado.
 
 ### Ejercicio 4
 
-Dados dos conjuntos representados mediante árboles binarios de búsqueda,
-implementa la operación intersección de dos conjuntos, que devuelva como resultado
-otro conjunto que sea la intersección de ambos. El resultado debe quedar en un árbol
-equilibrado.
+Dados dos conjuntos representados mediante árboles binarios de búsqueda, implementa la operación intersección de dos conjuntos, que devuelva como resultado otro conjunto que sea la intersección de ambos. El resultado debe quedar en un árbol equilibrado.
 
 ```cpp
 
