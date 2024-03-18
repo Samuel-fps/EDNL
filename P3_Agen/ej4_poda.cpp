@@ -6,7 +6,7 @@ using namespace std;
 #include <fstream>
 
 #include "agen_E-S.h"
-typedef char tElto;
+typedef int tElto;
 const tElto fin = '#';
 ////////////////////////////////////
 
@@ -15,22 +15,33 @@ const tElto fin = '#';
     la poda de A a partir de x. Se asume que no hay elementos repetidos en A.
 */
 
-void encuentraEntero(Agen<int> A, int x){
-    encuentraEntero_rec(A, A.raiz(), x);
+void podaNodo_rec(Agen<int>& A, typename Agen<int>::nodo n){
+    if(n != Agen<int>::NODO_NULO){
+        typename Agen<int>::nodo hijo = A.hijoIzqdo(n);
+        while(hijo == Agen<int>::NODO_NULO){
+            if(A.hijoIzqdo(hijo) == Agen<int>::NODO_NULO){ // No tiene hijos
+                cout << "Entra " << endl;
+                A.eliminarHijoIzqdo(A.hijoIzqdo(A.padre(n)));
+            }
+            else{
+                podaNodo_rec(A, A.hijoIzqdo(hijo));
+            }
+            hijo = A.hermDrcho(hijo);
+        }
+    }
 }
 
-
-void encuentraEntero_rec(Agen<int> A, typename Agen<int>::nodo n, int x){
+void encuentraEntero_rec(Agen<int>& A, typename Agen<int>::nodo n, int x){
     if(n != Agen<int>::NODO_NULO){
         typename Agen<int>::nodo hijo = A.hijoIzqdo(n);
         if(A.elemento(hijo) == x){
-                podaNodo_rec(A, A.padre(hijo));
+                podaNodo_rec(A, hijo);
                 A.eliminarHijoIzqdo(n);
         }
         else{
             while(hijo == Agen<int>::NODO_NULO){
                 if(A.elemento(A.hermDrcho(hijo) ) == x){
-                    podaNodo_rec(A, A.padre(hijo));
+                    podaNodo_rec(A, hijo);
                     A.eliminarHermDrcho(hijo);
                 }
                 encuentraEntero_rec(A, hijo, x);
@@ -40,16 +51,24 @@ void encuentraEntero_rec(Agen<int> A, typename Agen<int>::nodo n, int x){
     }
 }
 
-void podaNodo_rec(Agen<int> A, typename Agen<int>::nodo n){
-    if(A.hijoIzqdo(n) == Agen<int>::NODO_NULO){
-        
-    }
-    else{
-        typename Agen<int>::nodo hijo = A.hijoIzqdo(n);
-        while(hijo == Agen<int>::NODO_NULO){
-            
-            hijo = A.hermDrcho(hijo);
-        }
-    }
+void encontrarEntero(Agen<int> A, int x){
+    encuentraEntero_rec(A, A.raiz(), x);
 }
 
+int main(){
+    Agen<tElto> A(32);
+
+    ifstream fa("AgenB.dat"); // Abrir fichero de entrada.
+    rellenarAgen(fa, A); // Desde fichero.
+    fa.close();
+    // rellenarAgen(A, fin);
+    cout << "\n*** Mostrar arbol antes de podar ***\n";
+    imprimirAgen(A); // En std::cout
+    
+    encontrarEntero(A, 6);
+
+    cout << "\n*** Mostrar arbol podado ***\n";
+    imprimirAgen(A); // En std::cout
+
+    return 0;
+}
