@@ -12,7 +12,7 @@ using std::cout;
 using std::endl;
 
 template <typename T>
-void rellenarAbin(Abin<T>& A, const T& fin)
+void rellenarAbb(Abb<T>& A, const T& fin)
 // Pre: A está vacío.
 // Post: Rellena el árbol A con la estructura y elementos
 //       leídos en preorden de la entrada estándar, usando
@@ -29,7 +29,7 @@ void rellenarAbin(Abin<T>& A, const T& fin)
 }
 
 template <typename T>
-void rellenarDescendientes(typename Abin<T>::nodo n, Abb<T>& A, const T& fin)
+void rellenarDescendientes(typename Abb<T>::nodo n, Abb<T>& A, const T& fin)
 // Pre: n es un nodo hoja de A.
 // Post: Lee de la entrada estándar y en preorden los descendientes de n,
 //       usando fin para introducir nodos nulos.
