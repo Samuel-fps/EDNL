@@ -16,6 +16,28 @@ const tElto fin = '#';
     conjunto que sea la unión de ambos, representado por un ABB equilibrado.
 */
 
+template <typename T>
+using Conjunto = Abb<T>;
+
+template <typename T>
+bool pertenece(Conjunto<T> A, const T& elto){
+    if(A.elemento() == elto)
+        return true;
+    else if(!A.drcho().vacio() && A.izqdo().vacion())
+        return pertenece(A.izqdo(), elto);
+    else if(A.drcho().vacio() && !A.izqdo().vacion())
+        return pertenece(A.drcho(), elto);
+    else  
+        return false;
+}
+
+template <typename T>
+Conjunto<T> union(Conjunto<T> A, Conjunto<T> B){
+    if(pertenece(A, B.elemento()))
+        return A;
+    else 
+        return B;
+}
 
 int main(){
     Abb<tElto> A();

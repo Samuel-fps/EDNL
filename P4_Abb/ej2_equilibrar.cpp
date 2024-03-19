@@ -1,10 +1,10 @@
 #include "../TAD_ABB/abb.h" // Importamos el arbol binario
-using namespace std;
-
-//////////// Esta parte es solo para poder leer los arboles de los ficheros
 #include <iostream>
 #include <fstream>
 
+using namespace std;
+
+//////////// Esta parte es solo para poder leer los arboles de los ficheros
 #include "abb_E-S.h"
 typedef int tElto;
 const tElto fin = '#';
@@ -18,16 +18,31 @@ const tElto fin = '#';
     Implementa este algoritmo para equilibrar un ABB.
 */
 
+template <typename T>
+Vector<T> abb2vector_rec(Abb<T> A){
+    
+}
+
+template <typename T>
+void equilibrarAbb_rec(Vector<T> v){
+
+}
+
+template <typename T>
+Abb<T> equilibrarAbb(Abb<int> A){
+    Vector<T> v = abb2vector(A);
+    return equilibrarAbb_rec(v);
+}
 
 int main(){
-    Abb<tElto> A();
+    Abb<tElto> A(), B();
 
     ifstream fa("AbbA.dat"); // Abrir fichero de entrada.
     rellenarAbb(fa, A); // Desde fichero.
     fa.close();
-    
-    // Llamada a la funcion del ejercicio
-    //cout << "El desequilibrio del árbol es " <<  << endl;
+
+    B = equilibrarAbb(A);
+    imprimirAbb(B);
 
     return 0;
 }
