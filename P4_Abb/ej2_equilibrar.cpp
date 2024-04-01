@@ -1,6 +1,7 @@
 #include "../TAD_ABB/abb.h" // Importamos el arbol binario
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 
@@ -18,20 +19,36 @@ const tElto fin = '#';
     Implementa este algoritmo para equilibrar un ABB.
 */
 
+// Recibe un árbol abb y un vector vacio
+// Devuelve el vector recibido con los elementos del abb ordenados en él
 template <typename T>
-Vector<T> abb2vector_rec(Abb<T> A){
-    
+void abb2vector_rec(Abb<T> A, const vector<T> v){
+    if(A.izqdo().vacio() && A.drcho().vacio()){ // Nodo hoja
+        v.insert(v.first, A.elemento());
+    }
+    else {
+        if(!A.izqdo().vacio()) { // Izquierdo
+            abb2Vector(A.izqdo());
+            v.insert(v.first, A.elemento());
+        }
+        if(!A.drcho().vacio()){ // Derecho
+            v.insert(v.first, A.elemento());
+            abb2Vector(A.drcho());
+        }
+    }
 }
 
+// Recibe un vector ordenado
+// Devuelve un abb equilibrado
 template <typename T>
-void equilibrarAbb_rec(Vector<T> v){
+void equilibrarAbb_rec(vector<T> v, size_t i){
 
 }
 
 template <typename T>
 Abb<T> equilibrarAbb(Abb<int> A){
-    Vector<T> v = abb2vector(A);
-    return equilibrarAbb_rec(v);
+    vector<T> v = abb2vector(A);
+    return equilibrarAbb_rec(v, v.size()/2);
 }
 
 int main(){
