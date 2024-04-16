@@ -52,6 +52,8 @@ const typename Abin<T>::nodo Abin<T>::NODO_NULO(nullptr);
 /* M�todos p�blicos */
 /*--------------------------------------------------------*/
 
+// EJERCICIO 5
+
 template <typename T>
 int Abin<T>::altura(const nodo n){
     if(n == NODO_NULO)
@@ -75,7 +77,7 @@ inline Abin<T>::Abin() : r(NODO_NULO) {}
 template <typename T>
 inline void Abin<T>::insertarRaiz(const T& e)
 {
-	assert(r == NODO_NULO); // �rbol vac�o
+	assert(r == NODO_NULO); // arbol vacio
 	r = new celda(e);
 }
 
