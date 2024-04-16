@@ -71,18 +71,18 @@ Añade dos nuevas operaciones al TAD árbol binario, una que calcule la profundi
 ```cpp
 template <typename T>
 int Abin<T>::alturaArbol(const nodo n) const {
-	if(n == NODO_NULO)
-		return -1;
-	else
-		return 1 + std::max(alturaArbol(nodos[n].hizq), alturaArbol(nodos[n].hder));
+    if(n == NODO_NULO)
+        return -1;
+    else
+        return 1 + std::max(alturaArbol(nodos[n].hizq), alturaArbol(nodos[n].hder));
 }
 
 template <typename T>
 int Abin<T>::profundidadNodo(nodo n) const {
-	if(n == raiz())
-		return 0;
-	else
-		return 1 + profundidadNodo(nodos[n].padre);
+    if(n == raiz())
+        return 0;
+    else
+        return 1 + profundidadNodo(nodos[n].padre);
 }
 ```
 

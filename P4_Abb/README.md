@@ -74,22 +74,23 @@ Consideraremos que existe un orden lineal definido sobre el tipo de los elemento
 
 ### Operaciones
 
-- Abb()  
-    &nbsp;&nbsp; Post: Construye un árbol binario de búsqueda vacío.  
-- const Abb& buscar(const T& e) const  
+- Abb()
+    &nbsp;&nbsp; Post: Construye un árbol binario de búsqueda vacío.
+const Abb& buscar(const T& e) const
     &nbsp;&nbsp; Post: Si el elemento e pertenece al árbol, devuelve el subárbol en cuya raíz se encuentra e; en caso contrario, devuelve un árbol vacío.  
-- void insertar(const T& e)  
-    &nbsp;&nbsp; Post: Si e no pertenece al árbol, lo inserta; en caso contrario, el árbol no se modifica.  
-- void eliminar(const T& e)  
-    &nbsp;&nbsp; Post: Elimina el elemento e del árbol. Si e no se encuentra, el árbol no se modifica.  
-- bool vacio() const  
-    &nbsp;&nbsp; Post: Devuelve true si el árbol está vacío y false en caso contrario.  
-- const T& elemento() const  
-    &nbsp;&nbsp; Pre: Árbol no vacío.  
+- void insertar(const T& e)
+    &nbsp;&nbsp; Post: Si e no pertenece al árbol, lo inserta; en caso contrario, el árbol no semodifica.  
+- void eliminar(const T& e)
+    &nbsp;&nbsp; Post: Elimina el elemento e del árbol. Si e no se encuentra, el árbol no se modifica.
+- bool vacio() const
+    &nbsp;&nbsp; Post: Devuelve true si el árbol está vacío y false en caso contrario.
+- const T& elemento() const
+    &nbsp;&nbsp; Pre: Árbol no vacío.
     &nbsp;&nbsp; Post: Devuelve el elemento de la raíz de un árbol binario de búsqueda.  
-- const Abb& izqdo() const  
+- const Abb& izqdo() const
     &nbsp;&nbsp; Pre: Árbol no vacío.  
     &nbsp;&nbsp; Post: Devuelve el subárbol izquierdo.  
-- const Abb& drcho() const  
+- const Abb& drcho() const
     &nbsp;&nbsp; Pre: Árbol no vacío.  
     &nbsp;&nbsp; Post: Devuelve el subárbol derecho.  
+
