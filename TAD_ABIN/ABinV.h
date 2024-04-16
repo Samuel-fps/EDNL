@@ -23,8 +23,8 @@ template <typename T> class Abin {
 		const T& elemento(nodo n) const; // acceso a elto, lectura
 		T& elemento(nodo n); // acceso a elto, lectura/escritura
 
-		int alturaArbol(const nodo n);
-		int profundidadNodo(nodo n);
+		int alturaArbol(const nodo n) const;
+		int profundidadNodo(nodo n) const;
 		
 		nodo raiz() const;
 		nodo padre(nodo n) const;
@@ -47,20 +47,22 @@ template <typename T> class Abin {
 template <typename T>
 const typename Abin<T>::nodo Abin<T>::NODO_NULO(SIZE_MAX);
 
+// EJERCICIO 4
+
 template <typename T>
-int Abin<T>::alturaArbol(const nodo n){
-    if(n == NODO_NULO)
-        return -1;
-    else
-        return 1 + std::max(alturaArbol(nodos[n].hizq), alturaArbol(nodos[n].hder));
+int Abin<T>::alturaArbol(const nodo n) const {
+	if(n == NODO_NULO)
+		return -1;
+	else
+		return 1 + std::max(alturaArbol(nodos[n].hizq), alturaArbol(nodos[n].hder));
 }
 
 template <typename T>
-int Abin<T>::profundidadNodo(nodo n){
-    if(n == nodos[0])
-        return 0;
-    else
-        return 1 + profundidadNodo(nodos[n].padre);
+int Abin<T>::profundidadNodo(nodo n) const {
+	if(n == raiz())
+		return 0;
+	else
+		return 1 + profundidadNodo(nodos[n].padre);
 }
 
 template <typename T>

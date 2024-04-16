@@ -23,7 +23,7 @@ const tElto fin = '#';
     FUNCIONES DE AbinV (Implementación vectorial)
 
         template <typename T>
-        int Abin<T>::alturaArbol(const nodo n){
+        int Abin<T>::alturaArbol(const nodo n) const {
             if(n == NODO_NULO)
                 return -1;
             else
@@ -31,7 +31,7 @@ const tElto fin = '#';
         }
 
         template <typename T>
-        int Abin<T>::profundidadNodo(nodo n){
+        int Abin<T>::profundidadNodo(nodo n) const {
             if(n == raiz())
                 return 0;
             else
