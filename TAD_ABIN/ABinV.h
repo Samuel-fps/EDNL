@@ -35,12 +35,12 @@ template <typename T> class Abin {
 		~Abin(); // destructor
 	private:
 		struct celda {
-		T elto;
-		nodo padre, hizq, hder;
+			T elto;
+			nodo padre, hizq, hder;
 		};
 		celda *nodos; // vector de nodos
-		size_t maxNodos; // tama�o del vector
-		size_t numNodos; // n�mero de nodos del �rbol
+		size_t maxNodos; // tamaño del vector
+		size_t numNodos; // numero de nodos del arbol
 };
 
 /* Definicion del nodo nulo */
@@ -57,7 +57,7 @@ int Abin<T>::alturaArbol(const nodo n){
 
 template <typename T>
 int Abin<T>::profundidadNodo(nodo n){
-    if(n == raiz())
+    if(n == nodos[0])
         return 0;
     else
         return 1 + profundidadNodo(nodos[n].padre);
@@ -193,8 +193,8 @@ inline T& Abin<T>::elemento(nodo n){
 
 template <typename T>
 inline typename Abin<T>::nodo Abin<T>::raiz() const { return (numNodos > 0) ? 0 : NODO_NULO; }
-template <typename T> inline
 
+template <typename T> inline
 typename Abin<T>::nodo Abin<T>::padre(nodo n) const {
 	assert(n >= 0 && n < numNodos);
 	return nodos[n].padre;

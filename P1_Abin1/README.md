@@ -69,8 +69,24 @@ int profundidadNodo(const Abin<T>& A, typename Abin<T>::nodo n){
 Añade dos nuevas operaciones al TAD árbol binario, una que calcule la profundidad de un nodo y otra que calcule la altura de un nodo en un árbol dado. Implementa esta operación para la representación vectorial (índices del padre, hijo izquierdo e hijo derecho)
 
 ```cpp
+template <typename T>
+int Abin<T>::alturaArbol(const nodo n){
+    if(n == NODO_NULO)
+        return -1;
+    else
+        return 1 + std::max(alturaArbol(nodos[n].hizq), alturaArbol(nodos[n].hder));
+}
 
+template <typename T>
+int Abin<T>::profundidadNodo(nodo n){
+    if(n == nodos[0])
+        return 0;
+    else
+        return 1 + profundidadNodo(nodos[n].padre);
+}
 ```
+
+¿Es mejor usar directamente nodo[0] que la funcion raiz()?
 
 ### Ejercicio 5
 
