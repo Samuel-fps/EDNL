@@ -93,7 +93,22 @@ int Abin<T>::profundidadNodo(nodo n){
 Repite el ejercicio anterior para la representación enlazada de árboles binarios (punteros al padre, hijo izquierdo e hijo derecho).
 
 ```cpp
+template <typename T>
+template <typename T>
+int Abin<T>::altura(const nodo n) const {
+    if(n == NODO_NULO)
+        return -1;
+    else
+        return 1 + std::max(altura(n->hizq), altura(n->hder));
+}
 
+template <typename T>
+int Abin<T>::profundidadNodo(const nodo n) const {
+    if(n == r)
+        return 0;
+    else
+        return 1 + profundidadNodo(n->padre);
+}
 ```
 
 ### Ejercicio 6

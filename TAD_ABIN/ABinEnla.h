@@ -19,8 +19,8 @@ template <typename T> class Abin {
 			void eliminarRaiz();
 			bool arbolVacio() const;
 
-			int altura(const nodo n);
-			int profundidadNodo(const nodo n);
+			int altura(const nodo n) const;
+			int profundidadNodo(const nodo n) const;
 
 			const T& elemento(nodo n) const; // acceso a elto, lectura
 			T& elemento(nodo n); // acceso a elto, lectura/escritura
@@ -55,7 +55,7 @@ const typename Abin<T>::nodo Abin<T>::NODO_NULO(nullptr);
 // EJERCICIO 5
 
 template <typename T>
-int Abin<T>::altura(const nodo n){
+int Abin<T>::altura(const nodo n) const {
     if(n == NODO_NULO)
         return -1;
     else
@@ -63,7 +63,7 @@ int Abin<T>::altura(const nodo n){
 }
 
 template <typename T>
-int Abin<T>::profundidadNodo(const nodo n){
+int Abin<T>::profundidadNodo(const nodo n) const {
     if(n == r)
         return 0;
     else

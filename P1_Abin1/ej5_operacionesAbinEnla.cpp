@@ -1,5 +1,5 @@
 
-#include "../TAD_ABIN/ABinV.h" // Importamos el arbol binario
+#include "../TAD_ABIN/ABinEnla.h" // Importamos el arbol binario
 using namespace std;
 #include <cstddef>
 
@@ -22,15 +22,15 @@ const tElto fin = '#';
     FUNCIONES DECLARADAS EN AbinC (No olvides agragar la declaracion en la parte publica de la clase)
     
         template <typename T>
-        int Abin<T>::alturaArbol(const nodo n){
+        int Abin<T>::altura(const nodo n) const {
             if(n == NODO_NULO)
                 return -1;
             else
-                return 1 + std::max(alturaArbol(n->hizq), alturaArbol(n->hder));
+                return 1 + std::max(altura(n->hizq), altura(n->hder));
         }
 
         template <typename T>
-        int Abin<T>::profundidadNodo(const nodo n){
+        int Abin<T>::profundidadNodo(const nodo n) const {
             if(n == r)
                 return 0;
             else
