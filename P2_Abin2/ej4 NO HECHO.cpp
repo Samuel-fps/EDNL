@@ -12,7 +12,7 @@ const tElto fin = '#';
 ////////////////////////////////////
 
 /*
-    EJERCICIO 
+    EJERCICIO 4
 
 */
 

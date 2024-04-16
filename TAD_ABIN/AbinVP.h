@@ -3,9 +3,10 @@
 #ifndef ABIN_VEC1_H
 #define ABIN_VEC1_H
 #include <cassert>
+
 template <typename T> class Abin {
 	public:
-		typedef size_t nodo; // índice del vector,
+		typedef size_t nodo; // indice del vector,
 		// entre 0 y maxNodos-1
 		static const nodo NODO_NULO;
 		explicit Abin(size_t maxNodos, const T& e_nulo = T());
@@ -23,15 +24,15 @@ template <typename T> class Abin {
 		nodo hijoIzqdo(nodo n) const;
 		nodo hijoDrcho(nodo n) const;
 		Abin(const Abin<T>& a); // ctor. de copia
-		Abin<T>& operator =(const Abin<T>& a); // asig. de árboles
+		Abin<T>& operator =(const Abin<T>& a); // asig. de arboles
 		~Abin(); // destructor
 	private:
 		T* nodos; // vector de nodos
-		size_t maxNodos; // tamaño del vector
-		T ELTO_NULO; // marca celdas vacías
+		size_t maxNodos; // tamano del vector
+		T ELTO_NULO; // marca celdas vacias
 };
 
-/* Definición del nodo nulo */
+/* Definicion del nodo nulo */
 template <typename T>
 const typename Abin<T>::nodo Abin<T>::NODO_NULO(SIZE_MAX);
 
@@ -49,25 +50,25 @@ ELTO_NULO(e_nulo)
 template <typename T>
 inline void Abin<T>::insertarRaiz(const T& e)
 {
-	assert(nodos[0] == ELTO_NULO); // Árbol vacío.
+	assert(nodos[0] == ELTO_NULO); // ï¿½rbol vacï¿½o.
 	nodos[0] = e;
 }
 
 template <typename T> inline
 void Abin<T>::insertarHijoIzqdo(nodo n,const T& e)
 {
-	assert(n >= 0 && n <= maxNodos-1); // Nodo válido.
-	assert(nodos[n] != ELTO_NULO); // Nodo del árbol.
-	assert(2*n+1 < maxNodos); // Hijo izqdo. cabe en el árbol.
+	assert(n >= 0 && n <= maxNodos-1); // Nodo vï¿½lido.
+	assert(nodos[n] != ELTO_NULO); // Nodo del ï¿½rbol.
+	assert(2*n+1 < maxNodos); // Hijo izqdo. cabe en el ï¿½rbol.
 	assert(nodos[2*n+1] == ELTO_NULO); // n no tiene hijo izqdo.
 	nodos[2*n+1] = e;
 }
 template <typename T> inline
 void Abin<T>::insertarHijoDrcho(nodo n,const T& e)
 {
-	assert(n >= 0 && n < maxNodos-1); // Nodo válido
-	assert(nodos[n] != ELTO_NULO); // Nodo del árbol
-	assert(2*n+2 < maxNodos); // Hijo drcho. cabe en el árbol.
+	assert(n >= 0 && n < maxNodos-1); // Nodo vï¿½lido
+	assert(nodos[n] != ELTO_NULO); // Nodo del ï¿½rbol
+	assert(2*n+2 < maxNodos); // Hijo drcho. cabe en el ï¿½rbol.
 	assert(nodos[2*n+2] == ELTO_NULO); // n no tiene hijo drcho.
 	nodos[2*n+2] = e;
 }
@@ -75,14 +76,14 @@ void Abin<T>::insertarHijoDrcho(nodo n,const T& e)
 template <typename T> inline
 void Abin<T>::eliminarHijoIzqdo(nodo n)
 {
-	assert(n >= 0 && n <= maxNodos-1); // Nodo válido.
-	assert(nodos[n] != ELTO_NULO); // Nodo del árbol.
-	assert(2*n+1 < maxNodos); // Hijo izqdo. cabe en el árbol.
+	assert(n >= 0 && n <= maxNodos-1); // Nodo vï¿½lido.
+	assert(nodos[n] != ELTO_NULO); // Nodo del ï¿½rbol.
+	assert(2*n+1 < maxNodos); // Hijo izqdo. cabe en el ï¿½rbol.
 	assert(nodos[2*n+1] != ELTO_NULO); // n tiene hijo izqdo.
 	if (4*n+4 < maxNodos) // Caben los hijos del hijo izqdo. de n
 		assert(nodos[4*n+3] == ELTO_NULO && // Hijo izqdo. de
 		nodos[4*n+4] == ELTO_NULO); // n es hoja
-	else if (4*n+3 < maxNodos) //Sólo cabe h. izq. de h. izq. de n
+	else if (4*n+3 < maxNodos) //Sï¿½lo cabe h. izq. de h. izq. de n
 		assert(nodos[4*n+3] == ELTO_NULO); //Hijo izq. de n es hoja
 		nodos[2*n+1] = ELTO_NULO;
 }
@@ -90,23 +91,23 @@ void Abin<T>::eliminarHijoIzqdo(nodo n)
 template <typename T> inline
 void Abin<T>::eliminarHijoDrcho(nodo n)
 {
-	assert(n >= 0 && n <= maxNodos-1); // Nodo válido.
-	assert(nodos[n] != ELTO_NULO); // Nodo del árbol.
-	assert(2*n+2 < maxNodos); // Hijo drcho. cabe en el árbol.
+	assert(n >= 0 && n <= maxNodos-1); // Nodo vï¿½lido.
+	assert(nodos[n] != ELTO_NULO); // Nodo del ï¿½rbol.
+	assert(2*n+2 < maxNodos); // Hijo drcho. cabe en el ï¿½rbol.
 	assert(nodos[2*n+2] != ELTO_NULO); // n tiene hijo drcho.
 	if (4*n+6 < maxNodos) // Caben los hijos del hijo drcho. de n
 		assert(nodos[4*n+5] == ELTO_NULO && // Hijo drcho. de
 		nodos[4*n+6] == ELTO_NULO); // n es hoja
-	else if (4*n+5 < maxNodos) //Sólo cabe h. izq. de h. drch de n
+	else if (4*n+5 < maxNodos) //Sï¿½lo cabe h. izq. de h. drch de n
 		assert(nodos[4*n+5] == ELTO_NULO); //Hijo drch de n es hoja
 		nodos[2*n+2] = ELTO_NULO;
 }
 
 template <typename T>
 inline void Abin<T>::eliminarRaiz(){
-	assert(nodos[0] != ELTO_NULO); // Árbol no vacío
+	assert(nodos[0] != ELTO_NULO); // ï¿½rbol no vacï¿½o
 	assert(nodos[1] == ELTO_NULO &&
-	nodos[2] == ELTO_NULO); // La raíz es hoja
+	nodos[2] == ELTO_NULO); // La raï¿½z es hoja
 	nodos[0] = ELTO_NULO;
 }
 
@@ -119,16 +120,16 @@ inline bool Abin<T>::arbolVacio() const
 template <typename T>
 inline const T& Abin<T>::elemento(nodo n) const
 {
-	assert(n >= 0 && n <= maxNodos-1); // Nodo válido.
-	assert(nodos[n] != ELTO_NULO); // Nodo del árbol.
+	assert(n >= 0 && n <= maxNodos-1); // Nodo vï¿½lido.
+	assert(nodos[n] != ELTO_NULO); // Nodo del ï¿½rbol.
 	return nodos[n];
 }
 
 template <typename T>
 inline T& Abin<T>::elemento(nodo n)
 {
-	assert(n >= 0 && n <= maxNodos-1); // Nodo válido.
-	assert(nodos[n] != ELTO_NULO); // Nodo del árbol.
+	assert(n >= 0 && n <= maxNodos-1); // Nodo vï¿½lido.
+	assert(nodos[n] != ELTO_NULO); // Nodo del ï¿½rbol.
 	return nodos[n];
 }
 
@@ -141,16 +142,16 @@ inline typename Abin<T>::nodo Abin<T>::raiz() const
 template <typename T> inline
 typename Abin<T>::nodo Abin<T>::padre(nodo n) const
 {
-	assert(n >= 0 && n <= maxNodos-1); // Nodo válido.
-	assert(nodos[n] != ELTO_NULO); // Nodo del árbol.
+	assert(n >= 0 && n <= maxNodos-1); // Nodo vï¿½lido.
+	assert(nodos[n] != ELTO_NULO); // Nodo del ï¿½rbol.
 	return (n == 0) ? NODO_NULO : (n-1)/2;
 }
 
 template <typename T> inline
 typename Abin<T>::nodo Abin<T>::hijoIzqdo(nodo n) const
 {
-	assert(n >= 0 && n <= maxNodos-1); // Nodo válido.
-	assert(nodos[n] != ELTO_NULO); // Nodo del árbol.
+	assert(n >= 0 && n <= maxNodos-1); // Nodo vï¿½lido.
+	assert(nodos[n] != ELTO_NULO); // Nodo del ï¿½rbol.
 	return (2*n+1 >= maxNodos || nodos[2*n+1] == ELTO_NULO) ?
 	NODO_NULO : 2*n+1;
 }
@@ -158,8 +159,8 @@ typename Abin<T>::nodo Abin<T>::hijoIzqdo(nodo n) const
 template <typename T> inline
 typename Abin<T>::nodo Abin<T>::hijoDrcho(nodo n) const
 {
-	assert(n >= 0 && n <= maxNodos-1); // Nodo válido.
-	assert(nodos[n] != ELTO_NULO); // Nodo del árbol.
+	assert(n >= 0 && n <= maxNodos-1); // Nodo vï¿½lido.
+	assert(nodos[n] != ELTO_NULO); // Nodo del ï¿½rbol.
 	return (2*n+2 >= maxNodos || nodos[2*n+2] == ELTO_NULO) ?
 	NODO_NULO : 2*n+2;
 }
@@ -181,7 +182,7 @@ inline Abin<T>::~Abin() { delete[] nodos; }
 template <typename T>
 Abin<T>& Abin<T>::operator =(const Abin<T>& A)
 {
-	if (this != &A) // Evitar autoasignación.
+	if (this != &A) // Evitar autoasignaciï¿½n.
 	{
 		// Destruir el vector y crear uno nuevo si es necesario
 		if (maxNodos != A.maxNodos){
