@@ -17,12 +17,39 @@ const tElto fin = '#';
     equilibrado.
 */
 
+template <typename T>
+using Conjunto = Abb<T>;
+
+template <typename T>
+bool pertenece(const Conjunto<T>& A, const T& elto){
+    if(A.elemento() == elto)
+        return true;
+    else if(!A.drcho().vacio() && A.izqdo().vacio())
+        return pertenece(A.izqdo(), elto);
+    else if(A.drcho().vacio() && !A.izqdo().vacio())
+        return pertenece(A.drcho(), elto);
+    else  
+        return false;
+}
+
+template <typename T>
+Conjunto<T> interseccionAbb(const Conjunto<T>& A, Conjunto<T> B){
+    Conjunto<T> res;
+    T elto = B.elemento();
+
+    while(B.vacio()){
+        if(pertenece(A, elto))
+            res.insertar(B.elemento());
+    }
+    return res;
+}
+
 
 int main(){
     Abb<tElto> A();
 
     ifstream fa("AbbA.dat"); // Abrir fichero de entrada.
-    rellenarAbb(fa, A); // Desde fichero.
+    // rellenarAbb(fa, A); // Desde fichero.
     fa.close();
     
     // Llamada a la funcion del ejercicio

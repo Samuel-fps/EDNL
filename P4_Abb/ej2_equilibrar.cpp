@@ -22,44 +22,45 @@ const tElto fin = '#';
 // Recibe un árbol abb y un vector vacio
 // Devuelve el vector recibido con los elementos del abb ordenados en él
 template <typename T>
-void abb2vector_rec(Abb<T> A, const vector<T> v){
-    if(A.izqdo().vacio() && A.drcho().vacio()){ // Nodo hoja
-        v.insert(v.first, A.elemento());
-    }
-    else {
-        if(!A.izqdo().vacio()) { // Izquierdo
-            abb2Vector(A.izqdo());
-            v.insert(v.first, A.elemento());
-        }
-        if(!A.drcho().vacio()){ // Derecho
-            v.insert(v.first, A.elemento());
-            abb2Vector(A.drcho());
-        }
+void abb2vector_rec(Abb<T> A, vector<T>& v){
+    if(!A.vacio()){
+        abb2vector_rec(A.izqdo(), v);
+        v.push_back(A.elemento());
+        abb2vector_rec(A.drcho(), v);
     }
 }
 
 // Recibe un vector ordenado
 // Devuelve un abb equilibrado
 template <typename T>
-void equilibrarAbb_rec(vector<T> v, size_t i){
+Abb<T> equilibrarAbb_rec(const vector<T>& elementos, int inicio, int fin){
+    if(inicio > fin){
+        return Abb<T>{};
+    }
 
+    int mediana = (fin - inicio) / 2;
+    Abb<T> arbol;
+    arbol.insertar(elementos[mediana]);
+    arbol = equilibrarAbb_rec(elementos, inicio, mediana-1);
+    arbol = equilibrarAbb_rec(elementos, mediana+1 , fin);
+    return arbol;
 }
 
 template <typename T>
 Abb<T> equilibrarAbb(Abb<int> A){
     vector<T> v = abb2vector(A);
-    return equilibrarAbb_rec(v, v.size()/2);
+    return equilibrarAbb_rec(v, v.begin(), v.end());
 }
 
 int main(){
     Abb<tElto> A(), B();
 
     ifstream fa("AbbA.dat"); // Abrir fichero de entrada.
-    rellenarAbb(fa, A); // Desde fichero.
+    /* rellenarAbb(fa, A); // Desde fichero.
     fa.close();
 
     B = equilibrarAbb(A);
     imprimirAbb(B);
-
+    */
     return 0;
 }

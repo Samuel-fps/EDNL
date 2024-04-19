@@ -15,7 +15,7 @@ Abb<T> equilibrarAbb(const Abb<T>& A) {
 template <typename T>
 void insertar_inorden(const Abb<T>& A, std::vector<T>& elementos) {
     if (!A.vacio()) {
-        insertar_inorden(A.izqdo(), elementos);
+        insertar_inorden(A.izqdo(), elementos);S
         elementos.push_back(A.elemento());
         insertar_inorden(A.drcho(), elementos);
     }
@@ -26,7 +26,7 @@ Abb<T> construir_arbol_equilibrado(const std::vector<T>& elementos, int inicio, 
     if (inicio > fin) {
         return Abb<T>();
     }
-
+    
     int mediana = (inicio + fin) / 2;
     Abb<T> arbol;
     arbol.insertar(elementos[mediana]);

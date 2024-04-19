@@ -19,31 +19,43 @@ const tElto fin = '#';
 template <typename T>
 using Conjunto = Abb<T>;
 
+// OPCION 1 Usar el método buscar de la clase abb
+template <typename T>
+bool pertenece(const Conjunto<T>& A, const T& elto){
+    if(A.buscar(elto) == Conjunto<T>::NODO_NULO)
+        return false;
+    return true;
+}  
+
+/* OPCION 2 Buscar el elemento
 template <typename T>
 bool pertenece(Conjunto<T> A, const T& elto){
     if(A.elemento() == elto)
         return true;
-    else if(!A.drcho().vacio() && A.izqdo().vacion())
+    else if(!A.drcho().vacio() && A.izqdo().vacio())
         return pertenece(A.izqdo(), elto);
-    else if(A.drcho().vacio() && !A.izqdo().vacion())
+    else if(A.drcho().vacio() && !A.izqdo().vacio())
         return pertenece(A.drcho(), elto);
     else  
         return false;
 }
+*/
 
 template <typename T>
-Conjunto<T> union(Conjunto<T> A, Conjunto<T> B){
-    if(pertenece(A, B.elemento()))
-        return A;
-    else 
-        return B;
+Conjunto<T> unionAbb(const Conjunto<T>& A, Conjunto<T> B){
+    Conjunto<T> res(A);
+    while(B.vacio()){
+        res.insertar(B.elemento());
+        B.eliminar(B.elmento());
+    }
+    return res;
 }
 
 int main(){
     Abb<tElto> A();
 
     ifstream fa("AbbA.dat"); // Abrir fichero de entrada.
-    rellenarAbb(fa, A); // Desde fichero.
+    // rellenarAbb(fa, A); // Desde fichero.
     fa.close();
     
     // Llamada a la funcion del ejercicio
