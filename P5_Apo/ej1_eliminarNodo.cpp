@@ -1,4 +1,4 @@
-#include "../TAD_APO/apo.h" // Importamos el arbol binario
+#include "../TAD_ABIN/ABinEnla.h" // Importamos el arbol binario
 using namespace std;
 
 //////////// Esta parte es solo para poder leer los arboles de los ficheros
@@ -18,10 +18,41 @@ const tElto fin = '#';
     datos. 
 */
 
+template <typename T>
+typename Abin<T>::nodo buscarNodo(Abin<T>& A, const typename Abin<T>::nodo n, const T& elto){
+    typename Abin<T>::nodo resultado;
+    if(n != Abin<T>::NODO_NULO){
+        if(A.elemento(n) != elto){
+            resultado = buscarNodo(A.hijoIzqdo(n)); // Busqueda por hijo izquierdo
+            if(resultado != Abin<T>::NODO_NULO) // Encontado en hijo izquierdo
+                return resultado;
+            resultado = buscarNodo(A.hijoDrcho(n)); // Busqueda en hijo derecho
+            if(resultado != Abin<T>::NODO_NULO) // Encontrado en hijo derecho
+                return resultado;
+        } 
+        else {
+            return n;
+        }
+    }
+    else {
+        return Abin<T>::NODO_NULO;
+    }
+
+}
+
+template <typename T>
+void eliminarValor(Abin<T>& A, const T& valor){
+    typename Abin<T>::nodo nodo = buscarNodo(A, A.raiz(), valor);
+
+    if(nodo != Abin<T>::NODO_NULO){ // Encontrado
+
+    }
+
+}
 
 
 int main(){
-    Apo<tElto> A();
+    Abin<tElto> A();
 
     ifstream fa("AbbA.dat"); // Abrir fichero de entrada.
     //rellenarAbb(fa, A); // Desde fichero.
