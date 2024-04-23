@@ -1,11 +1,11 @@
-#include "../TAD_APO/apo.h" // Importamos el arbol binario
+#include "../TAD_AGEN/agenlis.h" // Importamos el arbol binario
 using namespace std;
 
 //////////// Esta parte es solo para poder leer los arboles de los ficheros
 #include <iostream>
 #include <fstream>
 
-#include "apo_E-S.h"
+#include "agen_E-S.h"
 typedef int tElto;
 const tElto fin = '#';
 ////////////////////////////////////
@@ -17,10 +17,28 @@ const tElto fin = '#';
     estrictamente ternario.
 */
 
+template <typename T>
+bool esTernario(const Agen<T>& A, const typename Agen<T>::nodo n){
+    if(n = Agen<T>::NODO_NULO){
+        return true;
+    }
+    else {
+        typename Agen<T>::nodo hijo = A.hijoIzqdo(n);
+        int numhijos = 0;
+        bool ternario = true;
+        while(hijo = Agen<T>::NODO_NULO && numhijos > 3){
+            ternario = ternario || esTernario(A, A.hijoIzqdo(hijo)) && esTernario(A, A.hijoDrcho(hijo));
+            numHijos++;
+            hijo = A.hermDrcho(hijo);
+        }
+        return numHijos == 0 || numHijos == 3 && ternario;
+    }
+}
+
 
 
 int main(){
-    Apo<tElto> A();
+    Agen<tElto> A();
 
     ifstream fa("AbbA.dat"); // Abrir fichero de entrada.
     //rellenarAbb(fa, A); // Desde fichero.
