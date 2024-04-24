@@ -26,6 +26,9 @@ int nodosCuatro_rec(const Abin<T>& A, const typename Abin<T>::nodo& n){
         if(contarDescendientes(A, n) >= 4){
             return 1 + nodosCuatro_rec(A.hijoIzqdo(n)) + nodosCuatro_rec(A.hijoDercho(n));
         }
+        else{
+            return 0;
+        }
     }
 }
 
