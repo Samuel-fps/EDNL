@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/PRACTICAS/EDNL/P5_Apo",
-      "program": "d:/PRACTICAS/EDNL/P5_Apo/build/Debug/outDebug",
+      "cwd": "d:/PRACTICAS/EDNL/EXAMEN",
+      "program": "d:/PRACTICAS/EDNL/EXAMEN/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

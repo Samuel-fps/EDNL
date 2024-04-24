@@ -79,6 +79,8 @@ bool esAvl(const Abin<T>& A){
 
 ### Parcial 1 - Contar descendientes
 
+Dado un árbol binario, cuenta el número de nodos que tienen cuatro descendientes o más.
+
 ```cpp
 
 ```
