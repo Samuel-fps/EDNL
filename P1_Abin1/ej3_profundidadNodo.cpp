@@ -1,5 +1,5 @@
 
-#include "../TAD_ABIN/ABinC.h" // Importamos el arbol binario
+#include "../TAD_ABIN/ABinEnla.h" // Importamos el arbol binario
 using namespace std;
 
 //////////// Esta parte es solo para poder leer los arboles de los ficheros
