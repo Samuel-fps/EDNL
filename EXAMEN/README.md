@@ -1,14 +1,25 @@
-/*
-SEPTIEMBRE 2022 - ARBOLES
+# EJERCICIOS DE EXAMEN
 
-    Construye una función que, dado un Árbol Binario, devuelva true si es un
-    AVL y false en el caso contrario.
-    *Nota: definir tipos de datos y prototipos de las operaciones de los TADs
-    usados
-*/
+## ÁRBOLES
 
-#include "../TAD_ABIN/ABinEnla.h"
+### [2020] Parcial 1 - Proposición
 
+```cpp
+
+```
+
+### [2021] Parcial 1 - Blanco y negro
+
+```cpp
+
+```
+
+### [2022] SEPTIEMBRE 2022 - esAVL
+
+Construye una función que, dado un Árbol Binario, devuelva true si es un AVL y false en el caso contrario.
+*Nota: definir tipos de datos y prototipos de las operaciones de los TADs usados.
+
+```cpp
 template <typename T>
 bool esAbb(const Abin<T>& A){
     return esAbb_rec(A, A.raiz());
@@ -58,3 +69,24 @@ template <typename T>
 bool esAvl(const Abin<T>& A){
     return esAbb(A) && desequilibrioAbin(A) <= 1;
 }
+```
+
+### Parcial 1 - Agenda
+
+```cpp
+
+```
+
+### Parcial 1 - Contar descendientes
+
+```cpp
+
+```
+
+### Parcial 1 - Nodos con 3 nietos
+
+```cpp
+
+```
+
+## GRAFOS
