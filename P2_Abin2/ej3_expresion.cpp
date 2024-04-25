@@ -20,10 +20,11 @@ const tElto fin = "#";
 #include <string>
 
 // Los decimales deben estar con un '.' y no con una ','
-double resolver_rec(const Abin<string> e, typename Abin<string>::nodo n){
-    if(e.hijoIzqdo(n) == Abin<string>::NODO_NULO) // Si uno es nulo ambos hijos lo son, No puedes tenr esto : (5 + )
+double resolver_rec(const Abin<string>& e, const typename Abin<string>::nodo n){
+    if(e.hijoIzqdo(n) == Abin<string>::NODO_NULO){  // Si uno es nulo ambos hijos lo son, No puedes tenr esto : (5 + )
         return std::stod(e.elemento(n));            // Devolvemos el numero
-    else
+    }
+    else{
         if(e.elemento(n) == "+")
             return resolver_rec(e, e.hijoIzqdo(n)) + resolver_rec(e, e.hijoDrcho(n));
         else if(e.elemento(n) == "-")
@@ -32,6 +33,7 @@ double resolver_rec(const Abin<string> e, typename Abin<string>::nodo n){
             return resolver_rec(e, e.hijoIzqdo(n)) * resolver_rec(e, e.hijoDrcho(n));
         else if(e.elemento(n) == "/")
             return resolver_rec(e, e.hijoIzqdo(n)) / resolver_rec(e, e.hijoDrcho(n));
+    }
 
 }
 

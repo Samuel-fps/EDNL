@@ -19,7 +19,7 @@ const tElto fin = '#';
 */
 
 template <typename T>
-void abinReflejado_rec(const Abin<T>& A, Abin<T>& R, const typename Abin<T>::nodo& nA, typename Abin<T>::nodo nR){    
+void abinReflejado_rec(const Abin<T>& A, Abin<T>& R, const typename Abin<T>::nodo& nA, typename Abin<T>::nodo& nR){    
     if(nA != Abin<T>::NODO_NULO){
         if(nA == A.raiz()){
             R.insertarRaiz(A.elemento(nA));
