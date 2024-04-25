@@ -20,7 +20,7 @@ const tElto fin = '#';
 */
 
 template <typename T>
-bool abinSimilares_rec(Abin<T> A, Abin<T> B, typename Abin<T>::nodo nA, typename Abin<T>::nodo nB){
+bool abinSimilares_rec(const Abin<T>& A, const Abin<T>& B, const typename Abin<T>::nodo& nA, const typename Abin<T>::nodo& nB){
     if(nA == Abin<T>::NODO_NULO && nB == Abin<T>::NODO_NULO) // Los dos son nulos
         return true;
     else if(nA == Abin<T>::NODO_NULO || nB == Abin<T>::NODO_NULO) // Solo uno de ellos es nulo
