@@ -19,7 +19,7 @@ const tElto fin = '#';
 
 template <typename T>
 bool esTernario(const Agen<T>& A, const typename Agen<T>::nodo n){
-    if(n = Agen<T>::NODO_NULO){
+    if(n == Agen<T>::NODO_NULO){
         return true;
     }
     else {
