@@ -53,7 +53,29 @@ const T& elemento(nodo n)
   - Pre: n es un nodo de A.
   - Post: Devuelve el nodo hijo derecho del nodo n. Si no existe, devuelve NODO_NULO.
 
+## Eficiencia
+
 ## Implementacion
+
+| Operación                                   | Árbol Binario Celdas Enlazadas | Árbol Binario Vectorial Posiciones Relativas |
+|---------------------------------------------|---------------------------------|----------------------------------------------|
+| `explicit Abin();`                          | 1                               | n                                            |
+| `void insertarRaiz(const T& e);`            | 1                               | 1                                            |
+| `void insertarHijoIzqdo(nodo n, const T& e);`| 1                               | 1                                            |
+| `void insertarHijoDrcho(nodo n, const T& e);`| 1                              | 1                                            |
+| `void eliminarHijoIzqdo(nodo n);`           | 1                               | 1                                            |
+| `void eliminarHijoDrcho(nodo n);`           | 1                               | 1                                            |
+| `void eliminarRaiz();`                      | 1                               | 1                                            |
+| `bool arbolVacio() const;`                  | 1                               | 1                                            |
+| `const T& elemento(nodo n) const;`          | 1                               | 1                                            |
+| `T& elemento(nodo n);`                      | 1                               | 1                                            |
+| `nodo raiz() const;`                        | 1                               | 1                                            |
+| `nodo padre(nodo n) const;`                 | 1                               | 1                                            |
+| `nodo hijoIzqdo(nodo n) const;`             | 1                               | 1                                            |
+| `nodo hijoDrcho(nodo n) const;`             | 1                               | 1                                            |
+| `Abin(const Abin<T>& a);`                   | n                               | n                                            |
+| `Abin<T>& operator =(const Abin<T>& a);`    | n                               | n                                            |
+| `~Abin();`                                  | 1                               | 1                                            |
 
 ### Implementación vectorial
 
@@ -519,7 +541,7 @@ Abin<T>& Abin<T>::operator =(const Abin<T>& A)
 #endif // ABIN_VEC1_H
 
 
-````
+```
 
 ### Implementación Celdas enlazadas
 
