@@ -31,7 +31,6 @@ int alturaArbol(Abin<T> A){
     return alturaArbol_rec(A, A.raiz());
 }
 
-
 // Probar funcion
 int main(){
     Abin<tElto> A;

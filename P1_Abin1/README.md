@@ -56,7 +56,7 @@ la profundidad de este nodo en dicho árbol.
 
 ```cpp
 template <typename T>
-int profundidadNodo(const Abin<T>& A, typename Abin<T>::nodo n){
+int profundidadNodo(const Abin<T>& A, const typename Abin<T>::nodo n){
     if(n == A.raiz())
         return 0;
     else
