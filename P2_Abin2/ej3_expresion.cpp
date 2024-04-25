@@ -21,7 +21,7 @@ const tElto fin = "#";
 
 // Los decimales deben estar con un '.' y no con una ','
 double resolver_rec(const Abin<string>& e, const typename Abin<string>::nodo n){
-    if(e.hijoIzqdo(n) == Abin<string>::NODO_NULO){  // Si uno es nulo ambos hijos lo son, No puedes tenr esto : (5 + )
+    if(e.hijoIzqdo(n) == Abin<string>::NODO_NULO){  // Si uno es nulo ambos hijos lo son, No puedes tener esto : (5 + )
         return std::stod(e.elemento(n));            // Devolvemos el numero
     }
     else{
