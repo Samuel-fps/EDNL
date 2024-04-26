@@ -20,10 +20,9 @@ const tElto fin = '#';
 
 template <typename T>
 typename Abin<T>::nodo buscarNodo(Abin<T>& A, const typename Abin<T>::nodo n, const T& elto){
-    typename Abin<T>::nodo resultado;
     if(n != Abin<T>::NODO_NULO){
         if(A.elemento(n) != elto){
-            resultado = buscarNodo(A.hijoIzqdo(n)); // Busqueda por hijo izquierdo
+            typename Abin<T>::nodo resultado = buscarNodo(A.hijoIzqdo(n)); // Busqueda por hijo izquierdo
             if(resultado != Abin<T>::NODO_NULO) // Encontado en hijo izquierdo
                 return resultado;
             resultado = buscarNodo(A.hijoDrcho(n)); // Busqueda en hijo derecho
@@ -42,12 +41,40 @@ typename Abin<T>::nodo buscarNodo(Abin<T>& A, const typename Abin<T>::nodo n, co
 
 template <typename T>
 void eliminarValor(Abin<T>& A, const T& valor){
-    typename Abin<T>::nodo nodo = buscarNodo(A, A.raiz(), valor);
+    typename Abin<T>::nodo n, hIzq, hDer;
 
-    if(nodo != Abin<T>::NODO_NULO){ // Encontrado
+    actual = buscarNodo(A, A.raiz(), valor);
+    hIzq = A.hijoIzqdo(actual);
+    hDer = A.hijoDrcho(actual);
 
+    while(hIzq != Abin<T>::NODO_NULO || hDer != Abin<T>::NODO_NULO){ // Mientra no sea nodo hoja
+        typename Abin<T>::nodo candidato;
+        if(hIzq != Abin<T>::NODO_NULO && hDer != Abin<T>::NODO_NULO){
+            if(A.elemento(hIzq) > A.elemento(hDer))
+                candidato = hIzq;
+            else
+                candidato = hDer;
+        }
+        else if(hIzq != Abin<T>::NODO_NULO){
+            candidato = hIzq;
+        }
+        else{
+            candidato = hDer;
+        }
+        
+        A.elemento(actual) = candidato.elemento(candidato);
+
+        actual = candidato;
+        hIzq = A.hijoIzqdo(actual);
+        hDer = A.hijoDrcho(actual);
     }
 
+    if(actual == A.raiz()) // Actual es raiz
+        A.eliminarRaiz();
+    else if(A.hijoIzqdo(A.padre(actual)) == actual) // Actual es el hijo izquiero
+        A.eliminarHijoIzqdo(A.padre(actual));
+    else // Actual es hijo derecho
+        A.eliminarHijoDrcho(A.padre(actual));
 }
 
 

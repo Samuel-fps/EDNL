@@ -23,6 +23,64 @@ Nota: Se supone que en el árbol no hay elementos repetidos, y que el número de
 
 ```cpp
 
+template <typename T>
+typename Abin<T>::nodo buscarNodo(Abin<T>& A, const typename Abin<T>::nodo n, const T& elto){
+    if(n != Abin<T>::NODO_NULO){
+        if(A.elemento(n) != elto){
+            typename Abin<T>::nodo resultado = buscarNodo(A.hijoIzqdo(n)); // Busqueda por hijo izquierdo
+            if(resultado != Abin<T>::NODO_NULO) // Encontado en hijo izquierdo
+                return resultado;
+            resultado = buscarNodo(A.hijoDrcho(n)); // Busqueda en hijo derecho
+            if(resultado != Abin<T>::NODO_NULO) // Encontrado en hijo derecho
+                return resultado;
+        } 
+        else {
+            return n;
+        }
+    }
+    else {
+        return Abin<T>::NODO_NULO;
+    }
+
+}
+
+template <typename T>
+void eliminarValor(Abin<T>& A, const T& valor){
+    typename Abin<T>::nodo n, hIzq, hDer;
+
+    actual = buscarNodo(A, A.raiz(), valor);
+    hIzq = A.hijoIzqdo(actual);
+    hDer = A.hijoDrcho(actual);
+
+    while(hIzq != Abin<T>::NODO_NULO || hDer != Abin<T>::NODO_NULO){ // Mientra no sea nodo hoja
+        typename Abin<T>::nodo candidato;
+        if(hIzq != Abin<T>::NODO_NULO && hDer != Abin<T>::NODO_NULO){
+            if(A.elemento(hIzq) > A.elemento(hDer))
+                candidato = hIzq;
+            else
+                candidato = hDer;
+        }
+        else if(hIzq != Abin<T>::NODO_NULO){
+            candidato = hIzq;
+        }
+        else{
+            candidato = hDer;
+        }
+        
+        A.elemento(actual) = candidato.elemento(candidato);
+
+        actual = candidato;
+        hIzq = A.hijoIzqdo(actual);
+        hDer = A.hijoDrcho(actual);
+    }
+
+    if(actual == A.raiz()) // Actual es raiz
+        A.eliminarRaiz();
+    else if(A.hijoIzqdo(A.padre(actual)) == actual) // Actual es el hijo izquiero
+        A.eliminarHijoIzqdo(A.padre(actual));
+    else // Actual es hijo derecho
+        A.eliminarHijoDrcho(A.padre(actual));
+}
 ```
 
 ### Ejercicio 2
@@ -50,7 +108,23 @@ Implementa una operación de orden logarítmico para eliminar el elemento máxim
 Un árbol es estrictamente ternario si todos sus nodos son hojas o tienen tres hijos. Escribe una función que, dado un árbol de grado arbitrario, nos indique si es o no estrictamente ternario.
 
 ```cpp
-
+template <typename T>
+bool esTernario(const Agen<T>& A, const typename Agen<T>::nodo n){
+    if(n == Agen<T>::NODO_NULO){
+        return true;
+    }
+    else {
+        typename Agen<T>::nodo hijo = A.hijoIzqdo(n);
+        int numhijos = 0;
+        bool ternario = true;
+        while(hijo = Agen<T>::NODO_NULO && numhijos > 3){
+            ternario = ternario || esTernario(A, A.hijoIzqdo(hijo)) && esTernario(A, A.hijoDrcho(hijo));
+            numHijos++;
+            hijo = A.hermDrcho(hijo);
+        }
+        return numHijos == 0 || numHijos == 3 && ternario;
+    }
+}
 ```
 
 ### Ejercicio 5
