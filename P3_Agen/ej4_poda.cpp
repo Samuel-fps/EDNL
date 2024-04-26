@@ -20,7 +20,7 @@ void podaNodo_rec(Agen<int>& A, typename Agen<int>::nodo n){
         typename Agen<int>::nodo hijo = A.hijoIzqdo(n);
         while(hijo != Agen<int>::NODO_NULO){
             if(A.hijoIzqdo(hijo) == Agen<int>::NODO_NULO){ // No tiene hijos
-                A.eliminarHijoIzqdo(A.hijoIzqdo(A.padre(n)));
+                A.eliminarHijoIzqdo(A.hijoIzqdo(n));
             }
             else{
                 podaNodo_rec(A, A.hijoIzqdo(hijo));
