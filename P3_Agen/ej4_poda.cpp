@@ -25,7 +25,7 @@ void podaNodo_rec(Agen<int>& A, typename Agen<int>::nodo n){
             else{
                 podaNodo_rec(A, A.hijoIzqdo(hijo));
             }
-            hijo = A.hermDrcho(hijo);
+            hijo = A.hijoIzqdo(n);
         }
     }
 }
@@ -33,15 +33,16 @@ void podaNodo_rec(Agen<int>& A, typename Agen<int>::nodo n){
 void encuentraEntero_rec(Agen<int>& A, typename Agen<int>::nodo n, int x){
     if(n != Agen<int>::NODO_NULO){
         typename Agen<int>::nodo hijo = A.hijoIzqdo(n);
-        if(A.elemento(hijo) == x){
-                podaNodo_rec(A, hijo);
-                A.eliminarHijoIzqdo(n);
+
+        if(A.elemento(n) == x){ 
+            podaNodo_rec(A, n);
+            A.eliminarHijoIzqdo(A.padre(n)); // Eliminamos el propio nodo
         }
         else{
             while(hijo != Agen<int>::NODO_NULO){
-                if(A.elemento(A.hermDrcho(hijo) ) == x){
-                    podaNodo_rec(A, hijo);
-                    A.eliminarHermDrcho(hijo);
+                if(A.elemento(A.hermDrcho(hijo)) == x){ // El siguiene hermano es x
+                    podaNodo_rec(A, A.hermDrcho(hijo)); // Podamos a partir del hermano 
+                    A.eliminarHermDrcho(hijo); // Eliminamos el propio nodo
                 }
                 encuentraEntero_rec(A, hijo, x);
                 hijo = A.hermDrcho(hijo);
