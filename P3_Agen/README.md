@@ -63,7 +63,47 @@ int profundidadNodo(const Agen<T>& A, typename Agen<T>::nodo n){
 Se define el desequilibrio de un árbol general como la máxima diferencia entre las alturas de los subárboles más bajo y más alto de cada nivel. Implementa un subprograma que calcule el grado de desequilibrio de un árbol general.
 
 ```cpp
+template <typename T>
+int alturaNodo(const Agen<T>& A, const typename Agen<T>::nodo& n){
+    if(n == Agen<T>::NODO_NULO)
+        return -1;
+    else{
+        typename Agen<T>::nodo hijo = A.hijoIzqdo(n);
+        int alturaMax=0, altura;
+        while(hijo != Agen<T>::NODO_NULO){
+            altura = 1 + std::max(alturaNodo(A, A.hijoIzqdo(hijo)), alturaNodo(A, A.hijoDrcho(hijo)));
+            if(altura > alturaMax)
+                alturaMax = altura;
+            hijo = A.hermDrcho(hijo);
+        }
+        return alturaMax;
+    }
+}
 
+template <typename T>
+int desequilibrioAgen_rec(const Agen<T>& A, const typename Agen<T>::nodo& n){
+    if(n == Agen<T>::NODO_NULO)
+        return 0;
+    else{
+        typename Agen<T>::nodo hijo = A.hijoIzqdo(n);
+        int max, min, altura;
+        max = min = altura = alturaNodo(A, hijo);
+        while(hijo != Agen<T>::NODO_NULO){
+            altura = alturaNodo(A, hijo);
+            if(altura > max)
+                max = altura;
+            if(altura < min)
+                min = altura;
+            hijo = A.hermDrcho(hijo);
+        }
+        return std::abs(max-min);
+    }
+}
+
+template <typename T>
+int desequilibrioAgen(Agen<T> A){
+    return desequilibrioAgen_rec(A, A.raiz());
+}
 ```
 
 ### Ejercicio 4
@@ -71,7 +111,44 @@ Se define el desequilibrio de un árbol general como la máxima diferencia entre
 Dado un árbol general de enteros A y un entero x, implementa un subprograma que realice la poda de A a partir de x. Se asume que no hay elementos repetidos en A.
 
 ```cpp
+void podaNodo_rec(Agen<int>& A, typename Agen<int>::nodo n){
+    if(n != Agen<int>::NODO_NULO){
+        typename Agen<int>::nodo hijo = A.hijoIzqdo(n);
+        while(hijo != Agen<int>::NODO_NULO){
+            if(A.hijoIzqdo(hijo) == Agen<int>::NODO_NULO){ // No tiene hijos
+                A.eliminarHijoIzqdo(A.hijoIzqdo(A.padre(n)));
+            }
+            else{
+                podaNodo_rec(A, A.hijoIzqdo(hijo));
+            }
+            hijo = A.hermDrcho(hijo);
+        }
+    }
+}
 
+void encuentraEntero_rec(Agen<int>& A, typename Agen<int>::nodo n, int x){
+    if(n != Agen<int>::NODO_NULO){
+        typename Agen<int>::nodo hijo = A.hijoIzqdo(n);
+        if(A.elemento(hijo) == x){
+                podaNodo_rec(A, hijo);
+                A.eliminarHijoIzqdo(n);
+        }
+        else{
+            while(hijo != Agen<int>::NODO_NULO){
+                if(A.elemento(A.hermDrcho(hijo) ) == x){
+                    podaNodo_rec(A, hijo);
+                    A.eliminarHermDrcho(hijo);
+                }
+                encuentraEntero_rec(A, hijo, x);
+                hijo = A.hermDrcho(hijo);
+            }
+        }
+    }
+}
+
+void encontrarEntero(Agen<int>& A, int x){
+    encuentraEntero_rec(A, A.raiz(), x);
+}
 ```
 
 ## AGEN Especificación

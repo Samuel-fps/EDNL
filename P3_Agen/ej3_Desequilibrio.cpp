@@ -16,16 +16,43 @@ const tElto fin = '#';
     el grado de desequilibrio de un árbol general.
 */
 
+#include <cmath>
+#include <algorithm>
+
 template <typename T>
-int desequilibrioAgen_rec(Agen<T> A, typename Agen<T>::nodo n){
+int alturaNodo(const Agen<T>& A, const typename Agen<T>::nodo& n){
+    if(n == Agen<T>::NODO_NULO)
+        return -1;
+    else{
+        typename Agen<T>::nodo hijo = A.hijoIzqdo(n);
+        int alturaMax=0, altura;
+        while(hijo != Agen<T>::NODO_NULO){
+            altura = 1 + std::max(alturaNodo(A, A.hijoIzqdo(hijo)), alturaNodo(A, A.hijoDrcho(hijo)));
+            if(altura > alturaMax)
+                alturaMax = altura;
+            hijo = A.hermDrcho(hijo);
+        }
+        return alturaMax;
+    }
+}
+
+template <typename T>
+int desequilibrioAgen_rec(const Agen<T>& A, const typename Agen<T>::nodo& n){
     if(n == Agen<T>::NODO_NULO)
         return 0;
     else{
         typename Agen<T>::nodo hijo = A.hijoIzqdo(n);
+        int max, min, altura;
+        max = min = altura = alturaNodo(A, hijo);
         while(hijo != Agen<T>::NODO_NULO){
-            
+            altura = alturaNodo(A, hijo);
+            if(altura > max)
+                max = altura;
+            if(altura < min)
+                min = altura;
+            hijo = A.hermDrcho(hijo);
         }
-        
+        return std::abs(max-min);
     }
 }
 

@@ -18,9 +18,8 @@ const tElto fin = '#';
 void podaNodo_rec(Agen<int>& A, typename Agen<int>::nodo n){
     if(n != Agen<int>::NODO_NULO){
         typename Agen<int>::nodo hijo = A.hijoIzqdo(n);
-        while(hijo == Agen<int>::NODO_NULO){
+        while(hijo != Agen<int>::NODO_NULO){
             if(A.hijoIzqdo(hijo) == Agen<int>::NODO_NULO){ // No tiene hijos
-                cout << "Entra " << endl;
                 A.eliminarHijoIzqdo(A.hijoIzqdo(A.padre(n)));
             }
             else{
@@ -39,7 +38,7 @@ void encuentraEntero_rec(Agen<int>& A, typename Agen<int>::nodo n, int x){
                 A.eliminarHijoIzqdo(n);
         }
         else{
-            while(hijo == Agen<int>::NODO_NULO){
+            while(hijo != Agen<int>::NODO_NULO){
                 if(A.elemento(A.hermDrcho(hijo) ) == x){
                     podaNodo_rec(A, hijo);
                     A.eliminarHermDrcho(hijo);
@@ -51,7 +50,7 @@ void encuentraEntero_rec(Agen<int>& A, typename Agen<int>::nodo n, int x){
     }
 }
 
-void encontrarEntero(Agen<int> A, int x){
+void encontrarEntero(Agen<int>& A, int x){
     encuentraEntero_rec(A, A.raiz(), x);
 }
 
