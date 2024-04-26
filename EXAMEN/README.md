@@ -144,4 +144,14 @@ int nodos3nietos(const Abin<T>& A, const typename Abin<T>::nodo& n){
 }
 ```
 
+### Parcial 1 24 - Inverso Agen
+
+![alt text](parcial1_24_Agen.png)
+
+![alt text](parcial1_24_AgenInverso.png)
+
+```cpp
+
+```
+
 ## GRAFOS
