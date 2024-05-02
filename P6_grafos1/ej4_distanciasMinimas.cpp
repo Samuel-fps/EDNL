@@ -1,6 +1,7 @@
 #include "../TAD_GRAFO/alg_grafoPMC.h"
 #include "alg_grafo_E-S.h"
 #include <iostream>
+#include <vector>;
 
 /*  EJERCICIO 4
 
@@ -28,9 +29,53 @@
 */
 
 template <typename tCoste>
-void viajeCiudades(const GrafoP<tCoste>& G){
+matriz<tCoste> disMinZuelandia(const GrafoP<tCoste>& G,
+                   const std::vector<typename GrafoP<tCoste>::vertice>& ciudadesTomadas,
+                   const matriz<bool>& estadoCarreteras,
+                   const typename grafoP<tCoste>::vertice& capital){
 
+    const size_t n = G.numVert();
+    const tCoste INF = GrafoP<tCoste>::INFINITO;
+    typedef typename GrafoP<tCoste>::vertice vertice;
+    
+    // Eliminar carreteras(aristas) que se dirijan a ciudades tomadas o que vengan de ciudades tomadas
+    for(vertice i = 0 ; i < ciudadesTomada.size() ; i++){
+        for(vertice j = 0 ; j < n ; i++){
+            G[ciudadesTomadas[i]][j] = INF; // desde ciudades tomadas
+            G[j][ciudadesTomadas[i]] = INF; // hacia ciudades tomadas
+        }
+    }
+
+    // Eliminamos las carreteras(aristas) cortadas
+    for(vertice i = 0 ; i < n ; i++){
+        for(vertice j = 0 ; j < n ; j++){
+            if(!estadoCarreteras[i][j]){
+                G[i][j] = INF;
+            }
+        }
+    }
+
+    // Aplicamos Dijkstra y DijkstraInv para obtener distacias minimas desde la capital a todas las ciudades y viceversa
+    vector<tCoste> P;
+    vector<tCoste> haciaCapital = DijkstraInv(capital, G, P),
+                   desdeCapital = Dijkstra(capital, G, P);
+
+    // Creamos un grafo con los nuevos costes
+    GrafoP<tCoste> distanciaMin(n); 
+    for (vertice i = 0 ; i < n ; i++)
+        for (vertice j = 0 ; j < n ; i++)
+            distanciaMin[i][j] = suma(haciaCapital[i], desdeCapital[j]);
+
+    return distanciaMin;
+    
 }
+
+/*
+    ¿Es mejor deividir en subfunciones?
+    ¿Recibir vertor de vertices o vector bool -> ciudades tomadas?
+    ¿DijtrakInv se puede usar en el examen?
+    ¿Esta bine declarado INF?
+*/
 
 
 int main() {
@@ -39,7 +84,7 @@ int main() {
     std::cout << grafo;
 
     // LLamada a funcion de ejercicio
-    viajeCiudades(grafo);
+    // disMinZuelandia(grafo, ciudadesTomadas, estadoCarreteras, capital);
 
     // Imprimir el resultado
 
