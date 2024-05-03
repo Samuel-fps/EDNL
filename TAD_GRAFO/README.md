@@ -145,8 +145,7 @@ Calcula los caminos de coste mínimo entre origen y todos los vértices del graf
 Salida:
 
 - Un vector de costes mínimos de tamaño G.numVert().
-- P, un vector de vértices de tamaño G.numVert(), tal que P[i] es el vértice
-anterior a i en el camino de coste mínimo desde origen hasta i.
+- P, un vector de vértices de tamaño G.numVert(), tal que P[i] es el vértice anterior a i en el camino de coste mínimo desde origen hasta i.
 
 ```cpp
 vector<tCoste> Dijkstra(const GrafoP<tCoste>& G,
