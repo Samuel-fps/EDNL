@@ -160,8 +160,7 @@ Calcula los caminos de coste mínimo entre cada par de vértices del grafo G.
 Salida:
 
 - Una matriz de costes mínimos de tamaño n x n, con n = G.numVert()
-- P, una matriz de vértices de tamaño n x n, tal que P[i][j] es un vértice
-intermedio por el que pasa el camino de coste mínimo desde i a j.
+- P, una matriz de vértices de tamaño n x n, tal que P[i][j] es un vértice intermedio por el que pasa el camino de coste mínimo desde i a j.
 
 ```cpp
 template <typename tCoste>
