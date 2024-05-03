@@ -37,7 +37,7 @@ bool esAciclico_rec(typename GrafoP<tCoste>::vertice i,
 }
 
 template <typename tCoste>
-bool esSubvencionable(const Grafo& G){
+bool esSubvencionable(const GrafoP<tCoste>& G){
     typedef typename GrafoP<tCoste>::vertice vertice;
     static const tCoste INF = GrafoP<tCoste>::INFINITO;
     const size_t n = G.numVert();
