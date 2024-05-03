@@ -144,7 +144,7 @@ vector<tCoste> DijkstraInv(const GrafoP<tCoste>& G,
    vector<bool> S(n, false);                  // Conjunto de vértices vacío.
    vector<tCoste> D;                          // Costes mínimos hasta origen.
 
-   // Iniciar D y P con caminos directos desde el vértice origen.
+   // Iniciar D y P con caminos directos desde cada vertive.
    D = G[origen];
    D[origen] = 0;                             // Coste origen-origen es 0.
    P = vector<vertice>(n, origen);
