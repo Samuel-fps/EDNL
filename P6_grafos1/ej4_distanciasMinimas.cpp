@@ -32,7 +32,7 @@ template <typename tCoste>
 matriz<tCoste> disMinZuelandia(const GrafoP<tCoste>& G,
                    const std::vector<typename GrafoP<tCoste>::vertice>& ciudadesTomadas,
                    const matriz<bool>& estadoCarreteras,
-                   const typename grafoP<tCoste>::vertice& capital){
+                   const typename GrafoP<tCoste>::vertice& capital){
 
     const size_t n = G.numVert();
     const tCoste INF = GrafoP<tCoste>::INFINITO;
