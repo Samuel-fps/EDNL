@@ -32,11 +32,11 @@ matriz<tCoste> FloydMax(const GrafoP<tCoste>& G,
    }
    // Calcular costes maximos y caminos correspondientes
    // entre cualquier par de vértices i, j
-   for (vertice k = 0; k < n; k++)
-      for (vertice i = 0; i < n; i++)
-         for (vertice j = 0; j < n; j++) {
+   for(vertice k = 0; k < n; k++)
+      for(vertice i = 0; i < n; i++)
+         for(vertice j = 0; j < n; j++) {
             tCoste ikj = suma(A[i][k], A[k][j]);
-            if (ikj > A[i][j]) {
+            if(ikj > A[i][j]) {
                A[i][j] = ikj;
                P[i][j] = k;
             }

@@ -5,16 +5,16 @@
 
 /*  EJERCICIO 3
 
-    Eres  el  orgulloso  dueño  de  una  empresa  de  distribución.  Tu  misión  radica  en  
+    Eres el orgulloso dueño de una empresa de distribución. Tu misión radica en
     distribuir todo tu stock entre las diferentes  ciudades en las que tu empresa dispone de 
-    almacén.  
+    almacén.
     Tienes un grafo representado mediante la matriz de costes, en el que aparece el coste 
-    (por  unidad  de  producto)  de  transportar  los  productos  entre  las  diferentes  ciudades  del  
+    (por unidad de producto) de transportar los productos entre las diferentes ciudades del  
     grafo. 
-    Pero  además  resulta  que  los  Ayuntamientos  de  las  diferentes  ciudades  en  las  que  
-    tienes  almacén  están  muy  interesados  en  que  almacenes  tus  productos  en  ellas,  por  lo  
-    que  están  dispuestos  a  subvencionarte  con  un  porcentaje  de  los  gastos  mínimos  de  
-    transporte  hasta  la  ciudad.  Para  facilitar  el  problema,  consideraremos  despreciables  los  
+    Pero además resulta que los Ayuntamientos de las diferentes ciudades en las que  
+    tienes almacén están muy interesados en que almacenes tus productos en ellas, por lo
+    que están dispuestos a subvencionarte con un porcentaje de los gastos mínimos  de  
+    transporte hasta la ciudad. Para facilitar el problema, consideraremos despreciables los  
     costes de volver el camión a su base (centro de producción). 
     
     He aquí tu problema. Dispones de 
@@ -36,6 +36,26 @@
     La solución del problema debe incluir las cantidades a almacenar en cada ciudad bajo 
     estas  condiciones  y  el  coste  mínimo  total  de  la  operación  de  distribución  para  tu  
     empresa.
+*/
+
+typedef struct{
+    unsigned capacidad;
+    double subvencion;
+} Ciudad;
+
+template <typename tCoste>
+void distribucion(typename GrafoP<tCoste>::vertice origen,
+                  unsigned cantidad,
+                  const GrafoP<tCoste>& G,
+                  const std::vector<Ciudad>& ciudades)
+{
+    typedef typename GrafoP<tCoste>::vertice vertice;
+    static const tCoste INF = GrafoP<tCoste>::INFINITO;
+    
+}
+
+/*
+Cuando dice que recibe matriz de costes, ¿Que recibe?
 */
 
 

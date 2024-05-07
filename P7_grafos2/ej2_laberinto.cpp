@@ -33,12 +33,31 @@ typename GrafoP<tCoste>::vertice casillas2vertice(GrafoP<tCoste>& G, const Casil
 
 }
 
+/*
+Diagonal a 0
+1 en las adyacentes 
+e infinito con pared
+Hacer funcion que diga cuando dos casillas son adyacentes
+¿cuandos son adyacentes? -> abs(c1.fila-c2.fila) + abs(c1.columna-c2.columna)
+
+Casilla nodo2casilla(nodo n, int N)
+    c.fila = n / N
+    c.col = n % N
+
+nodo casilla2nodo(Casilla c, int N)
+    c,fila*N + c.col
+
+    Ponr dos infinitos pq no es dirigido
+
+    camino hay que implementarla en el examen
+*/
+
 /* Precondiciones: las casillas de las paredes son casillas del laberinto
                    las casillas de Entrad y Salida son casillas del laberinto
 */
 template <typename tCoste>
 tCoste resolverLaberinto(const int dimension,
-                         const Lista<Casilla>& paredes,
+                         const vector<Casilla>& paredes,
                          const Casilla entrada,
                          const Casilla salida)
 {
