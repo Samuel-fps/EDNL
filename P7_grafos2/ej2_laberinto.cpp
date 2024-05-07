@@ -19,6 +19,67 @@
     calcule el camino más corto para ir de la entrada a la salida y su longitud.
 */
 
+struct Casilla{
+    size_t x, y;
+};
+
+// Convierte casillas en vertices
+template <typename tCoste>
+typename GrafoP<tCoste>::vertice casillas2vertice(GrafoP<tCoste>& G, const Casilla& c){
+    for(GrafoP<tCoste>::vertice i = 0 ; i < G.numVert() ; ++i)
+        for(size_t j = 0 ; j < G.numVert() ; ++j)
+            if(c.x == i && c.y == j)
+                return
+
+}
+
+/* Precondiciones: las casillas de las paredes son casillas del laberinto
+                   las casillas de Entrad y Salida son casillas del laberinto
+*/
+template <typename tCoste>
+tCoste resolverLaberinto(const int dimension,
+                         const Lista<Casilla>& paredes,
+                         const Casilla entrada,
+                         const Casilla salida)
+{
+    typedef GrafoP<tCoste>::vertice vertice;
+    static const tCoste INF = GrafoP<tCoste>::INFINITO;
+    matriz<tCoste> laberinto(dimension);
+    
+    // Rellenar casillas(Grafo) con coste 1
+    for(size_t i = 0 ; i < n ; ++i)
+        for(size_t j = 0 ; j < n ; ++j)
+            laberinto[i][j] = 1;
+
+    // Rellenar casillas(Grafo) con pared a infinito
+    for (Casilla c : paredes)
+        laberinto[c.x][c.y] = INF;
+
+    // Creamos un grafo a partir de la matriz de costes para aplicarle Dijkstra
+    size_t n = dimension * dimension;   // Numero de vertices
+    GrafoP<tCoste> L(n);                // Inicialización de grafo
+
+    for(size_t i = 0 ; i < n ; ++i)
+        for(size_t j = 0 ; j < n ; ++j)
+            L[i][j] = laberinto[i][j];
+
+    // Convertir casillas en vertices
+    for(size_t i = 0 ; i < n ; ++i)
+        for(size_t j = 0 ; j < n ; ++j)
+
+    
+    // Aplicamos Dijkstra
+    vector<tCoste> P;
+    vector<tCoste> costes = Dijkstra(L, e, P);
+
+    return costes[s];
+}
+
+/*
+Segun el enunciado puedo recibir un vertice?
+
+*/
+
 
 int main() {
     GrafoP<int> grafo("GrafoA.txt");
