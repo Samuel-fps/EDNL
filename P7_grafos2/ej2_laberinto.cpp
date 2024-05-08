@@ -19,20 +19,6 @@
     calcule el camino más corto para ir de la entrada a la salida y su longitud.
 */
 
-struct Casilla{
-    size_t x, y;
-};
-
-// Convierte casillas en vertices
-template <typename tCoste>
-typename GrafoP<tCoste>::vertice casillas2vertice(GrafoP<tCoste>& G, const Casilla& c){
-    for(GrafoP<tCoste>::vertice i = 0 ; i < G.numVert() ; ++i)
-        for(size_t j = 0 ; j < G.numVert() ; ++j)
-            if(c.x == i && c.y == j)
-                return
-
-}
-
 /*
 Diagonal a 0
 1 en las adyacentes 
@@ -45,60 +31,95 @@ Casilla nodo2casilla(nodo n, int N)
     c.col = n % N
 
 nodo casilla2nodo(Casilla c, int N)
-    c,fila*N + c.col
+    c.fila*N + c.col
 
     Ponr dos infinitos pq no es dirigido
 
     camino hay que implementarla en el examen
 */
 
+struct Casilla {
+    size_t x, y;
+};
+
+struct Pared {
+    Casilla c1, c2;
+};
+
+// Convierte una Casilla en un Vertice
+template <typename tCoste>
+typename GrafoP<tCoste>::vertice casillasToVertice(const Casilla& c, const int N){
+    return c.fila*N + c.col;
+}
+
+// Convierte un Vertice en una Casilla
+template <typename tCoste>
+Casilla verticeToCasilla(typename GrafoP<tCoste>::vertice n, const int N){
+    Casilla c;
+    c.fila = n / N;
+    c.col = n % N;
+    return c;
+}
+
+// Devuelve true si dos casillas son adyacentes
+template <typename tCoste>
+bool adyacentes(const Casilla& c1, const Casilla& c2){
+    return (1 == abs(c1.fila-c2.fila) + abs(c1.columna-c2.columna));
+}
+
+// Función declarada en alg_grafoPMC.h (en el examen hay que implementarla para uasarla)
+template <typename tCoste> typename GrafoP<tCoste>::tCamino
+camino(typename GrafoP<tCoste>::vertice orig,
+       typename GrafoP<tCoste>::vertice v,
+       const vector<typename GrafoP<tCoste>::vertice>& P)
+// Devuelve el camino de coste mínimo entre los vértices orig e v
+// a partir de un vector P obtenido mediante la función Dijkstra().
+{
+   typename GrafoP<tCoste>::tCamino C;
+
+   C.insertar(v, C.primera());
+   do {
+      C.insertar(P[v], C.primera());
+      v = P[v];
+   } while (v != orig);
+   return C;
+}
+
 /* Precondiciones: las casillas de las paredes son casillas del laberinto
                    las casillas de Entrad y Salida son casillas del laberinto
 */
 template <typename tCoste>
-tCoste resolverLaberinto(const int dimension,
-                         const vector<Casilla>& paredes,
-                         const Casilla entrada,
-                         const Casilla salida)
+tCoste resolverLaberinto(const int dimension,           // Dimensiones del laberinto cuadrado
+                         const vector<Pared>& paredes,  // Lista de paredes del laberinto
+                         const Casilla entrada,         // Entrada al alberinto
+                         const Casilla salida,          // Salida del laberinto
+                         vector<Casilla>& path)         // Camino de Casillas donde se devuelve el camino solucion
 {
     typedef GrafoP<tCoste>::vertice vertice;
     static const tCoste INF = GrafoP<tCoste>::INFINITO;
-    matriz<tCoste> laberinto(dimension);
-    
-    // Rellenar casillas(Grafo) con coste 1
-    for(size_t i = 0 ; i < n ; ++i)
-        for(size_t j = 0 ; j < n ; ++j)
-            laberinto[i][j] = 1;
 
-    // Rellenar casillas(Grafo) con pared a infinito
-    for (Casilla c : paredes)
-        laberinto[c.x][c.y] = INF;
+    GrafoP<tCoste> G(dimension * dimension);
+    size_t n = G.numVert();
 
-    // Creamos un grafo a partir de la matriz de costes para aplicarle Dijkstra
-    size_t n = dimension * dimension;   // Numero de vertices
-    GrafoP<tCoste> L(n);                // Inicialización de grafo
+    // Rellenar matriz de costes
+    for(vertice i = 0 ; i < n ; i++)
+        for(vertice j = 0 ; j < n ; j++)
+            if(adyacentes(verticeToNodo(i, n), verticeToNodo(i, n)))
+                G[i][j] = 1;
 
-    for(size_t i = 0 ; i < n ; ++i)
-        for(size_t j = 0 ; j < n ; ++j)
-            L[i][j] = laberinto[i][j];
-
-    // Convertir casillas en vertices
-    for(size_t i = 0 ; i < n ; ++i)
-        for(size_t j = 0 ; j < n ; ++j)
-
-    
     // Aplicamos Dijkstra
     vector<tCoste> P;
-    vector<tCoste> costes = Dijkstra(L, e, P);
+    vector<tCoste> costes = Dijkstra(L, casillaToVertice(entrada, n), P);
 
-    return costes[s];
+    // Guardar camino de entrada a salida
+    vector<vertice> c = camino(casillaToVertice(entrada, n), casillaToVertice(salida, n), P);
+
+    // Pasar de vertices a Casillas
+    for(size_t k = 0 ; k < c.size() ; k++)
+        path[k] =  verticeToCasilla(c[k], n);
+
+    return costes[casillaToVertice(salida, n)];
 }
-
-/*
-Segun el enunciado puedo recibir un vertice?
-
-*/
-
 
 int main() {
     GrafoP<int> grafo("GrafoA.txt");
