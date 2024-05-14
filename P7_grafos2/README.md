@@ -159,7 +159,7 @@ del grafo de costes en tren, y de la ciudad que tiene las estaciones unidas.
 
 ### Ejercicio 7
 
- Se dispone de dos grafos (matriz de costes) que representan los costes de viajar entre
+Se dispone de dos grafos (matriz de costes) que representan los costes de viajar entre
 N ciudades españolas utilizando el tren (primer grafo) y el autobús (segundo grafo).
 Ambos grafos representan viajes entre las mismas N ciudades.
 
