@@ -24,20 +24,21 @@
     Mucha suerte en el negocio, que la competencia es dura.
 */
 
+/*
+Diskstra(Tren) + inverso (bus)
+Diskstra(bus) + inverso (tren)
+No es necesario solo tren o solo bus porque es un caso especifico de las otras dos opciones
+*/
+
 template <typename tCoste> 
 double rutaCosteMin(const GrafoP<tCoste>& Tren,
                     const GrafoP<tCoste>& Bus,
-                    const GrafoP<tCoste>::vertice origen,
-                    const GrafoP<tCoste>::vertice destino)
+                    const typename GrafoP<tCoste>::vertice origen,
+                    const typename GrafoP<tCoste>::vertice destino)
 {
     typedef GrafoP<tCoste>::vertice vertice;
     size_t N = Tren.numVert();
-
-    matriz<vertice> RutaTren, RutaBus;
-    matriz<tCoste> minTren = Floyd(Tren, RutaTren),
-                   minBus = Floyd(Bus, RutaBus);
-
-    grafoP<tCoste> Costes(N);
+    
 }
 
 int main() {

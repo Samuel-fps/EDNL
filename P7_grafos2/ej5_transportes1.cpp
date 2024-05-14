@@ -14,10 +14,11 @@
     ciudades a las que podría llegar nuestro infatigable viajero.
 */
 
+enum Alergia{coche, tren, avion};
+
 template <typename tCoste>
-vector<bool> transporte(const GrafoP<tCoste>& C,
-                const GrafoP<tCoste>& T,
-                const GrafoP<tCoste>& A,
+vector<bool> transporte(const GrafoP<tCoste>& T1,
+                const GrafoP<tCoste>& T2,
                 const typename GrafoP<tCoste>::vertice& origen,
                 tCoste dinero)
 {
@@ -27,16 +28,38 @@ vector<bool> transporte(const GrafoP<tCoste>& C,
     size_t n = A.numVert()
     vector<bool> alcanzables(n);
 
-    matriz<tCoste> P;
-    matriz<tCoste> carretera = Floyd(C, P);
-    matriz<tCoste> tren = Floyd(T, P);
-    matriz<tCoste> avion = Floyd(A, P);
+    vector<tCoste> P;
+
 
     for(vertice i = 0 ; i < n ; i++){
         for(vertice j = 0 ; j < n ; j++){
             std::min(carretera[i][j], tren[i][j])
         }
     }
+}
+
+template <typename tCoste>
+vector<bool> viajeAlergia(const GrafoP<tCoste>& C,
+                const GrafoP<tCoste>& T,
+                const GrafoP<tCoste>& A,
+                const typename GrafoP<tCoste>::vertice& origen,
+                tCoste dinero,
+                Alergia alergia)
+{
+    vector<bool> resultado;
+    switch(alergia){
+        case coche:
+            resultado = transporte(T, A, origen, dinero);
+            break;
+        case avion:
+            resultado = transporte(T, C, origen, dinero);
+            break;
+        case tren:
+            resultado = transporte(C, A, origen, dinero);
+            break;
+    }
+
+    return resultado;
 }
 
 

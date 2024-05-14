@@ -18,23 +18,38 @@
     del grafo de costes en tren, y de la ciudad que tiene las estaciones unidas.
 */
 
+/*
+    4 formas de viajar
+    Floyd(tren)
+    Floyd(bus)
+    Primero llegar a cambio, luego llegar a destino
+*/
+
 template <typename tCoste> 
 double tarifaMinima(const GrafoP<tCoste>& Bus,
                     const GrafoP<tCoste>& Tren,
-                    const GrafoP<tCoste>::vertice& cambio){
+                    const typename GrafoP<tCoste>::vertice& cambio){
     typedef GrafoP<tCoste>::vertice vertice;
     size_t N = G.numVert();
 
     matriz<tCoste> P;
+    // Solo bus
     matriz<tCoste> minBus = Floyd(Bus, P);
+    // Solo tren
     matriz<tCoste> minTren = Floyd(Tren, P);
-
-    GrafoP<tCoste> Costes(N);
+    // Tren -> cambio -> bus
+    GrafoP<tCoste> TrenBus(N);
     for(vertice i = 0 ; i < N ; i++){
-        for(vertice j = 0 ; j < N ; i++){
-            Costes[i][j] = std::min(minBus[i][j], minTren[i][j]);
-        }
+        TrenBus[i][cambio] = TrenBus[i][cambio];
+        TrenBus[cambio][i] = TrenBus[cambio][i];
     }
+    // Bus -> cambio -> Tren
+    GrafoP<tCoste> TrenBus(N);
+    for(vertice i = 0 ; i < N ; i++){
+        BusTren[i][cambio] = BusTren[i][cambio];
+        BusTren[cambio][i] = BusTren[cambio][i];
+    }
+    
 }
 
 

@@ -20,13 +20,21 @@
     las ciudades Origen y Destino en estas condiciones.
 */
 
+/*
+ORIGEN tren-> CAMBIO_1 bus-> DESTINO
+ORIGEN bus-> CAMBIO_2 tren-> DESTINO
+dijsktra de origen , cogemos los dos del cambio
+inverso hasta destino y cogemos los dos cambio
+suma de los dos tramos
+*/
+
 template <typename tCoste> 
 double rutaCosteMin(const GrafoP<tCoste>& Tren,
                     const GrafoP<tCoste>& Bus,
-                    const GrafoP<tCoste>::vertice origen,
-                    const GrafoP<tCoste>::vertice destino,
-                    const GrafoP<tCoste>::vertice cambio1,
-                    const GrafoP<tCoste>::vertice cambio2)
+                    const typename GrafoP<tCoste>::vertice origen,
+                    const typename GrafoP<tCoste>::vertice destino,
+                    const typename GrafoP<tCoste>::vertice cambio1,
+                    const typename GrafoP<tCoste>::vertice cambio2)
 {
     typedef GrafoP<tCoste>::vertice vertice;
     size_t N = Tren.numVert();
@@ -37,10 +45,7 @@ double rutaCosteMin(const GrafoP<tCoste>& Tren,
         Costes[origen][i] = Tren[origen][i]; // Origen solo tren
         Costes[i][destino] = Bus[i][destino]; // Destino solo bus
         for(vertice j = 0 ; j < N ; j++){
-            if(i == cambio1)
-                Costes[i][j] = std::min(minBus[i][j], minTren[i][j]);
-            if(i == cambio2)
-                Costes[i][j] = std::min(minBus[i][j], minTren[i][j]);
+
         }
     }
 
