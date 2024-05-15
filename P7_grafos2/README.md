@@ -174,7 +174,32 @@ Implementa un subprograma que calcule la ruta y el coste mínimo para viajar ent
 las ciudades Origen y Destino en estas condiciones. 
 
 ```cpp
+template <typename tCoste> 
+tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,     // Matriz de costes deviaje en tren
+                    const GrafoP<tCoste>& Bus,      // Matriz de costes deviaje en bus
+                    const typename GrafoP<tCoste>::vertice origen,      // Origen del viaje
+                    const typename GrafoP<tCoste>::vertice destino,     // Destino del viaje
+                    const typename GrafoP<tCoste>::vertice cambio1,     // Vertice en el que se permite transbordo
+                    const typename GrafoP<tCoste>::vertice cambio2,     // Vertice en el que se permite transbordo
+                    vector<typename GrafoP<tCoste>::vertice>& rutaOrigenCambio,     // Camino de origen a cambio
+                    vector<typename GrafoP<tCoste>::vertice>& rutaCambioDestino)    // Camino de cambio a destino
+{
+    typedef GrafoP<tCoste>::vertice vertice;
+    size_t N = Tren.numVert();
 
+    // Aplicamos Dijkstra en vertice origen para obtener las rutas minimas entre ellas origen -> cambio
+    // Aplicamos DijkstraInv en vertice detino para obtener las rutas minimas entre ellas cambio -> destino
+    vector<tCoste> origenCambio = Dijkstra(Tren, origen, rutaOrigenCambio);
+    vector<tCoste> cambioDestino = DijkstraInv(Tren, destino, rutaCambioDestino);
+
+    // ORIGEN --tren--> CAMBIO_1 --bus--> DESTINO
+    tCoste cambio1 = suma(origenCambio[cambio1], cambioDestino[cambio1]);
+
+    //ORIGEN --bus--> CAMBIO_2 --tren-->  DESTINO
+    tCoste cambio2 = suma(origenCambio[cambio1], cambioDestino[cambio1]);
+
+    return std::min(cambio1, cambio2);
+}
 ```
 
 ### Ejercicio 8
@@ -198,7 +223,34 @@ Implementa un subprograma que calcule la tarifa mínima en estas condiciones.
 Mucha suerte en el negocio, que la competencia es dura. 
 
 ```cpp
+template <typename tCoste> 
+double tarifaMinima(const GrafoP<tCoste>& Tren,
+                    const GrafoP<tCoste>& Bus,
+                    const typename GrafoP<tCoste>::vertice origen,
+                    const typename GrafoP<tCoste>::vertice destino)
+{
+    typedef GrafoP<tCoste>::vertice vertice;
 
+    vector<vertice> ruta; // No nos pide la ruta por lo que usamos el mismo vector
+    vector<tCoste> origenTren = Dijkstra(Tren, origen, ruta),
+                   destinoTren = DijkstraInv(Tren, origen, ruta),
+                   origenBus = Dijkstra(Bus, origen, ruta),
+                   destinoBus = DijkstraInv(Bus, origen, ruta);
+
+    // Camino con transbordo de minimo coste tren->bus
+    tCoste<tCoste> minTrenBus = suma(origenTren[0], destinoBus[0]);
+    for(size_t i = 0 ; i < origenTren.size() ; i++)
+        if(minTrenBus < suma(origenTren[i], destinoBus[i])) // Hacer transbordo en i es menos costoso
+            minTrenBus = suma(origenTren[i], destinoBus[i]);
+
+    // Camino con transbordo de minimo coste bus->tren
+    tCoste<tCoste> minBusTren = suma(origenBus[0], destinoTren[0]);
+    for(size_t i = 0 ; i < origenBus.size() ; i++)
+        if(minBusTren < suma(origenBus[i], destinoTren[i])) // Hacer transbordo en i es menos costoso
+            minBusTren = suma(origenBus[i], destinoTren[i]);
+    
+    return std::min(minTrenBus, minBusTren);
+}
 ```
 
 ### Ejercicio 9
