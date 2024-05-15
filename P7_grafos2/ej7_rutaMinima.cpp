@@ -14,42 +14,48 @@
 
         - La ciudad origen sólo dispone de transporte por tren.
         - La ciudad destino sólo dispone de transporte por autobús.
-        - El sector del taxi, bastante conflictivo en nuestros problemas, sigue en huelga, por lo que únicamente es posible cambiar de transporte en dos ciudades del grafo, cambio1 y cambio2, donde las estaciones de tren y autobús están unidas.
+        - El sector del taxi, bastante conflictivo en nuestros problemas, sigue en huelga
+          por lo que únicamente es posible cambiar de transporte en dos ciudades del grafo,
+          cambio1 y cambio2, donde las estaciones de tren y autobús están unidas.
 
     Implementa un subprograma que calcule la ruta y el coste mínimo para viajar entre
     las ciudades Origen y Destino en estas condiciones.
 */
 
 /*
-ORIGEN tren-> CAMBIO_1 bus-> DESTINO
-ORIGEN bus-> CAMBIO_2 tren-> DESTINO
+ORIGEN --tren-->    CAMBIO_1 --bus-->   DESTINO
+ORIGEN --bus-->     CAMBIO_2 --tren-->  DESTINO
+
 dijsktra de origen , cogemos los dos del cambio
 inverso hasta destino y cogemos los dos cambio
 suma de los dos tramos
 */
 
 template <typename tCoste> 
-double rutaCosteMin(const GrafoP<tCoste>& Tren,
-                    const GrafoP<tCoste>& Bus,
-                    const typename GrafoP<tCoste>::vertice origen,
-                    const typename GrafoP<tCoste>::vertice destino,
-                    const typename GrafoP<tCoste>::vertice cambio1,
-                    const typename GrafoP<tCoste>::vertice cambio2)
+tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,     // Matriz de costes deviaje en tren
+                    const GrafoP<tCoste>& Bus,      // Matriz de costes deviaje en bus
+                    const typename GrafoP<tCoste>::vertice origen,      // Origen del viaje
+                    const typename GrafoP<tCoste>::vertice destino,     // Destino del viaje
+                    const typename GrafoP<tCoste>::vertice cambio1,     // Vertice en el que se permite transbordo
+                    const typename GrafoP<tCoste>::vertice cambio2,     // Vertice en el que se permite transbordo
+                    vector<typename GrafoP<tCoste>::vertice>& rutaOrigenCambio,     // Camino de origen a cambio
+                    vector<typename GrafoP<tCoste>::vertice>& rutaCambioDestino)    // Camino de cambio a destino
 {
     typedef GrafoP<tCoste>::vertice vertice;
     size_t N = Tren.numVert();
 
-    GrafoP<tCoste> Costes;
+    // Aplicamos Dijkstra en vertice origen para obtener las rutas minimas entre ellas origen -> cambio
+    vector<tCoste> origenCambio = Dijkstra(Tren, origen, rutaOrigenCambio);
+    // Aplicamos DijkstraInv en vertice detino para obtener las rutas minimas entre ellas cambio -> destino
+    vector<tCoste> cambioDestino = DijkstraInv(Tren, destino, rutaCambioDestino);
 
-    for(vertice i = 0 ; i < N ; i++){
-        Costes[origen][i] = Tren[origen][i]; // Origen solo tren
-        Costes[i][destino] = Bus[i][destino]; // Destino solo bus
-        for(vertice j = 0 ; j < N ; j++){
+    // ORIGEN --tren--> CAMBIO_1 --bus--> DESTINO
+    tCoste cambio1 = suma(origenCambio[cambio1], cambioDestino[cambio1]);
 
-        }
-    }
+    //ORIGEN --bus--> CAMBIO_2 --tren-->  DESTINO
+    tCoste cambio2 = suma(origenCambio[cambio1], cambioDestino[cambio1]);
 
-    matriz<tCoste> Ruta;
+    return std::min(cambio1, cambio2);
 }
 
 
