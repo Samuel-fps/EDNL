@@ -22,15 +22,6 @@
     las ciudades Origen y Destino en estas condiciones.
 */
 
-/*
-ORIGEN --tren-->    CAMBIO_1 --bus-->   DESTINO
-ORIGEN --bus-->     CAMBIO_2 --tren-->  DESTINO
-
-dijsktra de origen , cogemos los dos del cambio
-inverso hasta destino y cogemos los dos cambio
-suma de los dos tramos
-*/
-
 template <typename tCoste> 
 tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,     // Matriz de costes deviaje en tren
                     const GrafoP<tCoste>& Bus,      // Matriz de costes deviaje en bus
@@ -45,8 +36,8 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,     // Matriz de costes deviaje 
     size_t N = Tren.numVert();
 
     // Aplicamos Dijkstra en vertice origen para obtener las rutas minimas entre ellas origen -> cambio
-    vector<tCoste> origenCambio = Dijkstra(Tren, origen, rutaOrigenCambio);
     // Aplicamos DijkstraInv en vertice detino para obtener las rutas minimas entre ellas cambio -> destino
+    vector<tCoste> origenCambio = Dijkstra(Tren, origen, rutaOrigenCambio);
     vector<tCoste> cambioDestino = DijkstraInv(Tren, destino, rutaCambioDestino);
 
     // ORIGEN --tren--> CAMBIO_1 --bus--> DESTINO
