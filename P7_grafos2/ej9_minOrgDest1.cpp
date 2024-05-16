@@ -22,11 +22,31 @@ devuelvo vector ganador, origen, destino
 */
 
 template <typename tCoste> 
-double rutaCosteMin(const GrafoP<tCoste>& Tren,
+tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,
                     const GrafoP<tCoste>& Bus,
-                    const typename GrafoP<tCoste>::vertice origen)
+                    const typename GrafoP<tCoste>::vertice origen,
+                    const typename GrafoP<tCoste>::vertice destino,
+                    const tCoste costeTaxi,
+                    vector<typename GrafoP<tCoste>::vertice>& caminoCosteMin) // Vector donde se devuelve el camino de coste minimo
 {
+    typedef GrafoP<tCoste>::vertice vertice;
+    size_t N = Tren.numVert();
+    GrafoP<tCoste> G(2*N);
 
+    // Rellenamos matriz de costes para aplicar Dijkstra
+    for(vertice i=0 ; i < N ; i++){
+        G[i][i+n] = costeTaxi;          // Tren -> Bus  (Segundo cuadrante)
+        G[i+n][i] = costeTaxi;          // Bus  -> Tren (Tercer cuadrante)
+        for(vertice j=0 ; j < N ; j++){
+            G[i][j] = Tren[i][j];       // Tren -> Tren (Primer cuadrante)
+            G[i+n][2+n] = Bus[i][j];    // Bus  -> Bus  (Cuarto cuadrante)
+        }
+    }
+
+    // Aplicamos Dijkstra para obtener costes mínimos desde origen
+    vector<tCoste> costeMin = Dijkstra(G, origen, caminoCosteMin);
+
+    return costeMin[destino];
 }
           
 
