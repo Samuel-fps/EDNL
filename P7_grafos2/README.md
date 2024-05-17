@@ -154,7 +154,33 @@ Implementa una función que calcule la tarifa mínima (matriz de costes mínimos
 del grafo de costes en tren, y de la ciudad que tiene las estaciones unidas.
 
 ```cpp
+template <typename tCoste> 
+GrafoP<tCoste> tarifaMinima(const GrafoP<tCoste>& Bus,
+                    const GrafoP<tCoste>& Tren,
+                    const typename GrafoP<tCoste>::vertice& cambio){
+    typedef GrafoP<tCoste>::vertice vertice;
+    size_t N = G.numVert();
+    GrafoP<tCoste> costesMin(N); // Matriz de constes  a devolver
 
+    matriz<vertice> P; // Necesaria para algoritmo pero no la usaremos
+    // Solo bus
+    matriz<tCoste> minBus = Floyd(Bus, P);
+    // Solo tren
+    matriz<tCoste> minTren = Floyd(Tren, P);
+
+    // Rellenamos la matriz con el coste minimo entre las cuatro opciones posibles
+    tCoste minDirecto, minCambio;
+    for(vertice i=0 ; i < N ; i++){
+        for(vertice j=0 ; j < N ; j++){
+            minDirecto  = std::min(minTren[i][j], minBus[i][j]); // Solo Tren || solo Bus
+            minCambio   = std::min(suma(minTren[i][cambio], minBus[cambio][i]),  // Tren-> cambio ->bus
+                                   suma(minBus[i][cambio], minTren[cambio][i])); // bus-> cambio ->tren 
+            G[i][j]     = std::min(minDirecto, minCambio); // Guardamos la mejor opcion entre las cuatro
+        }    
+    }
+
+    return G;
+}
 ```
 
 ### Ejercicio 7
@@ -171,7 +197,7 @@ concretas del grafo, origen y destino, en las siguientes condiciones:
 - El sector del taxi, bastante conflictivo en nuestros problemas, sigue en huelga, por lo que únicamente es posible cambiar de transporte en dos ciudades del grafo, cambio1 y cambio2, donde las estaciones de tren y autobús están unidas.
 
 Implementa un subprograma que calcule la ruta y el coste mínimo para viajar entre
-las ciudades Origen y Destino en estas condiciones. 
+las ciudades Origen y Destino en estas condiciones.
 
 ```cpp
 template <typename tCoste> 
@@ -220,7 +246,7 @@ costes) de viajar entre las N ciudades del país, un grafo con los costes de via
 otro en autobús.
 
 Implementa un subprograma que calcule la tarifa mínima en estas condiciones.
-Mucha suerte en el negocio, que la competencia es dura. 
+Mucha suerte en el negocio, que la competencia es dura.
 
 ```cpp
 template <typename tCoste> 
@@ -304,7 +330,7 @@ Dados los siguientes datos:
 
 y asumiendo que ambos costes de taxi (distintos entre sí, son dos costes diferentes) son
 constantes e iguales para todas las ciudades, implementa un subprograma que calcule el
-camino y el coste mínimo para ir de la ciudad origen a la ciudad destino. 
+camino y el coste mínimo para ir de la ciudad origen a la ciudad destino.
 
 ```cpp
 template <typename tCoste> 
@@ -388,7 +414,7 @@ El archipiélago de las Huríes acaba de ser devastado por un maremoto de dimens
 
 Dadas las matrices de costes directos de las tres islas y las listas de ciudades costeras
 del archipiélago, implementad un subprograma que calcule los puentes a construir en las
-condiciones anteriormente descritas. 
+condiciones anteriormente descritas.
 
 ```cpp
 
