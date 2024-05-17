@@ -143,7 +143,52 @@ Implementa una función que dado el grafo con las distancias directas entre las 
 Se dispone de tres grafos que representan la matriz de costes para viajes en un determinado país pero por diferentes medios de transporte, por supuesto todos los grafos tendrán el mismo número de nodos. El primer grafo representa los costes de ir por carretera, el segundo en tren y el tercero en avión. Dado un viajero que dispone de una determinada cantidad de dinero, que es alérgico a uno de los tres medios de transporte, y que sale de una ciudad determinada, implementar un subprograma que determine las ciudades a las que podría llegar nuestro infatigable viajero.
 
 ```cpp
+enum Alergia{coche, tren, avion};
 
+template <typename tCoste>
+vector<bool> transporte(const GrafoP<tCoste>& T1,
+                        const GrafoP<tCoste>& T2,
+                        const typename GrafoP<tCoste>::vertice& origen,
+                        tCoste dinero)
+{
+    typedef typename GrafoP<tCoste>::vertice vertice;
+    size_t n = T1.numVert();
+    vector<bool> alcanzables(n);
+
+    vector<vertice> P;
+    vector<tCoste> t1Coste = Dijkstra(T1, origen, P),
+                   t2Coste = Dijkstra(T2, origen, P);
+
+    // rellenamos el vector con true si el presupuiesto >= que el coste minimo
+    for(vertice i=0 ; i < n ; i++)
+        alcanzables[i] = dinero >= std::min(t1Coste[i], t2Coste[i]);
+    
+    return alcanzables;
+}
+
+template <typename tCoste>
+vector<bool> viajeAlergia(const GrafoP<tCoste>& C,
+                          const GrafoP<tCoste>& T,
+                          const GrafoP<tCoste>& A,
+                          const typename GrafoP<tCoste>::vertice& origen,
+                          tCoste dinero,
+                          Alergia alergia)
+{
+    vector<bool> resultado;
+    switch(alergia){
+        case coche:
+            resultado = transporte(T, A, origen, dinero);
+            break;
+        case avion:
+            resultado = transporte(T, C, origen, dinero);
+            break;
+        case tren:
+            resultado = transporte(C, A, origen, dinero);
+            break;
+    }
+
+    return resultado;
+}
 ```
 
 ### Ejercicio 6

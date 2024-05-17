@@ -18,33 +18,32 @@ enum Alergia{coche, tren, avion};
 
 template <typename tCoste>
 vector<bool> transporte(const GrafoP<tCoste>& T1,
-                const GrafoP<tCoste>& T2,
-                const typename GrafoP<tCoste>::vertice& origen,
-                tCoste dinero)
+                        const GrafoP<tCoste>& T2,
+                        const typename GrafoP<tCoste>::vertice& origen,
+                        tCoste dinero)
 {
     typedef typename GrafoP<tCoste>::vertice vertice;
-    static const tCoste INF = GrafoP<tCoste>::INFINITO;
-
-    size_t n = A.numVert()
+    size_t n = T1.numVert();
     vector<bool> alcanzables(n);
 
-    vector<tCoste> P;
+    vector<vertice> P;
+    vector<tCoste> t1Coste = Dijkstra(T1, origen, P),
+                   t2Coste = Dijkstra(T2, origen, P);
 
-
-    for(vertice i = 0 ; i < n ; i++){
-        for(vertice j = 0 ; j < n ; j++){
-            std::min(carretera[i][j], tren[i][j])
-        }
-    }
+    // rellenamos el vector con true si el presupuiesto >= que el coste minimo
+    for(vertice i=0 ; i < n ; i++)
+        alcanzables[i] = dinero >= std::min(t1Coste[i], t2Coste[i]);
+    
+    return alcanzables;
 }
 
 template <typename tCoste>
 vector<bool> viajeAlergia(const GrafoP<tCoste>& C,
-                const GrafoP<tCoste>& T,
-                const GrafoP<tCoste>& A,
-                const typename GrafoP<tCoste>::vertice& origen,
-                tCoste dinero,
-                Alergia alergia)
+                          const GrafoP<tCoste>& T,
+                          const GrafoP<tCoste>& A,
+                          const typename GrafoP<tCoste>::vertice& origen,
+                          tCoste dinero,
+                          Alergia alergia)
 {
     vector<bool> resultado;
     switch(alergia){
