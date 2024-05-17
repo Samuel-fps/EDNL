@@ -34,20 +34,16 @@ unsigned distanciaCamiones(const GrafoP<tCoste>& G, // Distancia entre ciudades
                            vector<int> pedidos) // Vector de tamaño G.numVert() con la cantidad a entregar
 {
     typedef GrafoP<tCoste>::vertice vertice;
-    static const INF = GrafoP<tCoste>::INFINITO;
     size_t n = G.numVert();
 
     vector<tCoste> P;
-    vector<tCoste> capitalCiudades = Dijkstra(G, capital, P);
-    vector<tCoste> vueltaCapital = DijkstraInv(G, capital, P);
+    vector<tCoste> capitalCiudades = Dijkstra(G, capital, P), // Coste min desde capital a ciudades
+                   vueltaCapital = DijkstraInv(G, capital, P); // Coste min desde ciudades a capital
 
+    // Sumamos la distancia total multiplicando el numero de pedidos por la distancia de ir y volver a cada ciudad
     unsigned distancia = 0;
-    for(vertice i = 0 ; i < n ; i++){
-        while(pedidos[i] > 0){
-            distancia += suma(capitalcidades[i], vueltaCapital[i])
-            pedidos[i]--;
-        }
-    }
+    for(vertice i = 0 ; i < n ; i++)
+        distancia += pedidos[i] * suma(capitalcidades[i], vueltaCapital[i]);
 
     return distancia;
 }
