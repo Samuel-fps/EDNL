@@ -23,33 +23,35 @@
     Floyd(tren)
     Floyd(bus)
     Primero llegar a cambio, luego llegar a destino
+    Se podrían devolver las cuatro matrices en vez de unirlasen una
 */
 
 template <typename tCoste> 
-double tarifaMinima(const GrafoP<tCoste>& Bus,
+GrafoP<tCoste> tarifaMinima(const GrafoP<tCoste>& Bus,
                     const GrafoP<tCoste>& Tren,
                     const typename GrafoP<tCoste>::vertice& cambio){
     typedef GrafoP<tCoste>::vertice vertice;
     size_t N = G.numVert();
+    GrafoP<tCoste> costesMin(N); // Matriz de constes  a devolver
 
-    matriz<tCoste> P;
+    matriz<vertice> P; // Necesaria para algoritmo pero no la usaremos
     // Solo bus
     matriz<tCoste> minBus = Floyd(Bus, P);
     // Solo tren
     matriz<tCoste> minTren = Floyd(Tren, P);
-    // Tren -> cambio -> bus
-    GrafoP<tCoste> TrenBus(N);
-    for(vertice i = 0 ; i < N ; i++){
-        TrenBus[i][cambio] = TrenBus[i][cambio];
-        TrenBus[cambio][i] = TrenBus[cambio][i];
+
+    // Rellenamos la matriz con el coste minimo entre las cuatro opciones posibles
+    tCoste minDirecto, minCambio;
+    for(vertice i=0 ; i < N ; i++){
+        for(vertice j=0 ; j < N ; j++){
+            minDirecto  = std::min(minTren[i][j], minBus[i][j]); // Solo Tren || solo Bus
+            minCambio   = std::min(suma(minTren[i][cambio], minBus[cambio][i]),  // Tren-> cambio ->bus
+                                   suma(minBus[i][cambio], minTren[cambio][i])); // bus-> cambio ->tren 
+            G[i][j]     = std::min(minDirecto, minCambio); // Guardamos la mejor opcion entre las cuatro
+        }    
     }
-    // Bus -> cambio -> Tren
-    GrafoP<tCoste> TrenBus(N);
-    for(vertice i = 0 ; i < N ; i++){
-        BusTren[i][cambio] = BusTren[i][cambio];
-        BusTren[cambio][i] = BusTren[cambio][i];
-    }
-    
+
+    return G;
 }
 
 
