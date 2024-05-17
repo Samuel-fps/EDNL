@@ -156,8 +156,8 @@ del grafo de costes en tren, y de la ciudad que tiene las estaciones unidas.
 ```cpp
 template <typename tCoste> 
 GrafoP<tCoste> tarifaMinima(const GrafoP<tCoste>& Bus,
-                    const GrafoP<tCoste>& Tren,
-                    const typename GrafoP<tCoste>::vertice& cambio){
+                            const GrafoP<tCoste>& Tren,
+                            const typename GrafoP<tCoste>::vertice& cambio){
     typedef GrafoP<tCoste>::vertice vertice;
     size_t N = G.numVert();
     GrafoP<tCoste> costesMin(N); // Matriz de constes  a devolver
