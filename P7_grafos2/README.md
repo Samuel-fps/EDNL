@@ -1,14 +1,6 @@
 # Práctica 7: Grafos 2
 
-## GRAFOS PARA EJERCICIOS
-
-### GrafoA.dat
-
-![GrafoA.dat](GrafoA.png)
-
-### GrafoB.dat
-
-![GrafoB.dat](GrafoB.png)
+## INTRODUCCIÓN
 
 ## EJERCICIOS
 
