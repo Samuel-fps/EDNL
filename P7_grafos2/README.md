@@ -203,8 +203,7 @@ vector<bool> viajeAlergia(const GrafoP<tCoste>& C,
 
 Al dueño de una agencia de transportes se le plantea la siguiente situación. La agencia de viajes ofrece distintas trayectorias combinadas entre N ciudades españolas utilizando tren y autobús. Se dispone de dos grafos que representan los costes (matriz de costes) de viajar entre diferentes ciudades, por un lado en tren, y por otro en autobús (por supuesto entre las ciudades que tengan línea directa entre ellas). Además coincide que los taxis de toda España se encuentran en estos momentos en huelga general, lo que implica que sólo se podrá cambiar de transporte en una ciudad determinada en la que, por casualidad, las estaciones de tren y autobús están unidas.
 
-Implementa una función que calcule la tarifa mínima (matriz de costes mínimos) de viajar entre cualesquiera de las N ciudades disponiendo del grafo de costes en autobús,
-del grafo de costes en tren, y de la ciudad que tiene las estaciones unidas.
+Implementa una función que calcule la tarifa mínima (matriz de costes mínimos) de viajar entre cualesquiera de las N ciudades disponiendo del grafo de costes en autobús, del grafo de costes en tren, y de la ciudad que tiene las estaciones unidas.
 
 ```cpp
 template <typename tCoste> 
@@ -238,8 +237,7 @@ GrafoP<tCoste> tarifaMinima(const GrafoP<tCoste>& Bus,
 
 ### Ejercicio 7
 
-Se dispone de dos grafos (matriz de costes) que representan los costes de viajar entre
-N ciudades españolas utilizando el tren (primer grafo) y el autobús (segundo grafo).
+Se dispone de dos grafos (matriz de costes) que representan los costes de viajar entre N ciudades españolas utilizando el tren (primer grafo) y el autobús (segundo grafo).
 Ambos grafos representan viajes entre las mismas N ciudades.
 
 Nuestro objetivo es hallar el camino de coste mínimo para viajar entre dos ciudades
@@ -249,8 +247,7 @@ concretas del grafo, origen y destino, en las siguientes condiciones:
 - La ciudad destino sólo dispone de transporte por autobús.
 - El sector del taxi, bastante conflictivo en nuestros problemas, sigue en huelga, por lo que únicamente es posible cambiar de transporte en dos ciudades del grafo, cambio1 y cambio2, donde las estaciones de tren y autobús están unidas.
 
-Implementa un subprograma que calcule la ruta y el coste mínimo para viajar entre
-las ciudades Origen y Destino en estas condiciones.
+Implementa un subprograma que calcule la ruta y el coste mínimo para viajar entre las ciudades Origen y Destino en estas condiciones.
 
 ```cpp
 template <typename tCoste> 
@@ -283,20 +280,10 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,     // Matriz de costes deviaje 
 
 ### Ejercicio 8
 
-“UN SOLO TRANSBORDO, POR FAVOR”. Este es el título que reza en tu
-flamante compañía de viajes. Tu publicidad explica, por supuesto, que ofreces viajes
-combinados de TREN y/o AUTOBÚS (es decir, viajes en tren, en autobús, o usando
-ambos), entre N ciudades del país, que ofreces un servicio inmejorable, precios muy
-competitivos, y que garantizas ante notario algo que no ofrece ninguno de tus
-competidores: que en todos tus viajes COMO MÁXIMO se hará un solo transbordo
-(cambio de medio de transporte).
+“UN SOLO TRANSBORDO, POR FAVOR”. Este es el título que reza en tu flamante compañía de viajes. Tu publicidad explica, por supuesto, que ofreces viajes combinados de TREN y/o AUTOBÚS (es decir, viajes en tren, en autobús, o usando ambos), entre N ciudades del país, que ofreces un servicio inmejorable, precios muy competitivos, y que garantizas ante notario algo que no ofrece ninguno de tus competidores: que en todos tus viajes COMO MÁXIMO se hará un solo transbordo (cambio de medio de transporte).
 
-Bien, hoy es 1 de Julio y comienza la temporada de viajes.
-¡Qué suerte! Acaba de aparecer un cliente en tu oficina. Te explica que quiere viajar
-entre dos ciudades, Origen y Destino, y quiere saber cuánto le costará.
-Para responder a esa pregunta dispones de dos grafos de costes directos (matriz de
-costes) de viajar entre las N ciudades del país, un grafo con los costes de viajar en tren y
-otro en autobús.
+Bien, hoy es 1 de Julio y comienza la temporada de viajes. ¡Qué suerte!  
+Acaba de aparecer un cliente en tu oficina. Te explica que quiere viajar entre dos ciudades, Origen y Destino, y quiere saber cuánto le costará. Para responder a esa pregunta dispones de dos grafos de costes directos (matriz de costes) de viajar entre las N ciudades del país, un grafo con los costes de viajar en tren y otro en autobús.
 
 Implementa un subprograma que calcule la tarifa mínima en estas condiciones.
 Mucha suerte en el negocio, que la competencia es dura.
@@ -381,9 +368,7 @@ Dados los siguientes datos:
 - el coste del taxi para cambiar, dentro de una ciudad, de la estación de tren a la de autobús o viceversa(taxi-tren-bus) y
 - el coste del taxi desde el aeropuerto a la estación de tren o la de autobús, o viceversa (taxi-aeropuerto-tren/bus)
 
-y asumiendo que ambos costes de taxi (distintos entre sí, son dos costes diferentes) son
-constantes e iguales para todas las ciudades, implementa un subprograma que calcule el
-camino y el coste mínimo para ir de la ciudad origen a la ciudad destino.
+y asumiendo que ambos costes de taxi (distintos entre sí, son dos costes diferentes) son constantes e iguales para todas las ciudades, implementa un subprograma que calcule el camino y el coste mínimo para ir de la ciudad origen a la ciudad destino.
 
 ```cpp
 template <typename tCoste> 
