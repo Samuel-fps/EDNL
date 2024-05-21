@@ -40,7 +40,7 @@ matiz<tCoste> tombuctuDistribucion(const vector<Ciudad>& Ciudades,
                                    const matriz<bool>& A)
 {
     typedef GrafoMA::vertice vertice;
-    size_t N = A.numVert();
+    size_t N = A.dimension();
     GrafoP<tCoste> C(N);
 
     for(vertice i=0 ; i < N ; i++)
