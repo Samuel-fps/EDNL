@@ -43,17 +43,39 @@ void constriurPuente(const GrafoP<tCoste>& Fobos,                     // Coste c
 
     matriz<vertice> P;
     matriz<tCoste> minFobos = Floyd(Fobos, P);
-    matriz<tCoste> minDeinmos = Floyd(Deimos, P);
-    
-    // Enconstrar mejor ciudad
-    int suma = 0;
-    for(vertice i=0 ; i < NF ; i++){
-        for(vertice j=0 ; j < NF ; j++){
-            suma += minFobos[i][j];
-            suma += minFobos[j][i];
+    matriz<tCoste> minDeimos = Floyd(Deimos, P);
+
+    int suma, minSuma;
+    minSuma = GrafoP<tCoste>::INFINITO;
+
+    // Enconstrar mejor ciudad Fobos
+    for(vertice k=0 ; k < costeras1.size() ; k++){
+        suma = 0;
+        for(vertice i=0 ; i < NF ; i++){
+            for(vertice j=0 ; j < NF ; j++){
+                suma += minFobos[i][j] + minFobos[j][i];
+            }
+        }
+        if(suma < minSuma){
+            minSuma = suma;
+            ciudad1 = k;
         }
     }
-    
+
+    // Enconstrar mejor ciudad Deimos
+    for(vertice k=0 ; k < costeras2.size() ; k++){
+        suma = 0;
+        // Suma de todos los caminos de ida y vuelta a la ciudad k
+        for(vertice i=0 ; i < ND ; i++){
+            for(vertice j=0 ; j < ND ; j++){
+                suma += minDeimos[i][j] + minDeimos[j][i];
+            }
+        }
+        if(suma < minSuma){
+            minSuma = suma;
+            ciudad2 = k;
+        }
+    }
 }
 
 int main() {
