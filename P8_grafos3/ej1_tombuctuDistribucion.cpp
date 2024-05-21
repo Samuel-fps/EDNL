@@ -37,7 +37,7 @@ double distancia(Ciudad c1, Ciudad c2) {
 
 template <typename tCoste>
 matiz<tCoste> tombuctuDistribucion(const vector<Ciudad>& Ciudades,
-                                   const GrafoMA& A)
+                                   const matriz<bool>& A)
 {
     typedef GrafoMA::vertice vertice;
     size_t N = A.numVert();
