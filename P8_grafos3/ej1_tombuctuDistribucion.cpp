@@ -1,3 +1,4 @@
+#include "../TAD_GRAFO/alg_grafoMA.h"
 #include "../TAD_GRAFO/alg_grafoPMC.h"
 #include "alg_grafo_E-S.h"
 #include <iostream>
@@ -25,12 +26,33 @@
     archipiélago.    
 */
 
+typedef struct{
+    int x, y;
+} Ciudad;
+
+// Distancia euclidea
+double distancia(double x1, double y1, double x2, double y2) {
+    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+}
+
 template <typename tCoste>
-void constriurPuente()
+void constriurPuente(const vector<Ciudad>& Ciudades,
+                     const GrafoMA& A)
 {
-    typedef GrafoP<tCoste>::vertice vertice;
+    typedef GrafoMA::vertice vertice;
+    size_t N = A.numVert();
+    GrafoP<tCoste> C(N);
+
+    for(vertice i=0 ; i < N ; i++)
+        for(vertice j=0 ; j < N ; j++){
+            if(A[i][j]) // Son adyacentes
+                C[i][j] = distancia()
+        }
+
     
 }
+
+// Se puede hacer algo como en el laberinto
 
 int main() {
     GrafoP<int> grafo("GrafoA.txt");
