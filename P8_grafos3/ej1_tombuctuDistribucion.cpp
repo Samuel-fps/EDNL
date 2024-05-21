@@ -30,29 +30,31 @@ typedef struct{
     int x, y;
 } Ciudad;
 
-// Distancia euclidea
-double distancia(double x1, double y1, double x2, double y2) {
-    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+// Distancia euclidea entre ciudades
+double distancia(Ciudad c1, Ciudad c2) {
+    return sqrt(pow(c2.x - c1.x, 2) + pow(c2.y - c1.y, 2));
 }
 
 template <typename tCoste>
-void constriurPuente(const vector<Ciudad>& Ciudades,
-                     const GrafoMA& A)
+matiz<tCoste> tombuctuDistribucion(const vector<Ciudad>& Ciudades,
+                                   const GrafoMA& A)
 {
     typedef GrafoMA::vertice vertice;
     size_t N = A.numVert();
     GrafoP<tCoste> C(N);
 
     for(vertice i=0 ; i < N ; i++)
-        for(vertice j=0 ; j < N ; j++){
+        for(vertice j=0 ; j < N ; j++)
             if(A[i][j]) // Son adyacentes
-                C[i][j] = distancia()
-        }
+                C[i][j] = distancia(verticeToCiudad(i), verticeToCiudad(i));
 
-    
+    matriz<vertice> P;
+    matriz<tCoste> costesMin = Floyd(C, P);
+
+    return costesMin;
 }
 
-// Se puede hacer algo como en el laberinto
+// Se puede hacer algo como en el laberinto?
 
 int main() {
     GrafoP<int> grafo("GrafoA.txt");
