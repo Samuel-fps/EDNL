@@ -17,8 +17,8 @@
     nuestro problema es encontrar qué líneas aéreas debemos implantar para poder viajar entre todas 
     las ciudades del archipiélago, siguiendo los siguientes criterios:
 
-    1. Se implantará una y sólo una  línea aérea entre cada par de islas.
-    2. La línea aérea escogida entre cada par de islas será la más corta entre todas las posibles.
+        1. Se implantará una y sólo una  línea aérea entre cada par de islas.
+        2. La línea aérea escogida entre cada par de islas será la más corta entre todas las posibles.
 
     Así pues, dados los siguientes datos:
         - Lista de ciudades de Tombuctú2 representada cada una de ellas por sus coordenadas cartesianas.
@@ -29,10 +29,21 @@
     
 */
 
+typedef struct{
+    int x, y;
+} Ciudad;
+
+// Distancia euclidea entre ciudades
+double distancia(Ciudad c1, Ciudad c2) {
+    return sqrt(pow(c2.x - c1.x, 2) + pow(c2.y - c1.y, 2));
+}
+
 template <typename tCoste>
-void constriurPuente()
+matiz<tCoste> tombuctuAereas(const vector<Ciudad>& Ciudades, // Lista de ciudades de Tombuctú2
+                                   const matriz<bool>& A)    // Matriz de adyacencia de Tombuctú
 {
     typedef GrafoP<tCoste>::vertice vertice;
+    size_t N = A.dimension();
     
 }
 
