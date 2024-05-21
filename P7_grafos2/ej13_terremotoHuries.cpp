@@ -32,6 +32,75 @@
 Igual que el anterior pero con tres islas
 */
 
+template <typename tCoste>
+void constriurPuentes(const GrafoP<tCoste>& I1,                     // Coste ciudades Isla 1
+                      const GrafoP<tCoste>& I2,                     // Coste ciudades Isla 2
+                      const GrafoP<tCoste>& I3,                     // Coste ciudades Isla 3
+                      const vector<GrafoP<tCoste>::vertice> costeras1,   // Ciudades costeras
+                      const vector<GrafoP<tCoste>::vertice> costeras2,   // Ciudades costeras
+                      const vector<GrafoP<tCoste>::vertice> costeras3,   // Ciudades costeras
+                      GrafoP<tCoste>::vertice& ciudad1,             // Ciudad donde construir el puente Isla 1
+                      GrafoP<tCoste>::vertice& ciudad2,              // Ciudad donde construir el puente Isla 2
+                      GrafoP<tCoste>::vertice& ciudad3)             // Ciudad donde construir el puente Isla 3
+{
+    typedef GrafoP<tCoste>::vertice vertice;
+    size_t N1 = I1.numVert(),
+           N2 = I2.numVert(),
+           N3 = I3.numVert();
+
+    matriz<vertice> P;
+    matriz<tCoste> minI1 = Floyd(I1, P);
+    matriz<tCoste> minI2 = Floyd(I2, P);
+    matriz<tCoste> minI3 = Floyd(I3, P);
+
+    int suma, minSuma;
+    minSuma = GrafoP<tCoste>::INFINITO;
+
+    // Enconstrar mejor ciudad Isla 1
+    for(vertice k=0 ; k < costeras1.size() ; k++){
+        suma = 0;
+        for(vertice i=0 ; i < N1 ; i++){
+            for(vertice j=0 ; j < N1 ; j++){
+                suma += minI1[i][j] + minI1[j][i];
+            }
+        }
+        if(suma < minSuma){
+            minSuma = suma;
+            ciudad1 = k;
+        }
+    }
+
+    // Encontrar mejor ciudad Isla 2
+    for(vertice k=0 ; k < costeras2.size() ; k++){
+        suma = 0;
+        // Suma de todos los caminos de ida y vuelta a la ciudad k
+        for(vertice i=0 ; i < N2 ; i++){
+            for(vertice j=0 ; j < N2 ; j++){
+                suma += minI2[i][j] + minI2[j][i];
+            }
+        }
+        if(suma < minSuma){
+            minSuma = suma;
+            ciudad2 = k;
+        }
+    }
+
+    // Encontrar mejor ciudad Isla 3
+    for(vertice k=0 ; k < costeras3.size() ; k++){
+        suma = 0;
+        // Suma de todos los caminos de ida y vuelta a la ciudad k
+        for(vertice i=0 ; i < N3 ; i++){
+            for(vertice j=0 ; j < N3 ; j++){
+                suma += minI3[i][j] + minI3[j][i];
+            }
+        }
+        if(suma < minSuma){
+            minSuma = suma;
+            ciudad3 = k;
+        }
+    }
+}
+
 int main() {
     GrafoP<int> grafo("GrafoA.txt");
 

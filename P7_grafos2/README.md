@@ -424,7 +424,47 @@ de viajar entre cualesquiera dos ciudades de estas tres islas.
 ¡¡¡ QUE DISFRUTÉIS EL VIAJE !!!
 
 ```cpp
+typedef struct {
+    size_t origen, destino;
+} Puente;
 
+template <typename tCoste>
+matriz<tCoste> puentesHuries(const GrafoP<tCoste>& I1,
+                             const GrafoP<tCoste>& I2,
+                             const GrafoP<tCoste>& I3,
+                             const vector<Puente>& Puentes)
+{
+    typedef GrafoP<tCoste>::vertice vertice;
+    size_t n1 = I1.numVert(), n2 = I2.numVert(), n3 = I3.numVert(); // Número de ciudades en cada isla
+    size_t n = n1 + n2 + n3; // Número de ciudades totales
+    GrafoP<tCoste> A(n);
+
+    // Coste 0 de viajar por los puentes
+    for(Puente p : Puentes){
+        A[p.origen][p.destino] = 0;
+        A[p.destino][p.origen] = 0;
+    }
+
+    // Rellenar con la matriz de costes isla 1
+    for(vertice i=0 ; i < n1 ; i++)
+        for(vertice j=0 ; j < I.numVert() ; j++)
+            A[i][j] = I1[i][j];
+
+    // Rellenar con la matriz de costes isla 2
+    for(vertice i=n1  ; i < n1+n2 ; i++)
+        for(vertice j=0 ; j < I.numVert() ; j++)
+            A[i][j] = I2[i][j];
+
+    // Rellenar con la matriz de costes isla 3
+    for(vertice i=n1+n2 ; i < n1+n2+n3 ; i++)
+        for(vertice j=0 ; j < I.numVert() ; j++)
+            A[i][j] = I3[i][j];
+    
+    matriz<vertice> P;
+    matriz<tCoste> Costes = Floyd(A, P);
+
+    return A;
+}
 ```
 
 ### Ejercicio 12
@@ -439,7 +479,54 @@ costeras de ambas islas, implementa un subprograma que calcule las dos ciudades 
 unirá el puente.
 
 ```cpp
+template <typename tCoste>
+void constriurPuente(const GrafoP<tCoste>& Fobos,                     // Coste ciudades Fobos
+                     const GrafoP<tCoste>& Deimos,                     // Coste ciudades Deimos
+                     const vector<GrafoP<tCoste>::vertice> costeras1,   // Ciudades costeras
+                     const vector<GrafoP<tCoste>::vertice> costeras2,   // Ciudades costeras
+                     GrafoP<tCoste>::vertice& ciudad1,                  // Ciudad donde construir el puente
+                     GrafoP<tCoste>::vertice& ciudad2)                  // Ciudad donde construir el puente
+{
+    typedef GrafoP<tCoste>::vertice vertice;
+    size_t NF = Fobos.numVert(),
+           ND = Deimos.numVert();
 
+    matriz<vertice> P;
+    matriz<tCoste> minFobos = Floyd(Fobos, P);
+    matriz<tCoste> minDeimos = Floyd(Deimos, P);
+
+    int suma, minSuma;
+    minSuma = GrafoP<tCoste>::INFINITO;
+
+    // Enconstrar mejor ciudad Fobos
+    for(vertice k=0 ; k < costeras1.size() ; k++){
+        suma = 0;
+        for(vertice i=0 ; i < NF ; i++){
+            for(vertice j=0 ; j < NF ; j++){
+                suma += minFobos[i][j] + minFobos[j][i];
+            }
+        }
+        if(suma < minSuma){
+            minSuma = suma;
+            ciudad1 = k;
+        }
+    }
+
+    // Enconstrar mejor ciudad Deimos
+    for(vertice k=0 ; k < costeras2.size() ; k++){
+        suma = 0;
+        // Suma de todos los caminos de ida y vuelta a la ciudad k
+        for(vertice i=0 ; i < ND ; i++){
+            for(vertice j=0 ; j < ND ; j++){
+                suma += minDeimos[i][j] + minDeimos[j][i];
+            }
+        }
+        if(suma < minSuma){
+            minSuma = suma;
+            ciudad2 = k;
+        }
+    }
+}
 ```
 
 ### Ejercicio 13
@@ -455,5 +542,72 @@ del archipiélago, implementad un subprograma que calcule los puentes a construi
 condiciones anteriormente descritas.
 
 ```cpp
+template <typename tCoste>
+void constriurPuentes(const GrafoP<tCoste>& I1,                     // Coste ciudades Isla 1
+                      const GrafoP<tCoste>& I2,                     // Coste ciudades Isla 2
+                      const GrafoP<tCoste>& I3,                     // Coste ciudades Isla 3
+                      const vector<GrafoP<tCoste>::vertice> costeras1,   // Ciudades costeras
+                      const vector<GrafoP<tCoste>::vertice> costeras2,   // Ciudades costeras
+                      const vector<GrafoP<tCoste>::vertice> costeras3,   // Ciudades costeras
+                      GrafoP<tCoste>::vertice& ciudad1,             // Ciudad donde construir el puente Isla 1
+                      GrafoP<tCoste>::vertice& ciudad2,              // Ciudad donde construir el puente Isla 2
+                      GrafoP<tCoste>::vertice& ciudad3)             // Ciudad donde construir el puente Isla 3
+{
+    typedef GrafoP<tCoste>::vertice vertice;
+    size_t N1 = I1.numVert(),
+           N2 = I2.numVert(),
+           N3 = I3.numVert();
 
+    matriz<vertice> P;
+    matriz<tCoste> minI1 = Floyd(I1, P);
+    matriz<tCoste> minI2 = Floyd(I2, P);
+    matriz<tCoste> minI3 = Floyd(I3, P);
+
+    int suma, minSuma;
+    minSuma = GrafoP<tCoste>::INFINITO;
+
+    // Enconstrar mejor ciudad Isla 1
+    for(vertice k=0 ; k < costeras1.size() ; k++){
+        suma = 0;
+        for(vertice i=0 ; i < N1 ; i++){
+            for(vertice j=0 ; j < N1 ; j++){
+                suma += minI1[i][j] + minI1[j][i];
+            }
+        }
+        if(suma < minSuma){
+            minSuma = suma;
+            ciudad1 = k;
+        }
+    }
+
+    // Encontrar mejor ciudad Isla 2
+    for(vertice k=0 ; k < costeras2.size() ; k++){
+        suma = 0;
+        // Suma de todos los caminos de ida y vuelta a la ciudad k
+        for(vertice i=0 ; i < N2 ; i++){
+            for(vertice j=0 ; j < N2 ; j++){
+                suma += minI2[i][j] + minI2[j][i];
+            }
+        }
+        if(suma < minSuma){
+            minSuma = suma;
+            ciudad2 = k;
+        }
+    }
+
+    // Encontrar mejor ciudad Isla 3
+    for(vertice k=0 ; k < costeras3.size() ; k++){
+        suma = 0;
+        // Suma de todos los caminos de ida y vuelta a la ciudad k
+        for(vertice i=0 ; i < N3 ; i++){
+            for(vertice j=0 ; j < N3 ; j++){
+                suma += minI3[i][j] + minI3[j][i];
+            }
+        }
+        if(suma < minSuma){
+            minSuma = suma;
+            ciudad3 = k;
+        }
+    }
+}
 ```
