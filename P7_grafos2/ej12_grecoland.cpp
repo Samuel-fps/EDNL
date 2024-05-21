@@ -24,14 +24,35 @@
     islas, implementa un subprograma que calcule las dos ciudades que unirá el puente.
 */
 
+/*
+    Hay c1 * c2 posibles puentes
+    Tengo que encontrar la mejor ciudad costera de cada isla
+*/
+
 template <typename tCoste>
-void constriurPuente(const GrafoP<tCoste>& costesF,                     // Coste ciudades Fobos
-                     const GrafoP<tCoste>& costesD,                     // Coste ciudades Deimos
-                     const vector<GrafoP<tCoste>::vertice> Ciudades,    // Ciudades costeras
+void constriurPuente(const GrafoP<tCoste>& Fobos,                     // Coste ciudades Fobos
+                     const GrafoP<tCoste>& Deimos,                     // Coste ciudades Deimos
+                     const vector<GrafoP<tCoste>::vertice> costeras1,   // Ciudades costeras
+                     const vector<GrafoP<tCoste>::vertice> costeras2,   // Ciudades costeras
                      GrafoP<tCoste>::vertice& ciudad1,                  // Ciudad donde construir el puente
                      GrafoP<tCoste>::vertice& ciudad2)                  // Ciudad donde construir el puente
 {
     typedef GrafoP<tCoste>::vertice vertice;
+    size_t NF = Fobos.numVert(),
+           ND = Deimos.numVert();
+
+    matriz<vertice> P;
+    matriz<tCoste> minFobos = Floyd(Fobos, P);
+    matriz<tCoste> minDeinmos = Floyd(Deimos, P);
+    
+    // Enconstrar mejor ciudad
+    int suma = 0;
+    for(vertice i=0 ; i < NF ; i++){
+        for(vertice j=0 ; j < NF ; j++){
+            suma += minFobos[i][j];
+            suma += minFobos[j][i];
+        }
+    }
     
 }
 

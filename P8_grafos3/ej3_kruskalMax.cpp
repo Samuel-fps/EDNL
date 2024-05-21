@@ -9,8 +9,10 @@
     ¿Es más difícil que encontrar un árbol de extensión mínimo?
 */
 
+// Tiene la misma complejidad el maximo que el minimo
+
 template <typename tCoste>
-void constriurPuente()
+void kruskalMax()
 {
     typedef GrafoP<tCoste>::vertice vertice;
     

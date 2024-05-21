@@ -26,6 +26,12 @@
     archipiélago.    
 */
 
+/*
+Usar particiones, cuidado con cumplir condiciones
+primero comprobar si estan juntos, y luego yusamos encontrar para unirlo al representante
+Se puede usar warshall
+*/
+
 typedef struct{
     int x, y;
 } Ciudad;
@@ -53,8 +59,6 @@ matiz<tCoste> tombuctuDistribucion(const vector<Ciudad>& Ciudades,
 
     return costesMin;
 }
-
-// Se puede hacer algo como en el laberinto?
 
 int main() {
     GrafoP<int> grafo("GrafoA.txt");

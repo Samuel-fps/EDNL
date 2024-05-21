@@ -15,6 +15,8 @@
       luego los canales deben ser de la longitud máxima posible.
 */
 
+// Usamos el ejercicio 3
+
 template <typename tCoste>
 void constriurPuente()
 {

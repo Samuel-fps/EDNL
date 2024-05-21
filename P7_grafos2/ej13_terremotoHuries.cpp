@@ -28,6 +28,9 @@
     condiciones anteriormente descritas.
 */
 
+/*
+Igual que el anterior pero con tres islas
+*/
 
 int main() {
     GrafoP<int> grafo("GrafoA.txt");

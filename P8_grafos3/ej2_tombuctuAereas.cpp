@@ -29,6 +29,12 @@
     
 */
 
+/*Está pidiendo un grafo completo
+
+Numero de islas N - 1 cada vez que unamos particion
+el bucle interno empezarlo por i para no meter dos veces la misma ciudad
+matriz bool para saber si ya hemos visitado una isla*/
+
 typedef struct{
     int x, y;
 } Ciudad;

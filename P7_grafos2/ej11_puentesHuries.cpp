@@ -30,7 +30,7 @@ template <typename tCoste>
 matriz<tCoste> puentesHuries(const GrafoP<tCoste>& I1,
                              const GrafoP<tCoste>& I2,
                              const GrafoP<tCoste>& I3,
-                             const vector<Puente> Puentes)
+                             const vector<Puente>& Puentes)
 {
     typedef GrafoP<tCoste>::vertice vertice;
     size_t n1 = I1.numVert(), n2 = I2.numVert(), n3 = I3.numVert(); // Número de ciudades en cada isla
