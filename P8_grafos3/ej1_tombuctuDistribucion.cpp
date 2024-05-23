@@ -1,6 +1,7 @@
 #include "../TAD_GRAFO/alg_grafoMA.h"
 #include "../TAD_GRAFO/alg_grafoPMC.h"
 #include "alg_grafo_E-S.h"
+#include "particion.h"
 #include <iostream>
 #include <vector>
 
@@ -33,31 +34,41 @@ Se puede usar warshall
 */
 
 typedef struct{
-    int x, y;
+    double x, y;
 } Ciudad;
 
-// Distancia euclidea entre ciudades
-double distancia(Ciudad c1, Ciudad c2) {
-    return sqrt(pow(c2.x - c1.x, 2) + pow(c2.y - c1.y, 2));
+// Distancia euclidea entre dos puntos
+double calcularDistanciaEuclidea(double x1, double y1, double x2, double y2) {
+    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 }
 
 template <typename tCoste>
-matiz<tCoste> tombuctuDistribucion(const vector<Ciudad>& Ciudades,
-                                   const matriz<bool>& A)
+Particion tombuctuDistribucion(const vector<Ciudad>& ciudades,  // Vector ciudades(x, y)
+                               const matriz<bool>& ady,         // matriz adyacencia
+                               matriz<tCoste>& costesMin)       // Costes minimos entre ciudades
 {
-    typedef GrafoMA::vertice vertice;
-    size_t N = A.dimension();
+    typedef GrafoPMC::vertice vertice;
+    size_t N = ady.dimension();
     GrafoP<tCoste> C(N);
 
+    // Unir cada ciudad con su isla
+    Particion islas(N); // Particion de n ciudades
+    for(int i=0 ; i < n ; i++)
+        for(int j=0 ; j < n ; j++)
+            if(ady[i][j] && islas.encontrtar(i) != islas.encontrar(j)) // Son adyacentes && Aun no la hemos unido a la isla (precondicion unir)
+                islas.unir(i, j);
+
+    // Crear matriz de costes
     for(vertice i=0 ; i < N ; i++)
         for(vertice j=0 ; j < N ; j++)
-            if(A[i][j]) // Son adyacentes
-                C[i][j] = distancia(verticeToCiudad(i), verticeToCiudad(i));
+            if(ady[i][j])
+                C[i][j] = distancia(ciudades[i].x, ciudades[j].y, ciudades[i].x, ciudades[j].y);
 
+    // Calcular costes minimos
     matriz<vertice> P;
-    matriz<tCoste> costesMin = Floyd(C, P);
+    costesMin = Floyd(C, P);
 
-    return costesMin;
+    return islas;
 }
 
 int main() {
