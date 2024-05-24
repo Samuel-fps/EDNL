@@ -120,7 +120,11 @@ La empresa EMASAJER S.A. tiene que unir mediante canales todas las ciudades del 
 - el Ministerio de Fomento nos subvenciona por Kms de canal, luego los canales deben ser de la longitud máxima posible.
 
 ```cpp
-
+template <typename tCoste>
+void constriurPuente(GrafoP<tCoste> distancias)
+{
+  return KruskallMax(distancias); // Usamos el ejercicio 3
+}
 ```
 
 ### Ejercicio 5

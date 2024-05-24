@@ -6,8 +6,8 @@
 /*  EJERCICIO 4
 
     La empresa EMASAJER S.A. tiene que unir mediante canales todas las ciudades del valle del Jerte
-    (Cáceres). Calcula  qué  canales y de qué longitud deben construirse partiendo del grafo con las
-     distancias entre las ciudades y asumiendo las siguientes premisas:
+    (Cáceres). Calcula qué canales y de qué longitud deben construirse partiendo del grafo con las
+    distancias entre las ciudades y asumiendo las siguientes premisas:
 
     - el coste de abrir cada nuevo canal es casi prohibitivo, 
       luego la solución final debe tener un número mínimo de canales.
@@ -15,23 +15,8 @@
       luego los canales deben ser de la longitud máxima posible.
 */
 
-// Usamos el ejercicio 3
-
 template <typename tCoste>
-void constriurPuente()
+void constriurPuente(GrafoP<tCoste> distancias)
 {
-    typedef GrafoP<tCoste>::vertice vertice;
-    
-}
-
-int main() {
-    GrafoP<int> grafo("GrafoA.txt");
-
-    std::cout << grafo;
-
-    // LLamada a funcion de ejercicio
-
-    // Imprimir el resultado
-
-    return 0;
+  return KruskallMax(distancias); // Usamos el ejercicio 3
 }
