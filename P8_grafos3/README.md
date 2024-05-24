@@ -13,7 +13,43 @@ Así pues, dados los siguientes datos:
 Implementen un subprograma que calcule y devuelva la distribución en islas de las ciudades de Tombuctú, así como el coste mínimo de viajar entre cualesquiera dos ciudades de una misma isla del archipiélago.
 
 ```cpp
+typedef struct{
+    double x, y;
+} Ciudad;
 
+// Distancia euclidea entre dos puntos
+double calcularDistanciaEuclidea(double x1, double y1, double x2, double y2) {
+    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+}
+
+template <typename tCoste>
+Particion tombuctuDistribucion(const vector<Ciudad>& ciudades,  // Vector ciudades(x, y)
+                               const matriz<bool>& ady,         // matriz adyacencia
+                               matriz<tCoste>& costesMin)       // Costes minimos entre ciudades
+{
+    typedef GrafoPMC::vertice vertice;
+    size_t N = ady.dimension();
+    GrafoP<tCoste> C(N);
+
+    // Unir cada ciudad con su isla
+    Particion islas(N); // Particion de n ciudades
+    for(int i=0 ; i < n ; i++)
+        for(int j=0 ; j < n ; j++)
+            if(ady[i][j] && islas.encontrtar(i) != islas.encontrar(j)) // Son adyacentes && Aun no la hemos unido a la isla (precondicion unir)
+                islas.unir(i, j);
+
+    // Crear matriz de costes
+    for(vertice i=0 ; i < N ; i++)
+        for(vertice j=0 ; j < N ; j++)
+            if(ady[i][j])
+                C[i][j] = distancia(ciudades[i].x, ciudades[i].y, ciudades[j].x, ciudades[j].y);
+
+    // Calcular costes minimos
+    matriz<vertice> P;
+    costesMin = Floyd(C, P);
+
+    return islas;
+}
 ```
 
 ### Ejercicio 2
