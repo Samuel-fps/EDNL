@@ -16,6 +16,7 @@
     si existe carretera directa entre cualesquiera dos ciudades del archipiélago. El objetivo de 
     nuestro problema es encontrar qué líneas aéreas debemos implantar para poder viajar entre todas 
     las ciudades del archipiélago, siguiendo los siguientes criterios:
+    siguiendo los siguientes criterios:
 
         1. Se implantará una y sólo una  línea aérea entre cada par de islas.
         2. La línea aérea escogida entre cada par de islas será la más corta entre todas las posibles.

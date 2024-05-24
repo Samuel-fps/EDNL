@@ -15,7 +15,7 @@
 */
 
 template <typename tCoste>
-void kruskalMax()
+void kruskalMax(const GrafoP<tCoste>& G)
 // Devuelve un árbol generador de coste máximo
 // de un grafo no dirigido ponderado y conexo G.
 {
