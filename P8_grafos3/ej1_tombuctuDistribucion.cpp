@@ -62,7 +62,7 @@ Particion tombuctuDistribucion(const vector<Ciudad>& ciudades,  // Vector ciudad
     for(vertice i=0 ; i < N ; i++)
         for(vertice j=0 ; j < N ; j++)
             if(ady[i][j])
-                C[i][j] = distancia(ciudades[i].x, ciudades[j].y, ciudades[i].x, ciudades[j].y);
+                C[i][j] = distancia(ciudades[i].x, ciudades[i].y, ciudades[j].x, ciudades[j].y);
 
     // Calcular costes minimos
     matriz<vertice> P;
