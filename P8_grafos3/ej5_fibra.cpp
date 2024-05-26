@@ -24,7 +24,8 @@ tCoste constriurPuente(cosnt GrafoP<tCoste>& distancias)
     tCoste distancia=0;
     for(size_t i=0 ; i < n ; i++)
         for(size_t j=i+1 ; j < n ; j++)
-            distancia += min[i][j];
+            if (min[i][j] != GrafoP<double>::INFINITO)
+                distancia += min[i][j];
 
     return distancia;
 }
