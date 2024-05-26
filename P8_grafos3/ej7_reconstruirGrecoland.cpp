@@ -6,7 +6,7 @@
 /*  EJERCICIO 7
 
     El archipiélago de Grecoland (Zuelandia) está formado únicamente por dos islas, Fobos y Deimos, que tienen
-    N1 y N2 ciudades, respectivamente, de las cuales C1 y C2 ciudades son costeras (obviamente C1 ≤  N1 y C2 ≤ N2).
+    N1 y N2 ciudades, respectivamente, de las cuales C1 y C2 ciudades son costeras (obviamente C1 ≤ N1 y C2 ≤ N2).
     Se dispone de las coordenadas cartesianas (x, y) de todas y cada una de las ciudades del archipiélago.
     El huracán Isadore acaba de devastar el archipiélago, con lo que todas las carreteras y puentes construidos en su
     día han desaparecido. En esta Terrible situación se pide ayuda a la ONU, que acepta reconstruir el archipiélago
@@ -34,21 +34,54 @@
         6. Ciudad destino del viaje.
 */
 
-template <typename tCoste>
-void constriurPuente()
-{
-    typedef GrafoP<tCoste>::vertice vertice;
-    
+typedef struct {
+    int x, y;
+} Ciudad;
+
+// Distancia euclidea entre dos puntos
+double distanciaEuclidea(double x1, double y1, double x2, double y2) {
+    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 }
 
-int main() {
-    GrafoP<int> grafo("GrafoA.txt");
+template <typename tCoste>
+tCoste constriurPuentes(const vector<Ciudad>& ciudades1,
+                        const vector<Ciudad>& ciudades2,
+                        const vector<Ciudad>& costeras1,
+                        const vector<Ciudad>& costeras2,
+                        const GrafoP<tCoste>::vertice origen,
+                        const GrafoP<tCoste>::vertice destino)
+{
+    typedef GrafoP<tCoste>::vertice vertice;
+    size_t n1=ciudades1.size(), n2=ciudades2.size(), n=n1+n2;
+    GrafoP<tCoste> distancias(n);
 
-    std::cout << grafo;
+    // Coste de ir entre la primera isla por carretera
+    for(size_t i=0 ; i < n1 ; i++){
+        for(size_t j=0 ; j < n1 ; j++){
+            distancias[i][j] = distancias[j][i] = distanciaEuclidea(ciudades1[i], ciudades1[j]);
+        }
+    }
 
-    // LLamada a funcion de ejercicio
+    // Coste de ir entre la segunda isla por carretera
+    for(size_t i=0 ; i < n2 ; i++){
+        for(size_t j=0 ; j < n2 ; j++){
+            distancias[i][j] = distancias[j][i] = distanciaEuclidea(ciudades2[i], ciudades2[j]);
+        }
+    }
 
-    // Imprimir el resultado
+    // Coste cidades costeras (puentes)
+    for(size_t i=0 ; i < costeras1.size() ; i++){
+        for(size_t j=0 ; j < costeras2.size() ; j++){
+            distancias[i][j] = distancias[j][i] = distanciaEuclidea(costeras1[i], ccosteras2[j]);
+        }
+    }
 
-    return 0;
+    // Árbol generador de coste mínimo
+    GrafoP<tCoste> puentes = kruskall(distancias);
+
+    // Caminos de coste mínomo desde origen
+    vector<vertice> P;
+    vector<tCoste> costeMin = Dijkstra(puentes, origen, P);
+    
+    return costeMin[destino];
 }
