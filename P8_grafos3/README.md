@@ -162,7 +162,23 @@ La empresa EMASAJER S.A. tiene que unir mediante canales todas las ciudades del 
 Dada la matriz de distancias entre las diferentes ciudades del valle del Jerte, otra matriz con los diferentes caudales máximos admisibles entre estas ciudades teniendo en cuenta su orografía, la subvención que nos da Fomento por m3/sg. de caudal y el coste por km. de canal, implementen un subprograma que calcule qué canales y de qué longitud y caudal deben construirse para minimizar el coste total de la red de canales.
 
 ```cpp
+template <typename tCoste>
+GrafoP<tCoste> constriurPuente(const GrafoP<tCoste>& distancias,
+                               const GrafoP<tCoste>& caudales,
+                               const double subvencion,
+                               const double costeKm)
+{
+    typedef GrafoP<tCoste>::vertice vertice;
+    size_t n = distancias.numVert();
+    GrafoP<tCoste> caudalKm(n),
+                   canales(n);
 
+    for(vertice i=0 ; i < n ; i++)
+        for(vertice j=0 ; j < n ; j++)
+            caudalKm[i][j] = caudalKm[j][i] = distancias[i][j] * costeKm - caudales[i][j] * subvencion;
+
+    return kruskall(caudalKm);
+}
 ```
 
 ### Ejercicio 7

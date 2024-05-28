@@ -41,27 +41,43 @@ typedef struct{
 } Ciudad;
 
 // Distancia euclidea entre ciudades
-double distancia(Ciudad c1, Ciudad c2) {
+double distanciaCiudades(Ciudad c1, Ciudad c2) {
     return sqrt(pow(c2.x - c1.x, 2) + pow(c2.y - c1.y, 2));
 }
 
 template <typename tCoste>
-matiz<tCoste> tombuctuAereas(const vector<Ciudad>& Ciudades, // Lista de ciudades de Tombuctú2
-                                   const matriz<bool>& A)    // Matriz de adyacencia de Tombuctú
+GrafoP<tCoste> tombuctuAereas(const vector<Ciudad>& Ciudades, // Lista de ciudades de Tombuctú2
+                             const matriz<bool>& Ady)    // Matriz de adyacencia de Tombuctú
 {
     typedef GrafoP<tCoste>::vertice vertice;
-    size_t N = A.dimension();
+    size_t n = A.dimension();
     
-}
+    // Unir cada ciudad con su isla
+    Particion islas(N); // Particion de n ciudades
+    for(size_t i=0 ; i < n ; i++)
+        for(size_t j=0 ; j < n ; j++)
+            if(ady[i][j] && islas.encontrtar(i) != islas.encontrar(j)) // Son adyacentes && Aun no la hemos unido a la isla (precondicion unir)
+                islas.unir(i, j);
+    
+    GrafoP<tCoste> distancias(n);
+    for(vertice i=0 ; i < n ; i++)
+        for(vertice j=0 ; j < n ; j++)
+            if(islas.encontrtar(i) != islas.encontrar(j))
+                distancias[i][j] = distanciaCiudades(ciudades[i], ciudades[j]);
 
-int main() {
-    GrafoP<int> grafo("GrafoA.txt");
+    GrafoP<tCoste> lineas(n);
+    tCoste min;
+    vertice origen, destino;
+    for(size_t i=0 ; i < n ; i++){
+        min = GrafoP<tCoste>::INFINITO; // Reseteamos minimo
+        origen = i;
+        destino = 0;
+        for(size_t j=0 ; j < n ; j++){
+            if(distancias[i][j] < min){
+                min = distancias[i][j];
+                destino = j; 
+            }
+        }
+    }
 
-    std::cout << grafo;
-
-    // LLamada a funcion de ejercicio
-
-    // Imprimir el resultado
-
-    return 0;
 }

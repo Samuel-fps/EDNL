@@ -38,9 +38,9 @@ typedef struct {
     int x, y;
 } Ciudad;
 
-// Distancia euclidea entre dos puntos
-double distanciaEuclidea(double x1, double y1, double x2, double y2) {
-    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+// Distancia euclidea entre dos ciudades
+double distanciaCiudades(Ciudad c1, Ciudad c2){
+    return sqrt(pow(c2.x - c1.x, 2) + pow(c2.y - c1.y, 2));
 }
 
 template <typename tCoste>
@@ -58,21 +58,21 @@ tCoste constriurPuentes(const vector<Ciudad>& ciudades1,
     // Coste de ir entre la primera isla por carretera
     for(size_t i=0 ; i < n1 ; i++){
         for(size_t j=0 ; j < n1 ; j++){
-            distancias[i][j] = distancias[j][i] = distanciaEuclidea(ciudades1[i], ciudades1[j]);
+            distancias[i][j] = distancias[j][i] = distanciaCiudades(ciudades1[i], ciudades1[j]);
         }
     }
 
     // Coste de ir entre la segunda isla por carretera
     for(size_t i=0 ; i < n2 ; i++){
         for(size_t j=0 ; j < n2 ; j++){
-            distancias[i][j] = distancias[j][i] = distanciaEuclidea(ciudades2[i], ciudades2[j]);
+            distancias[i][j] = distancias[j][i] = distanciaCiudades(ciudades2[i], ciudades2[j]);
         }
     }
 
     // Coste cidades costeras (puentes)
     for(size_t i=0 ; i < costeras1.size() ; i++){
         for(size_t j=0 ; j < costeras2.size() ; j++){
-            distancias[i][j] = distancias[j][i] = distanciaEuclidea(costeras1[i], ccosteras2[j]);
+            distancias[i][j] = distancias[j][i] = distanciaCiudades(costeras1[i], ccosteras2[j]);
         }
     }
 

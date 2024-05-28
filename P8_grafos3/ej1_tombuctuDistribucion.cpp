@@ -37,7 +37,7 @@ typedef struct{
     double x, y;
 } Ciudad;
 
-// Distancia euclidea entre dos puntos
+// Distancia euclidea entre dos ciudades
 double distanciaCiudades(Ciudad c1, Ciudad c2){
     return sqrt(pow(c2.x - c1.x, 2) + pow(c2.y - c1.y, 2));
 }
