@@ -121,7 +121,7 @@ La empresa EMASAJER S.A. tiene que unir mediante canales todas las ciudades del 
 
 ```cpp
 template <typename tCoste>
-void constriurPuente(GrafoP<tCoste> distancias)
+GrafoP<tCoste> constriurCanales(const GrafoP<tCoste>& distancias)
 {
   return KruskallMax(distancias); // Usamos el ejercicio 3
 }
@@ -186,5 +186,57 @@ En estas condiciones, implementa un subprograma que calcule el coste mínimo de 
 6. Ciudad destino del viaje.
 
 ```cpp
+typedef struct {
+    int x, y;
+} Ciudad;
 
+// Distancia euclidea entre dos puntos
+double distanciaEuclidea(double x1, double y1, double x2, double y2) {
+    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+}
+
+template <typename tCoste>
+tCoste constriurPuentes(const vector<Ciudad>& ciudades1,
+                        const vector<Ciudad>& ciudades2,
+                        const vector<Ciudad>& costeras1,
+                        const vector<Ciudad>& costeras2,
+                        const GrafoP<tCoste>::vertice origen,
+                        const GrafoP<tCoste>::vertice destino)
+{
+    typedef GrafoP<tCoste>::vertice vertice;
+    size_t n1=ciudades1.size(), n2=ciudades2.size(), n=n1+n2;
+    GrafoP<tCoste> distancias(n);
+
+    // Coste de ir entre la primera isla por carretera
+    for(size_t i=0 ; i < n1 ; i++){
+        for(size_t j=0 ; j < n1 ; j++){
+            distancias[i][j] = distancias[j][i] = distanciaEuclidea(ciudades1[i], ciudades1[j]);
+        }
+    }
+
+    // Coste de ir entre la segunda isla por carretera
+    for(size_t i=0 ; i < n2 ; i++){
+        for(size_t j=0 ; j < n2 ; j++){
+            distancias[i][j] = distancias[j][i] = distanciaEuclidea(ciudades2[i], ciudades2[j]);
+        }
+    }
+
+    // Coste cidades costeras (puentes)
+    for(size_t i=0 ; i < costeras1.size() ; i++){
+        for(size_t j=0 ; j < costeras2.size() ; j++){
+            distancias[i][j] = distancias[j][i] = distanciaEuclidea(costeras1[i], ccosteras2[j]);
+        }
+    }
+
+    // Árbol generador de coste mínimo
+    GrafoP<tCoste> puentes = kruskall(distancias);
+
+    // Caminos de coste mínomo desde origen
+    vector<vertice> P;
+    vector<tCoste> costeMin = Dijkstra(puentes, origen, P);
+    
+    return costeMin[destino];
+}
 ```
+
+¿como implemento el "Cualquier puente que se construya siempre será más caro que cualquier carretera que se construya."?

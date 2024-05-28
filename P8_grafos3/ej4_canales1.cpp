@@ -16,7 +16,7 @@
 */
 
 template <typename tCoste>
-void constriurPuente(GrafoP<tCoste> distancias)
+GrafoP<tCoste> constriurCanales(const GrafoP<tCoste>& distancias)
 {
   return KruskallMax(distancias); // Usamos el ejercicio 3
 }
