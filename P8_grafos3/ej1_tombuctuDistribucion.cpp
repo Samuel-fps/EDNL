@@ -38,8 +38,8 @@ typedef struct{
 } Ciudad;
 
 // Distancia euclidea entre dos puntos
-double calcularDistanciaEuclidea(double x1, double y1, double x2, double y2) {
-    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+double distanciaCiudades(Ciudad c1, Ciudad c2){
+    return sqrt(pow(c2.x - c1.x, 2) + pow(c2.y - c1.y, 2));
 }
 
 template <typename tCoste>
@@ -62,23 +62,11 @@ Particion tombuctuDistribucion(const vector<Ciudad>& ciudades,  // Vector ciudad
     for(vertice i=0 ; i < N ; i++)
         for(vertice j=0 ; j < N ; j++)
             if(ady[i][j])
-                C[i][j] = distancia(ciudades[i].x, ciudades[i].y, ciudades[j].x, ciudades[j].y);
+                C[i][j] = distanciaCiudades(ciudades[i], ciudades[j]);
 
     // Calcular costes minimos
     matriz<vertice> P;
     costesMin = Floyd(C, P);
 
     return islas;
-}
-
-int main() {
-    GrafoP<int> grafo("GrafoA.txt");
-
-    std::cout << grafo;
-
-    // LLamada a funcion de ejercicio
-
-    // Imprimir el resultado
-
-    return 0;
 }

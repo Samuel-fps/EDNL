@@ -10,6 +10,7 @@ Así pues, dados los siguientes datos:
 
 - Lista de ciudades de Tombuctú representada cada una de ellas por sus coordenadas cartesianas.
 - Matriz de adyacencia de Tombuctú, que indica las carreteras existentes en dicho archipiélago.
+
 Implementen un subprograma que calcule y devuelva la distribución en islas de las ciudades de Tombuctú, así como el coste mínimo de viajar entre cualesquiera dos ciudades de una misma isla del archipiélago.
 
 ```cpp
