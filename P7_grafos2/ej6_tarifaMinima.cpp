@@ -31,8 +31,8 @@ GrafoP<tCoste> tarifaMinima(const GrafoP<tCoste>& Bus,
                             const GrafoP<tCoste>& Tren,
                             const typename GrafoP<tCoste>::vertice& cambio){
     typedef GrafoP<tCoste>::vertice vertice;
-    size_t N = G.numVert();
-    GrafoP<tCoste> costesMin(N); // Matriz de constes  a devolver
+    size_t n = G.numVert();
+    GrafoP<tCoste> costesMin(n); // Matriz de constes a devolver
 
     matriz<vertice> P; // Necesaria para algoritmo pero no la usaremos
     // Solo bus
@@ -40,10 +40,12 @@ GrafoP<tCoste> tarifaMinima(const GrafoP<tCoste>& Bus,
     // Solo tren
     matriz<tCoste> minTren = Floyd(Tren, P);
 
+    GrafoP<tCoste> G(n);
+
     // Rellenamos la matriz con el coste minimo entre las cuatro opciones posibles
     tCoste minDirecto, minCambio;
-    for(vertice i=0 ; i < N ; i++){
-        for(vertice j=0 ; j < N ; j++){
+    for(vertice i=0 ; i < n ; i++){
+        for(vertice j=0 ; j < n ; j++){
             minDirecto  = std::min(minTren[i][j], minBus[i][j]); // Solo Tren || solo Bus
             minCambio   = std::min(suma(minTren[i][cambio], minBus[cambio][i]),  // Tren-> cambio ->bus
                                    suma(minBus[i][cambio], minTren[cambio][i])); // bus-> cambio ->tren 
@@ -52,18 +54,4 @@ GrafoP<tCoste> tarifaMinima(const GrafoP<tCoste>& Bus,
     }
 
     return G;
-}
-
-
-int main() {
-    GrafoP<int> grafo("GrafoA.txt");
-
-    std::cout << grafo;
-
-    // LLamada a funcion de ejercicio
-    // disMinZuelandia(grafo, ciudadesTomadas, estadoCarreteras, capital);
-
-    // Imprimir el resultado
-
-    return 0;
 }
