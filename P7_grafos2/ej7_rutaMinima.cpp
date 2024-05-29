@@ -48,17 +48,3 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,     // Matriz de costes deviaje 
 
     return std::min(cambio1, cambio2);
 }
-
-
-int main() {
-    GrafoP<int> grafo("GrafoA.txt");
-
-    std::cout << grafo;
-
-    // LLamada a funcion de ejercicio
-    // disMinZuelandia(grafo, ciudadesTomadas, estadoCarreteras, capital);
-
-    // Imprimir el resultado
-
-    return 0;
-}
