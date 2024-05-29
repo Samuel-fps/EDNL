@@ -281,6 +281,7 @@ unsigned distanciaCamiones(const GrafoP<tCoste>& G, // Distancia entre ciudades
 
     return distancia;
 }
+
 ```
 
 ### Ejercicio 5
