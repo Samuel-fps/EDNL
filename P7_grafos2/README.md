@@ -200,7 +200,53 @@ La solución del problema debe incluir las cantidades a almacenar en cada ciudad
 empresa.
 
 ```cpp
+// Asumimos que en un trayecto se puede llevar todo el producto que cabe en un almacen y que no hacen faltan mas viajes
+// Almacenes es el vector de tamaño n con la cantidad de producto en cada almacen
+// Devuelve el coste total de llevar los productos a cada almacen
+template <typename tCoste, typename capacidad>
+tCoste distribucion(typename GrafoP<tCoste>::vertice origen,
+                    unsigned cantidad,
+                    const GrafoP<tCoste>& costes,
+                    const std::vector<capacidad>& capacidades,
+                    const std::vector<double>& subvenciones,
+                    vector<capacidad>& almacenes) // Cantidad de producto en cada almacen
+{
+    typedef typename GrafoP<tCoste>::vertice vertice;
+    size_t n = costes.numVert();
 
+    vector<vertice> P;
+    vector<tCoste> costesMin = Dijkstra(costes, origen, P);
+
+    // Aplicar subvención
+    for(vertice i=0 ; i < n ; i++)
+        costesMin[i] *= (1-subvenciones[i]);
+    
+    // Sumar costes de distribuir la mercancia a los destinos mas baratos
+    tCoste min, costeTotal=0;
+    vertice nodoMin=0;
+    for(vertice i=0 ; i < n || cantidad <= 0 ; i++){
+        // Encontrar la ciudad de minimo coste O(n)
+        min = GrafoP<tCoste>::INFINITO;
+        for(vertice j=0 ; j < n ; j++){
+            if(costesMin[j] < min){ 
+                min = costesMin[j]; // Nuevo minimo
+                nodoMin = j;        // Guardamos el vertice
+            }
+        }
+        costeTotal += costesMin[nodoMin];              // Sumamos el coste al total
+        if(capacidades[nodoMin] <= cantidad){          // Queda producto suficiente
+            almacenes[nodoMin] = capacidades[nodoMin]; // Se llena el almacen
+            cantidad -= capacidades[nodoMin];          // Restamos el producto ya asignado
+        }
+        else{
+            almacenes[nodoMin] = cantidad; // Se lleva el producto restante
+            cantidad = 0;
+        }
+        costesMin[nodoMin] = GrafoP<tCoste>::INFINITO; // Lo ponemos a infinito porque ya lo hemos usado
+    }
+
+    return costeTotal;
+}
 ```
 
 ### Ejercicio 4
