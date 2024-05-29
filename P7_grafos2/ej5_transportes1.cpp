@@ -45,32 +45,17 @@ vector<bool> viajeAlergia(const GrafoP<tCoste>& C,
                           tCoste dinero,
                           Alergia alergia)
 {
-    vector<bool> resultado;
     switch(alergia){
         case coche:
-            resultado = transporte(T, A, origen, dinero);
+            return transporte(T, A, origen, dinero);
             break;
         case avion:
-            resultado = transporte(T, C, origen, dinero);
+            return transporte(T, C, origen, dinero);
             break;
         case tren:
-            resultado = transporte(C, A, origen, dinero);
+            return transporte(C, A, origen, dinero);
             break;
+        default:
+            return vector<bool>{};
     }
-
-    return resultado;
-}
-
-
-int main() {
-    GrafoP<int> grafo("GrafoA.txt");
-
-    std::cout << grafo;
-
-    // LLamada a funcion de ejercicio
-    // disMinZuelandia(grafo, ciudadesTomadas, estadoCarreteras, capital);
-
-    // Imprimir el resultado
-
-    return 0;
 }
