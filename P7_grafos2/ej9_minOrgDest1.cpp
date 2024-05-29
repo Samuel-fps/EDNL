@@ -30,14 +30,14 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,
                     vector<typename GrafoP<tCoste>::vertice>& caminoCosteMin) // Vector donde se devuelve el camino de coste minimo
 {
     typedef GrafoP<tCoste>::vertice vertice;
-    size_t N = Tren.numVert();
-    GrafoP<tCoste> G(2*N);
+    size_t n = Tren.numVert();
+    GrafoP<tCoste> G(2*n);
 
     // Rellenamos matriz de costes para aplicar Dijkstra
-    for(vertice i=0 ; i < N ; i++){
+    for(vertice i=0 ; i < n ; i++){
         G[i][i+n] = costeTaxi;          // Tren -> Bus  (Segundo cuadrante)
         G[i+n][i] = costeTaxi;          // Bus  -> Tren (Tercer cuadrante)
-        for(vertice j=0 ; j < N ; j++){
+        for(vertice j=0 ; j < n ; j++){
             G[i][j] = Tren[i][j];       // Tren -> Tren (Primer cuadrante)
             G[i+n][2+n] = Bus[i][j];    // Bus  -> Bus  (Cuarto cuadrante)
         }
@@ -47,18 +47,4 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,
     vector<tCoste> costeMin = Dijkstra(G, origen, caminoCosteMin);
 
     return costeMin[destino];
-}
-          
-
-int main() {
-    GrafoP<int> grafo("GrafoA.txt");
-
-    std::cout << grafo;
-
-    // LLamada a funcion de ejercicio
-    // disMinZuelandia(grafo, ciudadesTomadas, estadoCarreteras, capital);
-
-    // Imprimir el resultado
-
-    return 0;
 }
