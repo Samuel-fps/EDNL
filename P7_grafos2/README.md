@@ -2,6 +2,8 @@
 
 ## INTRODUCCIÓN
 
+Esta son mis soluciones a los ejercicios propuestos en clase de prácticas, ten en cuenta que es mi solución y que no tiene porque ser correcta ni la única solución posible.
+
 ## EJERCICIOS
 
 ### Ejercicio 1

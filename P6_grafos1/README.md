@@ -1,14 +1,8 @@
 # Práctica 6: Grafos 1
 
-## GRAFOS PARA EJERCICIOS
+## INTRODUCCIÓN
 
-### GrafoA.dat
-
-![GrafoA.dat](GrafoA.png)
-
-### GrafoB.dat
-
-![GrafoB.dat](GrafoB.png)
+Esta son mis soluciones a los ejercicios propuestos en clase de prácticas, ten en cuenta que es mi solución y que no tiene porque ser correcta ni la única solución posible.
 
 ## EJERCICIOS
 
@@ -23,7 +17,7 @@ Añadir una función genérica, llamada DijkstraInv, en el fichero alg_grafoPMC.
 ### Ejercicio 2
 
 Definiremos el pseudocentro de un grafo conexo como el nodo del mismo que minimiza la suma de las distancias mínimas a sus dos nodos más alejados. Definiremos el diámetro del grafo como la suma de las distancias mínimas a los dos nodos más alejados del pseudocentro del grafo.  
-Dado un grafo conexo representado mediante matriz de costes, implementa un subprograma que devuelva la longitud de su diámetro. 
+Dado un grafo conexo representado mediante matriz de costes, implementa un subprograma que devuelva la longitud de su diámetro.
 
 ```cpp
 
@@ -32,7 +26,7 @@ Dado un grafo conexo representado mediante matriz de costes, implementa un subpr
 ### Ejercicio 3
 
 Tu empresa de transportes “PEROTRAVEZUNGRAFO S.A.” acaba de recibir la lista de posibles subvenciones del Ministerio de Fomento en la que una de las más jugosas se concede a las empresas cuyo grafo asociado a su matriz de costes sea acíclico. ¿Puedes pedir esta subvención?  
-Implementa un subprograma que a partir de la matriz de costes nos indique si tu empresa tiene derecho a dicha subvención. 
+Implementa un subprograma que a partir de la matriz de costes nos indique si tu empresa tiene derecho a dicha subvención.
 
 ```cpp
 
@@ -43,8 +37,8 @@ Implementa un subprograma que a partir de la matriz de costes nos indique si tu 
 Se necesita hacer un estudio de las distancias mínimas necesarias para viajar entre
 dos ciudades cualesquiera de un país llamado Zuelandia. El problema es sencillo pero
 hay que tener en cuenta unos pequeños detalles:
-- La orografía de Zuelandia es un poco especial, las carreteras son muy estrechas
-y por tanto solo permiten un sentido de la circulación.
+
+- La orografía de Zuelandia es un poco especial, las carreteras son muy estrechas y por tanto solo permiten un sentido de la circulación.
 - Actualmente Zuelandia es un país en guerra. Y de hecho hay una serie de
 ciudades del país que han sido tomadas por los rebeldes, por lo que no pueden
 ser usadas para viajar.
@@ -56,6 +50,7 @@ que absolutamente todos los viajes que se hagan por el país pasen por la capita
 del mismo, donde se harán los controles de seguridad pertinentes.
 
 Dadas estas cuatro condiciones, se pide implementar un subprograma que dados
+
 - el grafo (matriz de costes) de Zuelandia en situación normal,
 - la relación de las ciudades tomadas por los rebeldes,
 - la relación de las carreteras cortadas por los rebeldes
