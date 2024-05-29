@@ -32,9 +32,6 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,     // Matriz de costes deviaje 
                     vector<typename GrafoP<tCoste>::vertice>& rutaOrigenCambio,     // Camino de origen a cambio
                     vector<typename GrafoP<tCoste>::vertice>& rutaCambioDestino)    // Camino de cambio a destino
 {
-    typedef GrafoP<tCoste>::vertice vertice;
-    size_t N = Tren.numVert();
-
     // Aplicamos Dijkstra en vertice origen para obtener las rutas minimas entre ellas origen -> cambio
     // Aplicamos DijkstraInv en vertice detino para obtener las rutas minimas entre ellas cambio -> destino
     vector<tCoste> origenCambio = Dijkstra(Tren, origen, rutaOrigenCambio);
