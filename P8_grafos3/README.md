@@ -2,7 +2,8 @@
 
 ## INTRODUCCIÓN
 
-Esta son mis soluciones a los ejercicios propuestos en clase de prácticas, ten en cuenta que es mi solución y que no tiene porque ser correcta ni la única solución posible.
+Antes de ver las soluciones de los ejercicios te recomiendo intentar hacerlo tú mismo y asistir a clase de prácticas porque así es como de verdad aprendes a resolver estos ejercicios y cualquiera que te puedan poner en el examen.
+DISCLAIMER Esta son mis soluciones a los ejercicios propuestos en clase de prácticas, ten en cuenta que es mi solución y que no tiene porque ser correcta ni la única solución posible.
 
 ## EJERCICIOS
 
