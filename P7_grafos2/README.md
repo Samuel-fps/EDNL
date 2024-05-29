@@ -399,9 +399,6 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,     // Matriz de costes deviaje 
                     vector<typename GrafoP<tCoste>::vertice>& rutaOrigenCambio,     // Camino de origen a cambio
                     vector<typename GrafoP<tCoste>::vertice>& rutaCambioDestino)    // Camino de cambio a destino
 {
-    typedef GrafoP<tCoste>::vertice vertice;
-    size_t N = Tren.numVert();
-
     // Aplicamos Dijkstra en vertice origen para obtener las rutas minimas entre ellas origen -> cambio
     // Aplicamos DijkstraInv en vertice detino para obtener las rutas minimas entre ellas cambio -> destino
     vector<tCoste> origenCambio = Dijkstra(Tren, origen, rutaOrigenCambio);
@@ -429,7 +426,7 @@ Mucha suerte en el negocio, que la competencia es dura.
 
 ```cpp
 template <typename tCoste> 
-double tarifaMinima(const GrafoP<tCoste>& Tren,
+tCoste tarifaMinima(const GrafoP<tCoste>& Tren,
                     const GrafoP<tCoste>& Bus,
                     const typename GrafoP<tCoste>::vertice origen,
                     const typename GrafoP<tCoste>::vertice destino)
@@ -443,13 +440,13 @@ double tarifaMinima(const GrafoP<tCoste>& Tren,
                    destinoBus = DijkstraInv(Bus, origen, ruta);
 
     // Camino con transbordo de minimo coste tren->bus
-    tCoste<tCoste> minTrenBus = suma(origenTren[0], destinoBus[0]);
+    tCoste minTrenBus = suma(origenTren[0], destinoBus[0]);
     for(size_t i = 0 ; i < origenTren.size() ; i++)
         if(minTrenBus < suma(origenTren[i], destinoBus[i])) // Hacer transbordo en i es menos costoso
             minTrenBus = suma(origenTren[i], destinoBus[i]);
 
     // Camino con transbordo de minimo coste bus->tren
-    tCoste<tCoste> minBusTren = suma(origenBus[0], destinoTren[0]);
+    tCoste minBusTren = suma(origenBus[0], destinoTren[0]);
     for(size_t i = 0 ; i < origenBus.size() ; i++)
         if(minBusTren < suma(origenBus[i], destinoTren[i])) // Hacer transbordo en i es menos costoso
             minBusTren = suma(origenBus[i], destinoTren[i]);
@@ -474,14 +471,14 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,
                     vector<typename GrafoP<tCoste>::vertice>& caminoCosteMin) // Vector donde se devuelve el camino de coste minimo
 {
     typedef GrafoP<tCoste>::vertice vertice;
-    size_t N = Tren.numVert();
-    GrafoP<tCoste> G(2*N);
+    size_t n = Tren.numVert();
+    GrafoP<tCoste> G(2*n);
 
     // Rellenamos matriz de costes para aplicar Dijkstra
-    for(vertice i=0 ; i < N ; i++){
+    for(vertice i=0 ; i < n ; i++){
         G[i][i+n] = costeTaxi;          // Tren -> Bus  (Segundo cuadrante)
         G[i+n][i] = costeTaxi;          // Bus  -> Tren (Tercer cuadrante)
-        for(vertice j=0 ; j < N ; j++){
+        for(vertice j=0 ; j < n ; j++){
             G[i][j] = Tren[i][j];       // Tren -> Tren (Primer cuadrante)
             G[i+n][2+n] = Bus[i][j];    // Bus  -> Bus  (Cuarto cuadrante)
         }
@@ -492,7 +489,6 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,
 
     return costeMin[destino];
 }
-     
 ```
 
 ### Ejercicio 10
@@ -521,11 +517,11 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,
                     vector<typename GrafoP<tCoste>::vertice>& caminoCosteMin)
 {
     typedef GrafoP<tCoste>::vertice vertice;
-    size_t N = Tren.numVert();
-    GrafoP<tCoste> G(3*N);
+    size_t n = Tren.numVert();
+    GrafoP<tCoste> G(3*n);
 
     // Rellenamos matriz de costes para aplicar Dijkstra
-    for(vertice i=0 ; i < N ; i++){
+    for(vertice i=0 ; i < n ; i++){
         G[i]  [i+n] = taxiBusTren;      // Tren -> Bus
         G[i+n][i] = taxiBusTren;        // Bus  -> Tren
 
@@ -534,7 +530,7 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,
         G[i+n+n][i]     = taxiAvion;    // Avion -> Tren
         G[i+n+n][i+n]   = taxiAvion;    // Avion -> Bus
 
-        for(vertice j=0 ; j < N ; j++){
+        for(vertice j=0 ; j < n ; j++){
             G[i][j] = Tren[i][j];           // Tren -> Tren 
             G[i+n][j+n] = Bus[i][j];        // Bus  -> Bus 
             G[i+n+n][j+n+n] = Bus[i][j];    // Avion  -> Avion
@@ -553,13 +549,9 @@ Disponemos de tres grafos (matriz de costes) que representan los costes directos
 
 Para poder viajar de una isla a otra se dispone de una serie de puentes que conectan ciudades de las diferentes islas a un precio francamente asequible (por decisión del Prefecto de las Huríes, el uso de los puentes es absolutamente gratuito).
 
-Si el alumno desea simplificar el problema, puede numerar las N1 ciudades de la isla
-1, del 0 al N1-1, las N2 ciudades de la isla 2, del N1 al N1+N2-1, y las N3 de la última, del
-N1+ N2 al N1+N2+ N3-1.
+Si el alumno desea simplificar el problema, puede numerar las N1 ciudades de la isla 1, del 0 al N1-1, las N2 ciudades de la isla 2, del N1 al N1+N2-1, y las N3 de la última, del N1+ N2 al N1+N2+ N3-1.
 
-Disponiendo de las tres matrices de costes directos de viajar dentro de cada una de
-las islas, y la lista de puentes entre ciudades de las mismas, calculad los costes mínimos
-de viajar entre cualesquiera dos ciudades de estas tres islas.
+Disponiendo de las tres matrices de costes directos de viajar dentro de cada una de las islas, y la lista de puentes entre ciudades de las mismas, calculad los costes mínimos de viajar entre cualesquiera dos ciudades de estas tres islas.
 ¡¡¡ QUE DISFRUTÉIS EL VIAJE !!!
 
 ```cpp
@@ -619,12 +611,12 @@ unirá el puente.
 
 ```cpp
 template <typename tCoste>
-void constriurPuente(const GrafoP<tCoste>& Fobos,                     // Coste ciudades Fobos
-                     const GrafoP<tCoste>& Deimos,                     // Coste ciudades Deimos
+void constriurPuente(const GrafoP<tCoste>& Fobos,  // Coste ciudades Fobos
+                     const GrafoP<tCoste>& Deimos, // Coste ciudades Deimos
                      const vector<GrafoP<tCoste>::vertice> costeras1,   // Ciudades costeras
                      const vector<GrafoP<tCoste>::vertice> costeras2,   // Ciudades costeras
-                     GrafoP<tCoste>::vertice& ciudad1,                  // Ciudad donde construir el puente
-                     GrafoP<tCoste>::vertice& ciudad2)                  // Ciudad donde construir el puente
+                     GrafoP<tCoste>::vertice& ciudad1, // Ciudad donde construir el puente
+                     GrafoP<tCoste>::vertice& ciudad2) // Ciudad donde construir el puente
 {
     typedef GrafoP<tCoste>::vertice vertice;
     size_t NF = Fobos.numVert(),

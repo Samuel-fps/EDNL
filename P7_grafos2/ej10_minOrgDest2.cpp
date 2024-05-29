@@ -7,7 +7,7 @@
 
     Se dispone de tres grafos que representan la matriz de costes para viajes en un determinado país, pero por diferentes medios de
     transporte (tren, autobús y avión).
-    Por supuesto los tres grafos tendrán el mismo número de nodos, N.
+    Por supuesto los tres grafos tendrán el mismo número de nodos, n.
 
     Dados los siguientes datos:
 
@@ -33,11 +33,11 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,
                     vector<typename GrafoP<tCoste>::vertice>& caminoCosteMin)
 {
     typedef GrafoP<tCoste>::vertice vertice;
-    size_t N = Tren.numVert();
-    GrafoP<tCoste> G(3*N);
+    size_t n = Tren.numVert();
+    GrafoP<tCoste> G(3*n);
 
     // Rellenamos matriz de costes para aplicar Dijkstra
-    for(vertice i=0 ; i < N ; i++){
+    for(vertice i=0 ; i < n ; i++){
         G[i]  [i+n] = taxiBusTren;      // Tren -> Bus
         G[i+n][i] = taxiBusTren;        // Bus  -> Tren
 
@@ -46,7 +46,7 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,
         G[i+n+n][i]     = taxiAvion;    // Avion -> Tren
         G[i+n+n][i+n]   = taxiAvion;    // Avion -> Bus
 
-        for(vertice j=0 ; j < N ; j++){
+        for(vertice j=0 ; j < n ; j++){
             G[i][j] = Tren[i][j];           // Tren -> Tren 
             G[i+n][j+n] = Bus[i][j];        // Bus  -> Bus 
             G[i+n+n][j+n+n] = Bus[i][j];    // Avion  -> Avion
@@ -56,18 +56,4 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,
     vector<tCoste> costesMin = Dijkstra(G, origen, caminoCosteMin);
 
     return costesMin[destino];
-}
-
-
-int main() {
-    GrafoP<int> grafo("GrafoA.txt");
-
-    std::cout << grafo;
-
-    // LLamada a funcion de ejercicio
-    // disMinZuelandia(grafo, ciudadesTomadas, estadoCarreteras, capital);
-
-    // Imprimir el resultado
-
-    return 0;
 }

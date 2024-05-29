@@ -63,17 +63,3 @@ matriz<tCoste> puentesHuries(const GrafoP<tCoste>& I1,
 
     return A;
 }
-
-
-int main() {
-    GrafoP<int> grafo("GrafoA.txt");
-
-    std::cout << grafo;
-
-    // LLamada a funcion de ejercicio
-    // disMinZuelandia(grafo, ciudadesTomadas, estadoCarreteras, capital);
-
-    // Imprimir el resultado
-
-    return 0;
-}
