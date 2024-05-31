@@ -480,7 +480,7 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,
         G[i+n][i] = costeTaxi;          // Bus  -> Tren (Tercer cuadrante)
         for(vertice j=0 ; j < n ; j++){
             G[i][j] = Tren[i][j];       // Tren -> Tren (Primer cuadrante)
-            G[i+n][2+n] = Bus[i][j];    // Bus  -> Bus  (Cuarto cuadrante)
+            G[i+n][i+n] = Bus[i][j];    // Bus  -> Bus  (Cuarto cuadrante)
         }
     }
 
@@ -533,7 +533,7 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,
         for(vertice j=0 ; j < n ; j++){
             G[i][j] = Tren[i][j];           // Tren -> Tren 
             G[i+n][j+n] = Bus[i][j];        // Bus  -> Bus 
-            G[i+n+n][j+n+n] = Bus[i][j];    // Avion  -> Avion
+            G[i+n+n][j+n+n] = Avion[i][j];    // Avion  -> Avion
         }
     }
 
@@ -605,9 +605,7 @@ El archipiélago de Grecoland (Zuelandia) está formado únicamente por dos isla
 1. Se asume que el coste viajar entre las dos ciudades que una el puente es 0.
 2. Para poder plantearse las mejoras en el transporte que implica la construcción de un puente frente a cualquier otro, se asume que se realizarán exactamente el mismo número de viajes entre cualesquiera ciudades del archipiélago. Por ejemplo, se considerará que el número de viajes entre la ciudad P de Fobos y la Q de Deimos será el mismo que entre las ciudades R y S de la misma isla. Dicho de otra forma, todos los posibles trayectos a realizar dentro del archipiélago son igual de importantes.
 
-Dadas las matrices de costes directos de Fobos y Deimos y las listas de ciudades
-costeras de ambas islas, implementa un subprograma que calcule las dos ciudades que
-unirá el puente.
+Dadas las matrices de costes directos de Fobos y Deimos y las listas de ciudades costeras de ambas islas, implementa un subprograma que calcule las dos ciudades que unirá el puente.
 
 ```cpp
 template <typename tCoste>
@@ -668,9 +666,7 @@ El archipiélago de las Huríes acaba de ser devastado por un maremoto de dimens
 2. La ONU subvencionará únicamente el número mínimo de puentes necesario para comunicar las tres islas.
 3. Para poder plantearse las mejoras en el transporte que implica la construcción de un puente frente a cualquier otro, se asume que se realizarán exactamente el mismo número de viajes entre cualesquiera ciudades del archipélago. Dicho de otra forma, todos los posibles trayectos a realizar dentro del archipiélago son igual de importantes.
 
-Dadas las matrices de costes directos de las tres islas y las listas de ciudades costeras
-del archipiélago, implementad un subprograma que calcule los puentes a construir en las
-condiciones anteriormente descritas.
+Dadas las matrices de costes directos de las tres islas y las listas de ciudades costeras del archipiélago, implementad un subprograma que calcule los puentes a construir en las condiciones anteriormente descritas.
 
 ```cpp
 template <typename tCoste>

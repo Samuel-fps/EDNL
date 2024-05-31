@@ -39,7 +39,7 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,
         G[i+n][i] = costeTaxi;          // Bus  -> Tren (Tercer cuadrante)
         for(vertice j=0 ; j < n ; j++){
             G[i][j] = Tren[i][j];       // Tren -> Tren (Primer cuadrante)
-            G[i+n][2+n] = Bus[i][j];    // Bus  -> Bus  (Cuarto cuadrante)
+            G[i+n][i+n] = Bus[i][j];    // Bus  -> Bus  (Cuarto cuadrante)
         }
     }
 

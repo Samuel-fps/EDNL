@@ -49,7 +49,7 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,
         for(vertice j=0 ; j < n ; j++){
             G[i][j] = Tren[i][j];           // Tren -> Tren 
             G[i+n][j+n] = Bus[i][j];        // Bus  -> Bus 
-            G[i+n+n][j+n+n] = Bus[i][j];    // Avion  -> Avion
+            G[i+n+n][j+n+n] = Avion[i][j];    // Avion  -> Avion
         }
     }
 
