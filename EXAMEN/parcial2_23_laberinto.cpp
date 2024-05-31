@@ -26,14 +26,17 @@ tCoste numSaltos(const int n, const int m,
     tCoste nSaltos=0;
     size_t N = n*m;
 
-    for(Casilla t : trampas){
-        vertice trampa = CasillaToNodo(t, N);
-    }
-
     GrafoP<tCoste> L(N);
     for(vertice i=0 ; i < N ; i++){
         for(vertice j=0 ;j < N ; j++){
-            
+            L[i][j] = 1;
+        }
+    }
+
+    for(Casilla t : trampas){ // O(n^2)
+        vertice trampa = CasillaToNodo(t, N);
+        for(vertice i=0 ; i < N ; i++){
+            L[trampa][i] = L[i][trampa] = GrafoP<tCoste>::INFINITO;
         }
     }
 
