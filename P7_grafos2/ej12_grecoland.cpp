@@ -26,20 +26,21 @@
 
 /*
     Hay c1 * c2 posibles puentes
-    Tengo que encontrar la mejor ciudad costera de cada isla
+    Tengo que encontrar la mejor ciudad costera de cada isla para construir el puente
 */
 
+// Devuelve las ciudades entre las cuales construir el puente
 template <typename tCoste>
-void constriurPuente(const GrafoP<tCoste>& Fobos,                     // Coste ciudades Fobos
-                     const GrafoP<tCoste>& Deimos,                     // Coste ciudades Deimos
+void constriurPuente(const GrafoP<tCoste>& Fobos,                       // Coste ciudades Fobos
+                     const GrafoP<tCoste>& Deimos,                      // Coste ciudades Deimos
                      const vector<GrafoP<tCoste>::vertice> costeras1,   // Ciudades costeras
                      const vector<GrafoP<tCoste>::vertice> costeras2,   // Ciudades costeras
                      GrafoP<tCoste>::vertice& ciudad1,                  // Ciudad donde construir el puente
                      GrafoP<tCoste>::vertice& ciudad2)                  // Ciudad donde construir el puente
 {
     typedef GrafoP<tCoste>::vertice vertice;
-    size_t NF = Fobos.numVert(),
-           ND = Deimos.numVert();
+    size_t nF = Fobos.numVert(),
+           nD = Deimos.numVert();
 
     matriz<vertice> P;
     matriz<tCoste> minFobos = Floyd(Fobos, P);
@@ -48,32 +49,27 @@ void constriurPuente(const GrafoP<tCoste>& Fobos,                     // Coste c
     int suma, minSuma;
     minSuma = GrafoP<tCoste>::INFINITO;
 
-    // Enconstrar mejor ciudad Fobos
-    for(vertice k=0 ; k < costeras1.size() ; k++){
-        suma = 0;
-        for(vertice i=0 ; i < NF ; i++){
-            for(vertice j=0 ; j < NF ; j++){
-                suma += minFobos[i][j] + minFobos[j][i];
-            }
+    // Encontrar mejor ciudad Fobos
+    for(vertice costera : costeras1){
+        suma = 0; // Suma de todos los caminos de ida y vuelta a la ciudad costera
+        for(vertice j=0 ; j < nF ; j++){
+            suma += minFobos[costera][j] + minFobos[j][costera];
         }
         if(suma < minSuma){
             minSuma = suma;
-            ciudad1 = k;
+            ciudad1 = costera;
         }
     }
-
+    
     // Enconstrar mejor ciudad Deimos
-    for(vertice k=0 ; k < costeras2.size() ; k++){
-        suma = 0;
-        // Suma de todos los caminos de ida y vuelta a la ciudad k
-        for(vertice i=0 ; i < ND ; i++){
-            for(vertice j=0 ; j < ND ; j++){
-                suma += minDeimos[i][j] + minDeimos[j][i];
-            }
+    for(vertice costera : costeras2){
+        suma = 0; // Suma de todos los caminos de ida y vuelta a la ciudad costera
+        for(vertice j=0 ; j < nF ; j++){
+            suma += minFobos[costera][j] + minFobos[j][costera];
         }
         if(suma < minSuma){
             minSuma = suma;
-            ciudad2 = k;
+            ciudad2 = costera;
         }
     }
 }

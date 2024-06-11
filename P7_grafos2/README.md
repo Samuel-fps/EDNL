@@ -608,17 +608,18 @@ El archipiélago de Grecoland (Zuelandia) está formado únicamente por dos isla
 Dadas las matrices de costes directos de Fobos y Deimos y las listas de ciudades costeras de ambas islas, implementa un subprograma que calcule las dos ciudades que unirá el puente.
 
 ```cpp
+// Devuelve las ciudades entre las cuales construir el puente
 template <typename tCoste>
-void constriurPuente(const GrafoP<tCoste>& Fobos,  // Coste ciudades Fobos
-                     const GrafoP<tCoste>& Deimos, // Coste ciudades Deimos
+void constriurPuente(const GrafoP<tCoste>& Fobos,                       // Coste ciudades Fobos
+                     const GrafoP<tCoste>& Deimos,                      // Coste ciudades Deimos
                      const vector<GrafoP<tCoste>::vertice> costeras1,   // Ciudades costeras
                      const vector<GrafoP<tCoste>::vertice> costeras2,   // Ciudades costeras
-                     GrafoP<tCoste>::vertice& ciudad1, // Ciudad donde construir el puente
-                     GrafoP<tCoste>::vertice& ciudad2) // Ciudad donde construir el puente
+                     GrafoP<tCoste>::vertice& ciudad1,                  // Ciudad donde construir el puente
+                     GrafoP<tCoste>::vertice& ciudad2)                  // Ciudad donde construir el puente
 {
     typedef GrafoP<tCoste>::vertice vertice;
-    size_t NF = Fobos.numVert(),
-           ND = Deimos.numVert();
+    size_t nF = Fobos.numVert(),
+           nD = Deimos.numVert();
 
     matriz<vertice> P;
     matriz<tCoste> minFobos = Floyd(Fobos, P);
@@ -627,32 +628,27 @@ void constriurPuente(const GrafoP<tCoste>& Fobos,  // Coste ciudades Fobos
     int suma, minSuma;
     minSuma = GrafoP<tCoste>::INFINITO;
 
-    // Enconstrar mejor ciudad Fobos
-    for(vertice k=0 ; k < costeras1.size() ; k++){
-        suma = 0;
-        for(vertice i=0 ; i < NF ; i++){
-            for(vertice j=0 ; j < NF ; j++){
-                suma += minFobos[i][j] + minFobos[j][i];
-            }
+    // Encontrar mejor ciudad Fobos
+    for(vertice costera : costeras1){
+        suma = 0; // Suma de todos los caminos de ida y vuelta a la ciudad costera
+        for(vertice j=0 ; j < nF ; j++){
+            suma += minFobos[costera][j] + minFobos[j][costera];
         }
         if(suma < minSuma){
             minSuma = suma;
-            ciudad1 = k;
+            ciudad1 = costera;
         }
     }
-
+    
     // Enconstrar mejor ciudad Deimos
-    for(vertice k=0 ; k < costeras2.size() ; k++){
-        suma = 0;
-        // Suma de todos los caminos de ida y vuelta a la ciudad k
-        for(vertice i=0 ; i < ND ; i++){
-            for(vertice j=0 ; j < ND ; j++){
-                suma += minDeimos[i][j] + minDeimos[j][i];
-            }
+    for(vertice costera : costeras2){
+        suma = 0; // Suma de todos los caminos de ida y vuelta a la ciudad costera
+        for(vertice j=0 ; j < nF ; j++){
+            suma += minFobos[costera][j] + minFobos[j][costera];
         }
         if(suma < minSuma){
             minSuma = suma;
-            ciudad2 = k;
+            ciudad2 = costera;
         }
     }
 }
@@ -681,9 +677,9 @@ void constriurPuentes(const GrafoP<tCoste>& I1,                     // Coste ciu
                       GrafoP<tCoste>::vertice& ciudad3)             // Ciudad donde construir el puente Isla 3
 {
     typedef GrafoP<tCoste>::vertice vertice;
-    size_t N1 = I1.numVert(),
-           N2 = I2.numVert(),
-           N3 = I3.numVert();
+    size_t n1 = I1.numVert(),
+           n2 = I2.numVert(),
+           n3 = I3.numVert();
 
     matriz<vertice> P;
     matriz<tCoste> minI1 = Floyd(I1, P);
@@ -694,46 +690,38 @@ void constriurPuentes(const GrafoP<tCoste>& I1,                     // Coste ciu
     minSuma = GrafoP<tCoste>::INFINITO;
 
     // Enconstrar mejor ciudad Isla 1
-    for(vertice k=0 ; k < costeras1.size() ; k++){
-        suma = 0;
-        for(vertice i=0 ; i < N1 ; i++){
-            for(vertice j=0 ; j < N1 ; j++){
-                suma += minI1[i][j] + minI1[j][i];
-            }
+    for(vertice costera : costeras1){
+        suma = 0; // Suma de todos los caminos de ida y vuelta a la ciudad costera
+        for(vertice j=0 ; j < n1 ; j++){
+            suma += minI1[costera][j] + minI1[j][costera];
         }
         if(suma < minSuma){
             minSuma = suma;
-            ciudad1 = k;
+            ciudad1 = costera;
         }
     }
 
     // Encontrar mejor ciudad Isla 2
-    for(vertice k=0 ; k < costeras2.size() ; k++){
-        suma = 0;
-        // Suma de todos los caminos de ida y vuelta a la ciudad k
-        for(vertice i=0 ; i < N2 ; i++){
-            for(vertice j=0 ; j < N2 ; j++){
-                suma += minI2[i][j] + minI2[j][i];
-            }
+    for(vertice costera : costeras2){
+        suma = 0; // Suma de todos los caminos de ida y vuelta a la ciudad costera
+        for(vertice j=0 ; j < n2 ; j++){
+            suma += minI2[costera][j] + minI2[j][costera];
         }
         if(suma < minSuma){
             minSuma = suma;
-            ciudad2 = k;
+            ciudad2 = costera;
         }
     }
 
     // Encontrar mejor ciudad Isla 3
-    for(vertice k=0 ; k < costeras3.size() ; k++){
-        suma = 0;
-        // Suma de todos los caminos de ida y vuelta a la ciudad k
-        for(vertice i=0 ; i < N3 ; i++){
-            for(vertice j=0 ; j < N3 ; j++){
-                suma += minI3[i][j] + minI3[j][i];
-            }
+    for(vertice costera : costeras3){
+        suma = 0; // Suma de todos los caminos de ida y vuelta a la ciudad costera
+        for(vertice j=0 ; j < n3 ; j++){
+            suma += minI3[costera][j] + minI3[j][costera];
         }
         if(suma < minSuma){
             minSuma = suma;
-            ciudad3 = k;
+            ciudad3 = costera;
         }
     }
 }
