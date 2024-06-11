@@ -305,7 +305,7 @@ vector<bool> transporte(const GrafoP<tCoste>& T1,
     vector<tCoste> t1Coste = Dijkstra(T1, origen, P),
                    t2Coste = Dijkstra(T2, origen, P);
 
-    // rellenamos el vector con true si el presupuiesto >= que el coste minimo
+    // rellenamos el vector con true si el presupuesto >= que el coste minimo
     for(vertice i=0 ; i < n ; i++)
         alcanzables[i] = dinero >= std::min(t1Coste[i], t2Coste[i]);
     
