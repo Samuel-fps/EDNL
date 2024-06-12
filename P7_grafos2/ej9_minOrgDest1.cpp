@@ -29,7 +29,7 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,
                     const tCoste costeTaxi,
                     vector<typename GrafoP<tCoste>::vertice>& caminoCosteMin) // Vector donde se devuelve el camino de coste minimo
 {
-    typedef GrafoP<tCoste>::vertice vertice;
+    typedef typename GrafoP<tCoste>::vertice vertice;
     size_t n = Tren.numVert();
     GrafoP<tCoste> G(2*n);
 

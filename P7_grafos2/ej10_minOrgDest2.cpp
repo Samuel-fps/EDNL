@@ -32,7 +32,7 @@ tCoste rutaCosteMin(const GrafoP<tCoste>& Tren,
                     const tCoste taxiAvion,
                     vector<typename GrafoP<tCoste>::vertice>& caminoCosteMin)
 {
-    typedef GrafoP<tCoste>::vertice vertice;
+    typedef typename GrafoP<tCoste>::vertice vertice;
     size_t n = Tren.numVert();
     GrafoP<tCoste> G(3*n);
 

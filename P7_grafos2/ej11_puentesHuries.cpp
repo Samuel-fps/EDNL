@@ -32,7 +32,7 @@ matriz<tCoste> puentesHuries(const GrafoP<tCoste>& I1,
                              const GrafoP<tCoste>& I3,
                              const vector<Puente>& Puentes)
 {
-    typedef GrafoP<tCoste>::vertice vertice;
+    typedef typename GrafoP<tCoste>::vertice vertice;
     size_t n1 = I1.numVert(), n2 = I2.numVert(), n3 = I3.numVert(); // Número de ciudades en cada isla
     size_t n = n1 + n2 + n3; // Número de ciudades totales
     GrafoP<tCoste> A(n);

@@ -37,7 +37,7 @@ tCoste tarifaMinima(const GrafoP<tCoste>& Tren,
                     const typename GrafoP<tCoste>::vertice origen,
                     const typename GrafoP<tCoste>::vertice destino)
 {
-    typedef GrafoP<tCoste>::vertice vertice;
+    typedef typename GrafoP<tCoste>::vertice vertice;
 
     vector<vertice> ruta; // No nos pide la ruta por lo que usamos el mismo vector
     vector<tCoste> origenTren = Dijkstra(Tren, origen, ruta),

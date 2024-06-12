@@ -30,7 +30,7 @@ template <typename tCoste>
 GrafoP<tCoste> tarifaMinima(const GrafoP<tCoste>& Bus,
                             const GrafoP<tCoste>& Tren,
                             const typename GrafoP<tCoste>::vertice& cambio){
-    typedef GrafoP<tCoste>::vertice vertice;
+    typedef typename GrafoP<tCoste>::vertice vertice;
     size_t n = G.numVert();
     GrafoP<tCoste> costesMin(n); // Matriz de constes a devolver
 

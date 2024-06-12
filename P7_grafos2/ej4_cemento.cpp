@@ -33,7 +33,7 @@ unsigned distanciaCamiones(const GrafoP<tCoste>& G, // Distancia entre ciudades
                            const typename GrafoP<tCoste>::vertice capital,
                            vector<int> pedidos) // Vector de tamaño G.numVert() con la cantidad a entregar
 {
-    typedef GrafoP<tCoste>::vertice vertice;
+    typedef typename GrafoP<tCoste>::vertice vertice;
     size_t n = G.numVert();
 
     vector<tCoste> P;

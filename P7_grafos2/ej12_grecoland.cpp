@@ -33,12 +33,12 @@
 template <typename tCoste>
 void constriurPuente(const GrafoP<tCoste>& Fobos,                       // Coste ciudades Fobos
                      const GrafoP<tCoste>& Deimos,                      // Coste ciudades Deimos
-                     const vector<GrafoP<tCoste>::vertice> costeras1,   // Ciudades costeras
-                     const vector<GrafoP<tCoste>::vertice> costeras2,   // Ciudades costeras
-                     GrafoP<tCoste>::vertice& ciudad1,                  // Ciudad donde construir el puente
-                     GrafoP<tCoste>::vertice& ciudad2)                  // Ciudad donde construir el puente
+                     const vector<typename GrafoP<tCoste>::vertice> costeras1,   // Ciudades costeras
+                     const vector<typename GrafoP<tCoste>::vertice> costeras2,   // Ciudades costeras
+                     typename GrafoP<tCoste>::vertice& ciudad1,                  // Ciudad donde construir el puente
+                     typename GrafoP<tCoste>::vertice& ciudad2)                  // Ciudad donde construir el puente
 {
-    typedef GrafoP<tCoste>::vertice vertice;
+    typedef typename GrafoP<tCoste>::vertice vertice;
     size_t nF = Fobos.numVert(),
            nD = Deimos.numVert();
 
