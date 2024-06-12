@@ -79,7 +79,7 @@ tCoste constriurPuentes(const vector<Ciudad>& ciudades1,
     // Árbol generador de coste mínimo
     GrafoP<tCoste> puentes = kruskall(distancias);
 
-    // Caminos de coste mínomo desde origen
+    // Caminos de coste mínimo desde origen
     vector<vertice> P;
     vector<tCoste> costeMin = Dijkstra(puentes, origen, P);
     

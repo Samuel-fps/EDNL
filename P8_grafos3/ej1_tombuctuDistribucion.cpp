@@ -47,14 +47,14 @@ Particion tombuctuDistribucion(const vector<Ciudad>& ciudades,  // Vector ciudad
                                const matriz<bool>& ady,         // matriz adyacencia
                                matriz<tCoste>& costesMin)       // Costes minimos entre ciudades
 {
-    typedef GrafoPMC::vertice vertice;
+    typedef GrafoP::vertice vertice;
     size_t N = ady.dimension();
     GrafoP<tCoste> C(N);
 
     // Unir cada ciudad con su isla
     Particion islas(N); // Particion de n ciudades
-    for(int i=0 ; i < n ; i++)
-        for(int j=0 ; j < n ; j++)
+    for(int i=0 ; i < N ; i++)
+        for(int j=0 ; j < N ; j++)
             if(ady[i][j] && islas.encontrtar(i) != islas.encontrar(j)) // Son adyacentes && Aun no la hemos unido a la isla (precondicion unir)
                 islas.unir(i, j);
 
