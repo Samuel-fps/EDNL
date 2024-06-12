@@ -47,3 +47,20 @@ tCoste laberinto3d(const int N,
 
     return costesMin[casillaToNodo(salida)];
 }
+
+/*
+template <typename tCoste>
+GrafoP<tCoste>{
+    public:
+        explicit GrafoP(size_t N);
+        size_t numVert();
+    private:
+        vector<vector<tCoste>> costes;
+}
+
+template <typename tCoste>
+Dijkstra(const GrafoP<tCoste>& G, 
+         typename GrafoP<tCoste>::vertice origen,
+         vector<typename GrafoP<tCoste>::vertice>& P;)
+
+*/
