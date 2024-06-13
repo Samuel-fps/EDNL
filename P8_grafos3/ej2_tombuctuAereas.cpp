@@ -90,7 +90,7 @@ vector<LineaAerea> tombuctuAereas(const vector<Ciudad>& ciudades, // Lista de ci
         lineasOrdenadas.suprimir(actual);
         vertice o = actual.origen,  // vertice origen de la linea
                 d = actual.destino; // vertice destino de la linea
-        if(islas.encontrtar(o) != islas.encontrar(d)){              // No son ciudades de la misma isla
+        if(islas.encontrar(o) != islas.encontrar(d)){              // No son ciudades de la misma isla
             if(conectadas.encontrar(o) != conectadas.encontrar(d)){ // Comprobar que no esten ya conectadas
                 conectadas.unir(o, d);                              // Islas conectadas por linea aerea
                 lineasSolucion.push_back(actual);                   // Guardamos la Linea en el vector solucion
