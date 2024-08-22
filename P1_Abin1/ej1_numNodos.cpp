@@ -8,8 +8,8 @@ using namespace std;
 typedef char tElto;
 const tElto fin = '#'; // Fin de lectura.
 
-/*
-    EJERCICIO 1
+/*  EJERCICIO 1 - Número de nodos
+
     Implementa un subprograma que calcule el número de nodos de un árbol binario. 
 */
 

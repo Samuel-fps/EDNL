@@ -12,8 +12,8 @@ typedef char tElto;
 const tElto fin = '#';
 ////////////////////////////////////
 
-/*
-    EJERCICIO 5
+/*  EJERCICIO 5 - Altura y profundidad nodo Abin lista
+
     Repite el ejercicio anterior para la representación enlazada de árboles binarios (punteros al
     padre, hijo izquierdo e hijo derecho). 
 */

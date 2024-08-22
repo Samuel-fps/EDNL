@@ -12,8 +12,8 @@ typedef char tElto;
 const tElto fin = '#';
 ////////////////////////////////////
 
-/*
-    EJERCICIO 4
+/*  EJERCICIO 4 - Altura y profundidad nodo Abin vectorial
+
     Añade dos nuevas operaciones al TAD árbol binario, una que calcule la profundidad de un
     nodo y otra que calcule la altura de un nodo en un árbol dado. Implementa esta operación para
     la representación vectorial (índices del padre, hijo izquierdo e hijo derecho)

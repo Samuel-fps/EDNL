@@ -11,8 +11,8 @@ typedef char tElto;
 const tElto fin = '#';
 ////////////////////////////////////
 
-/*
-    EJERCICIO 2
+/*  EJERCICIO 2 - Altura árbol binario
+
     Implementa un subprograma que calcule la altura de un árbol binario.
 */
 

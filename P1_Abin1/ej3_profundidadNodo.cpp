@@ -11,8 +11,8 @@ typedef char tElto;
 const tElto fin = '#';
 ////////////////////////////////////
 
-/*
-    EJERCICIO 3
+/*  EJERCICIO 3 - Profundidad árbol binario
+
     Implementa un subprograma que, dados un árbol binario y un nodo del mismo, determine
     la profundidad de este nodo en dicho árbol.
 */
