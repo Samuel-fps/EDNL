@@ -22,8 +22,8 @@ template <typename T>
 bool esPseudocompleto_rec(Abin<T> A, typename Abin<T>::nodo n){
     if(n == Abin<T>::NODO_NULO)
         return true;
-    else if(A.altura(n) == 1 
-            && A.hijoIzqdo(n) == Abin<T>::NODO_NULO && A.hijoDrcho(n) != Abin<T>::NODO_NULO
+    else if(A.altura(n) == 1 // Penúltimo nivel
+            && A.hijoIzqdo(n) == Abin<T>::NODO_NULO && A.hijoDrcho(n) != Abin<T>::NODO_NULO // uno de sus nodos es nulo y el otro no
             || A.hijoIzqdo(n) != Abin<T>::NODO_NULO && A.hijoDrcho(n) == Abin<T>::NODO_NULO)
         return false;
     else
