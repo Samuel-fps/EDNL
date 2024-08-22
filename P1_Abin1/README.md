@@ -184,4 +184,5 @@ Consideraremos que existe un orden lineal definido sobre el tipo de los elemento
   - Post: Devuelve el subárbol izquierdo.
 - const Abb& drcho() const
   - Pre: Árbol no vacío.  
-  - Post: Devuelve el subárbol derecho. 
+  - Post: Devuelve el subárbol derecho.
+  
