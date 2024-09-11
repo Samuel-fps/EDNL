@@ -10,7 +10,8 @@ typedef int tElto;
 const tElto fin = '#';
 ////////////////////////////////////
 
-/*  EJERCICIO 4
+/*  EJERCICIO 4 REPASAR ELIMINAR
+
     Dados dos conjuntos representados mediante árboles binarios de búsqueda,
     implementa la operación intersección de dos conjuntos, que devuelva como resultado
     otro conjunto que sea la intersección de ambos. El resultado debe quedar en un árbol
@@ -20,16 +21,28 @@ const tElto fin = '#';
 template <typename T>
 using Conjunto = Abb<T>;
 
+// Dos implementaciones de la operación pertenece por si no quieres usar la operación buscar
+
+/* OPCION 1 Usar el método buscar de la clase abb
 template <typename T>
 bool pertenece(const Conjunto<T>& A, const T& elto){
-    if(A.elemento() == elto)
-        return true;
-    else if(!A.drcho().vacio() && A.izqdo().vacio())
-        return pertenece(A.izqdo(), elto);
-    else if(A.drcho().vacio() && !A.izqdo().vacio())
-        return pertenece(A.drcho(), elto);
-    else  
+    if(A.buscar(elto) == Conjunto<T>::NODO_NULO)
         return false;
+    return true;
+}  
+*/
+
+// OPCION 2 Buscar el elemento sin usar operacion buscar()
+template <typename T>
+bool pertenece(Conjunto<T> A, const T& elto){
+    if(A.vacio())
+        return false
+    else{
+        if(A.elemento() == elto)
+            return true;
+        else
+            return pertenece(A.izqdo(), elto) || pertenece(A.drcho(), elto);
+    }
 }
 
 template <typename T>
@@ -38,22 +51,9 @@ Conjunto<T> interseccionAbb(const Conjunto<T>& A, Conjunto<T> B){
     T elto = B.elemento();
 
     while(B.vacio()){
-        if(pertenece(A, elto))
+        if(pertenece(A, elto)) // Si el elemento de B pertenece a A lo insertamo en el resultado
             res.insertar(B.elemento());
+        elto = B.eliminar()
     }
     return res;
-}
-
-
-int main(){
-    Abb<tElto> A();
-
-    ifstream fa("AbbA.dat"); // Abrir fichero de entrada.
-    // rellenarAbb(fa, A); // Desde fichero.
-    fa.close();
-    
-    // Llamada a la funcion del ejercicio
-    //cout << "El desequilibrio del árbol es " <<  << endl;
-
-    return 0;
 }

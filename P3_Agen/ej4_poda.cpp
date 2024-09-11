@@ -11,6 +11,7 @@ const tElto fin = '#';
 ////////////////////////////////////
 
 /*  EJERCICIO 4
+
     Dado un árbol general de enteros A y un entero x, implementa un subprograma que realice 
     la poda de A a partir de x. Se asume que no hay elementos repetidos en A.
 */
@@ -19,31 +20,36 @@ void podaNodo_rec(Agen<int>& A, typename Agen<int>::nodo n){
     if(n != Agen<int>::NODO_NULO){
         typename Agen<int>::nodo hijo = A.hijoIzqdo(n);
         while(hijo != Agen<int>::NODO_NULO){
-            if(A.hijoIzqdo(hijo) == Agen<int>::NODO_NULO){ // No tiene hijos
-                A.eliminarHijoIzqdo(A.hijoIzqdo(n));
-            }
-            else{
-                podaNodo_rec(A, A.hijoIzqdo(hijo));
-            }
-            hijo = A.hijoIzqdo(n);
+            podaNodo_rec(A, A.hijoIzqdo(hijo)); // Podamos la rama del hIzq
+            A.eliminarHijoIzqdo(n); // Eliminamos hIzq que ya no tiene hijos
+            hijo = A.hijoIzqdo(n); // Obtenemos nuevo hIzq(anteriormente hermano derecho)
         }
     }
 }
 
 void encuentraEntero_rec(Agen<int>& A, typename Agen<int>::nodo n, int x){
     if(n != Agen<int>::NODO_NULO){
-        typename Agen<int>::nodo hijo = A.hijoIzqdo(n);
-
         if(A.elemento(n) == x){ 
             podaNodo_rec(A, n);
-            A.eliminarHijoIzqdo(A.padre(n)); // Eliminamos el propio nodo
+            // Eliminamos el propio nodo n
+            typename Agen<int>::nodo hijo = A.hijoIzqdo(A.padre(n));
+            if(hijo == n){
+                A.eliminarHijoIzqdo(A.padre(n));
+            }
+            else{
+                while (hijo != Agen<int>::NODO_NULO){
+                    if(A.hermDrcho(hijo) == n){
+                        A.eliminarHermDrcho(hijo);
+                    }
+                    hijo = A.hermDrcho(hijo);
+                }
+            }
+            
         }
         else{
+            typename Agen<int>::nodo hijo = A.hijoIzqdo(n);
             while(hijo != Agen<int>::NODO_NULO){
-                if(A.elemento(A.hermDrcho(hijo)) == x){ // El siguiene hermano es x
-                    podaNodo_rec(A, A.hermDrcho(hijo)); // Podamos a partir del hermano 
-                    A.eliminarHermDrcho(hijo); // Eliminamos el propio nodo
-                }
+                
                 encuentraEntero_rec(A, hijo, x);
                 hijo = A.hermDrcho(hijo);
             }

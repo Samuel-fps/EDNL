@@ -19,24 +19,21 @@ const tElto fin = '#';
 */
 
 template <typename T>
-typename Abin<T>::nodo buscarNodo(Abin<T>& A, const typename Abin<T>::nodo n, const T& elto){
-    if(n != Abin<T>::NODO_NULO){
-        if(A.elemento(n) != elto){
-            typename Abin<T>::nodo resultado = buscarNodo(A.hijoIzqdo(n)); // Busqueda por hijo izquierdo
-            if(resultado != Abin<T>::NODO_NULO) // Encontado en hijo izquierdo
-                return resultado;
-            resultado = buscarNodo(A.hijoDrcho(n)); // Busqueda en hijo derecho
-            if(resultado != Abin<T>::NODO_NULO) // Encontrado en hijo derecho
-                return resultado;
-        } 
-        else {
-            return n;
-        }
-    }
-    else {
+typename Abin<T>::nodo buscarNodo(const Abin<T>& A, const typename Abin<T>::nodo n, const T& elto){
+    if(n == Abin<T>::NODO_NULO){
         return Abin<T>::NODO_NULO;
     }
-
+    else {
+        if(A.elemento(n) == elto){
+            return n;
+        }
+        else{
+            typename Abin<T>::nodo resultado = buscarNodo(A, A.hijoIzqdo(n), elto); // Busqueda por hijo izquierdo
+            if(resultado == Abin<T>::NODO_NULO) // No encontrado en hijo izquierdo
+                resultado = buscarNodo(A, A.hijoDrcho(n), elto); // Busqueda en hijo derecho
+            return resultado;
+        } 
+    }
 }
 
 template <typename T>
@@ -75,18 +72,4 @@ void eliminarValor(Abin<T>& A, const T& valor){
         A.eliminarHijoIzqdo(A.padre(actual));
     else // Actual es hijo derecho
         A.eliminarHijoDrcho(A.padre(actual));
-}
-
-
-int main(){
-    Abin<tElto> A();
-
-    ifstream fa("AbbA.dat"); // Abrir fichero de entrada.
-    //rellenarAbb(fa, A); // Desde fichero.
-    fa.close();
-    
-    // Llamada a la funcion del ejercicio
-    //cout << "El desequilibrio del árbol es " <<  << endl;
-
-    return 0;
 }

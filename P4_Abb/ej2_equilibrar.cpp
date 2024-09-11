@@ -12,6 +12,7 @@ const tElto fin = '#';
 ////////////////////////////////////
 
 /*  EJERCICIO 2
+
     Un árbol binario de búsqueda se puede equilibrar realizando el recorrido en inorden
     del árbol para obtener el listado ordenado de sus elementos y a continuación, repartir
     equitativamente los elementos a izquierda y derecha colocando la mediana en la raíz y
@@ -22,7 +23,7 @@ const tElto fin = '#';
 // Recibe un árbol abb y un vector vacio
 // Devuelve el vector recibido con los elementos del abb ordenados en él
 template <typename T>
-void abb2vector_rec(Abb<T> A, vector<T>& v){
+void abb2vector_rec(const Abb<T>& A, vector<T>& v){
     if(!A.vacio()){
         abb2vector_rec(A.izqdo(), v);
         v.push_back(A.elemento());
@@ -34,7 +35,7 @@ void abb2vector_rec(Abb<T> A, vector<T>& v){
 // Devuelve un abb equilibrado
 template <typename T>
 Abb<T> equilibrarAbb_rec(const vector<T>& elementos, int inicio, int fin){
-    if(inicio > fin){
+    if(inicio > fin){ // Error
         return Abb<T>{};
     }
 
@@ -50,17 +51,4 @@ template <typename T>
 Abb<T> equilibrarAbb(Abb<int> A){
     vector<T> v = abb2vector(A);
     return equilibrarAbb_rec(v, v.begin(), v.end());
-}
-
-int main(){
-    Abb<tElto> A(), B();
-
-    ifstream fa("AbbA.dat"); // Abrir fichero de entrada.
-    /* rellenarAbb(fa, A); // Desde fichero.
-    fa.close();
-
-    B = equilibrarAbb(A);
-    imprimirAbb(B);
-    */
-    return 0;
 }
